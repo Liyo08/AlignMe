@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,6 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
       home: const HomeScreen(),
     );
   }
@@ -28,25 +34,25 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         leading: Padding(
           padding: EdgeInsets.all(8.0),
-        child: Container(
-  padding:  EdgeInsets.all(8), // space inside the box
-  decoration: BoxDecoration(
-    color: Colors.white, // box background color
-    borderRadius: BorderRadius.circular(12), // rounded corners
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black.withOpacity(0.05), // light shadow
-        blurRadius: 6,
-        offset:  Offset(0, 3),
-      ),
-    ],
-  ),
-  child: Icon(
-    Icons.notifications_none,
-    color: Colors.black,
-    size: 24, // adjust icon size
-  ),
-),
+          child: Container(
+            padding: EdgeInsets.all(8), // space inside the box
+            decoration: BoxDecoration(
+              color: Colors.white, // box background color
+              borderRadius: BorderRadius.circular(12), // rounded corners
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05), // light shadow
+                  blurRadius: 6,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Icon(
+              Icons.notifications_none,
+              color: Colors.black,
+              size: 24, // adjust icon size
+            ),
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -57,11 +63,11 @@ class HomeScreen extends StatelessWidget {
             children: [
               // Top Illustration
               Center(
-               // child: Image.asset(
-               //   'assets/meditation.png', // Replace with your image asset
-               //   height: 150,
-                //),
-              ),
+                  // child: Image.asset(
+                  //   'assets/meditation.png', // Replace with your image asset
+                  //   height: 150,
+                  //),
+                  ),
               const SizedBox(height: 10),
               const Text(
                 "Welcome Back,",
@@ -119,8 +125,8 @@ class HomeScreen extends StatelessWidget {
                           child: CircularProgressIndicator(
                             value: 0.7,
                             backgroundColor: Colors.white30,
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.pinkAccent),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.pinkAccent),
                           ),
                         ),
                         const Text(
@@ -137,24 +143,44 @@ class HomeScreen extends StatelessWidget {
 
               // Today Target Button
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   gradient: const LinearGradient(
-                    colors: [Color(0xFFa18cd1), Color(0xFFfbc2eb)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                    begin: Alignment(1.00, 1.00),
+                    end: Alignment(-0.24, -0.31),
+                    colors: [
+                      Color.fromARGB(255, 201, 208, 241),
+                      Color.fromARGB(255, 223, 237, 251)
+                    ],
                   ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text("Today Target",
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
-                    Chip(
-                      label: Text("Check"),
-                      backgroundColor: Colors.white,
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.bold)),
+                    Container(
+                      width: 80,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment(1.00, 1.00),
+                          end: Alignment(-0.24, -0.31),
+                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
+                      child: const Text(
+                        "Check",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
                     )
                   ],
                 ),
@@ -213,6 +239,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
 
@@ -225,7 +252,8 @@ class CustomBottomNavBar extends StatelessWidget {
         // Background container
         Container(
           height: 70,
-       margin: const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
+          margin:
+              const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(40),
@@ -240,7 +268,8 @@ class CustomBottomNavBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _navItem(Icons.home, true, const Color(0xFFB86EFF)),
+              _navItem(
+                  Icons.home, true, const Color.fromARGB(255, 227, 137, 245)),
               _navItem(Icons.bar_chart, false, Colors.grey),
               const SizedBox(width: 70), // space for bigger center button
               _navItem(Icons.camera_alt_outlined, false, Colors.grey),
@@ -256,10 +285,10 @@ class CustomBottomNavBar extends StatelessWidget {
             height: 75, // bigger size
             width: 75,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF76C7FF), Color(0xFF6A8DFF)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+              gradient: LinearGradient(
+                begin: Alignment(1.00, 1.00),
+                end: Alignment(-0.24, -0.31),
+                colors: [const Color(0xFF92A3FD), const Color(0xFF9DCEFF)],
               ),
               shape: BoxShape.circle,
               boxShadow: [
@@ -278,6 +307,6 @@ class CustomBottomNavBar extends StatelessWidget {
   }
 
   Widget _navItem(IconData icon, bool active, Color color) {
-    return Icon(icon, color: color, size:28);
-}
+    return Icon(icon, color: color, size: 28);
+  }
 }
