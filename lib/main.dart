@@ -26,9 +26,27 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Icon(Icons.notifications_none, color: Colors.black),
+        leading: Padding(
+          padding: EdgeInsets.all(8.0),
+        child: Container(
+  padding:  EdgeInsets.all(8), // space inside the box
+  decoration: BoxDecoration(
+    color: Colors.white, // box background color
+    borderRadius: BorderRadius.circular(12), // rounded corners
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.05), // light shadow
+        blurRadius: 6,
+        offset:  Offset(0, 3),
+      ),
+    ],
+  ),
+  child: Icon(
+    Icons.notifications_none,
+    color: Colors.black,
+    size: 24, // adjust icon size
+  ),
+),
         ),
       ),
       body: SingleChildScrollView(
@@ -162,22 +180,7 @@ class HomeScreen extends StatelessWidget {
       ),
 
       // Bottom Navigation
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: 0,
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search), label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt), label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline), label: ""),
-        ],
-      ),
+      bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 
@@ -209,4 +212,72 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+class CustomBottomNavBar extends StatelessWidget {
+  const CustomBottomNavBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none, // allow overflow
+      alignment: Alignment.bottomCenter,
+      children: [
+        // Background container
+        Container(
+          height: 70,
+       margin: const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(40),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _navItem(Icons.home, true, const Color(0xFFB86EFF)),
+              _navItem(Icons.bar_chart, false, Colors.grey),
+              const SizedBox(width: 70), // space for bigger center button
+              _navItem(Icons.camera_alt_outlined, false, Colors.grey),
+              _navItem(Icons.person_outline, false, Colors.grey),
+            ],
+          ),
+        ),
+
+        // Floating bigger center button
+        Positioned(
+          bottom: 40, // raise it above the bar
+          child: Container(
+            height: 75, // bigger size
+            width: 75,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF76C7FF), Color(0xFF6A8DFF)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blueAccent.withOpacity(0.3),
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: const Icon(Icons.search, color: Colors.white, size: 32),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _navItem(IconData icon, bool active, Color color) {
+    return Icon(icon, color: color, size:28);
+}
 }
