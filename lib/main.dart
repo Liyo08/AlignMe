@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-          theme: ThemeData(
+      theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
@@ -33,15 +33,16 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.only(
+              left: 16.0, top: 8.0, bottom: 8.0), // more space from left
           child: Container(
-            padding: EdgeInsets.all(8), // space inside the box
+            padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white, // box background color
-              borderRadius: BorderRadius.circular(12), // rounded corners
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05), // light shadow
+                  color: Colors.black.withOpacity(0.05),
                   blurRadius: 6,
                   offset: Offset(0, 3),
                 ),
@@ -50,14 +51,14 @@ class HomeScreen extends StatelessWidget {
             child: Icon(
               Icons.notifications_none,
               color: Colors.black,
-              size: 24, // adjust icon size
+              size: 24,
             ),
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -85,32 +86,48 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF76C7C0), Color(0xFF91EAE4)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                    begin: Alignment(1.00, 1.00),
+                    end: Alignment(-0.24, -0.31),
+                    colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
                   ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("BMI (Body Mass Index)",
                               style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
                                   color: Colors.white)),
                           SizedBox(height: 4),
                           Text("You have a normal weight",
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white)),
                           SizedBox(height: 10),
-                          Chip(
-                            label: Text("View More",
-                                style: TextStyle(color: Colors.white)),
-                            backgroundColor: Colors.pinkAccent,
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment(1.00, 1.00),
+                                end: Alignment(-0.24, -0.31),
+                                colors: [Color(0xFFC58BF2), Color(0xFFEEA4CE)],
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  20), // rounded corners like a Chip
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 18, vertical: 4),
+                              child: Text(
+                                "View More",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -126,16 +143,19 @@ class HomeScreen extends StatelessWidget {
                             value: 0.7,
                             backgroundColor: Colors.white30,
                             valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.pinkAccent),
+                              Color(0xFFC58BF2), // Start of gradient
+                            ),
                           ),
                         ),
                         const Text(
                           "20.1",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -198,7 +218,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              _featureCard("AlignMart", "Essentials for your yoga journey.",
+              _featureCar("AlignMart", "Essentials for your yoga journey.",
                   'assets/shop.png'),
             ],
           ),
@@ -212,8 +232,37 @@ class HomeScreen extends StatelessWidget {
 
   Widget _featureCard(String title, String subtitle, String asset) {
     return Container(
-      width: 150,
-      padding: const EdgeInsets.all(12),
+      width: 175,
+      padding: const EdgeInsets.all(22),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5)
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(asset, height: 60), // Replace with real image assets
+          const SizedBox(height: 10),
+          Text(title,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          Text(subtitle,
+              style: const TextStyle(fontSize: 12, color: Colors.blue)),
+        ],
+      ),
+    );
+  }
+
+  Widget _featureCar(String title, String subtitle, String asset) {
+    return Container(
+      width: 440,
+      padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
