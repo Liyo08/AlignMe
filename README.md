@@ -20,7 +20,7 @@ AlignMe is the mobile app evolution of our earlier web-based platform ZenAlign, 
 
 🤖 AI ChatBot – Health tips, reminders, and personalized suggestions.
 
-🚀 Current Development
+## 🚀 Current Development
 
 AlignMe is actively under development with ongoing work focused on:
 
