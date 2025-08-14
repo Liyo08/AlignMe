@@ -32,7 +32,7 @@ Optimizing performance on mobile devices.
 
 Expanding accessibility with regional language support.
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 Frontend: Flutter
 
