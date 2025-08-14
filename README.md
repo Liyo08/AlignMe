@@ -1,4 +1,4 @@
-AlignMe
+# AlignMe
 
 AlignMe is the mobile app evolution of our earlier web-based platform ZenAlign, built using Flutter to deliver a deeply personalized yoga and wellness experience. It combines AI, smart tracking, and voice-first technologies to provide a tailored approach to physical and mental well-being.
 
