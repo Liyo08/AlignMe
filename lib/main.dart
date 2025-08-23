@@ -229,7 +229,11 @@ const SizedBox(height: 16),
 Container(
   padding: const EdgeInsets.all(16),
   decoration: BoxDecoration(
-    color: Colors.blue.shade50,
+       gradient: LinearGradient(
+                begin: Alignment(1.00, 1.00),
+                end: Alignment(-0.24, -0.31),
+                colors: [const Color.fromARGB(255, 229, 232, 250), const Color.fromARGB(255, 226, 236, 247)],
+              ),
     borderRadius: BorderRadius.circular(20),
   ),
   child: Column(
@@ -375,10 +379,10 @@ Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Sleep",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12)),
                 const SizedBox(height: 8),
                 const Text("8h 20m",
-                    style: TextStyle(color:  Color(0xFF92A3FD), fontSize: 16)),
+                    style: TextStyle(color:  Color(0xFF92A3FD), fontSize: 14,fontWeight: FontWeight.w700)),
                 const SizedBox(height: 12),
                 SizedBox(
                   height: 80,
@@ -440,7 +444,7 @@ Row(
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 const Text("760 kcal",
-                    style: TextStyle(color: Colors.orange, fontSize: 16)),
+                    style: TextStyle(color:  Color(0xFF92A3FD), fontSize: 16)),
                 const SizedBox(height: 12),
                 SizedBox(
                   height: 100,
