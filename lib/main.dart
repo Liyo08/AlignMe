@@ -212,7 +212,7 @@ class HomeScreen extends StatelessWidget {
             _featureCar("AlignMart", "Essentials for your yoga journey.",
                 'assets/shop.png'),
 
-            // ---------------- Activity Status ----------------
+           
             // ---------------- Activity Status ----------------
             const SizedBox(height: 30),
             const Text("Activity Status",
@@ -499,7 +499,7 @@ Row(
                         color: Color(0xFF92A3FD), fontSize: 16)),
                 const SizedBox(height: 12),
                 SizedBox(
-                  height: 100,
+                  height: 110,
                   child: PieChart(
                     PieChartData(
                       centerSpaceRadius: 35,
@@ -540,6 +540,9 @@ Row(
   ],
 ),
 
+// ---------------- Latest Workout Section ----------------
+const SizedBox(height: 30),
+LatestWorkoutSection(),
 
           ]),
         ),
@@ -608,6 +611,157 @@ Row(
     );
   }
 }
+// ---------------- Latest Workout Section ----------------
+class LatestWorkoutSection extends StatelessWidget {
+  const LatestWorkoutSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header Row
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Latest Workout",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "See more",
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+            ),
+          ],
+        ),
+        const SizedBox(height: 15),
+
+        // Workout Cards
+        WorkoutCard(
+          title: "Fullbody Workout",
+          subtitle: "180 Calories Burn | 20minutes",
+          progress: 0.4,
+          icon: Icons.fitness_center,
+          iconBg: Colors.purple.shade100,
+         
+        ),
+        WorkoutCard(
+          title: "Lowerbody Workout",
+          subtitle: "200 Calories Burn | 30minutes",
+          progress: 0.6,
+          icon: Icons.directions_run,
+          iconBg: Colors.pink.shade100,
+        ),
+        WorkoutCard(
+          title: "Ab Workout",
+          subtitle: "180 Calories Burn | 20minutes",
+          progress: 0.35,
+          icon: Icons.accessibility_new,
+          iconBg: Colors.blue.shade100,
+        ),
+      ],
+    );
+  }
+}
+
+class WorkoutCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final double progress;
+  final IconData icon;
+  final Color iconBg;
+  final Color? titleColor;
+  final Color? textColor;
+
+  const WorkoutCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.progress,
+    required this.icon,
+    required this.iconBg,
+    this.titleColor = Colors.black,
+    this.textColor = Colors.black54,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // Icon Circle
+          Container(
+            height: 55,
+            width: 55,
+            decoration: BoxDecoration(
+              color: iconBg,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, size: 30, color: Colors.black87),
+          ),
+          const SizedBox(width: 15),
+
+          // Title & Subtitle
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: titleColor,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  subtitle,
+                  style: TextStyle(fontSize: 13, color: textColor),
+                ),
+                const SizedBox(height: 8),
+
+                // Progress bar
+                LinearProgressIndicator(
+                  value: progress,
+                  minHeight: 6,
+                  backgroundColor: Colors.grey.shade200,
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                    Color.fromARGB(181, 109, 109, 248),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Right Circle
+          Container(
+            height: 20,
+            width: 20,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color.fromARGB(255, 210, 156, 239), width: 2),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 // ---------------- Timeline Row Widget ----------------
 class _TimelineRow extends StatelessWidget {
   final String time;
