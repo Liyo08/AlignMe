@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-
-
 void main() {
   runApp(const MyApp());
 }
@@ -36,8 +34,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Padding(
-          padding:
-              const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+          padding: const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -62,275 +59,283 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Top Illustration
-              const Center(),
-              const SizedBox(height: 10),
-              const Text(
-                "Welcome Back,",
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-              const Text(
-                "Jeel",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            // Top Illustration
+            const Center(),
+            const SizedBox(height: 10),
+            const Text(
+              "Welcome Back,",
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            const Text(
+              "Jeel",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
 
-              // BMI Card
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(
-                    begin: Alignment(1.00, 1.00),
-                    end: Alignment(-0.24, -0.31),
-                    colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                  ),
+            // BMI Card
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: const LinearGradient(
+                  begin: Alignment(1.00, 1.00),
+                  end: Alignment(-0.24, -0.31),
+                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("BMI (Body Mass Index)",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white)),
-                          const SizedBox(height: 4),
-                          const Text("You have a normal weight",
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.white)),
-                          const SizedBox(height: 10),
-                          Container(
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                begin: Alignment(1.00, 1.00),
-                                end: Alignment(-0.24, -0.31),
-                                colors: [Color(0xFFC58BF2), Color(0xFFEEA4CE)],
-                              ),
-                              borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("BMI (Body Mass Index)",
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white)),
+                        const SizedBox(height: 4),
+                        const Text("You have a normal weight",
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.white)),
+                        const SizedBox(height: 10),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              begin: Alignment(1.00, 1.00),
+                              end: Alignment(-0.24, -0.31),
+                              colors: [Color(0xFFC58BF2), Color(0xFFEEA4CE)],
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 18, vertical: 4),
-                              child: Text(
-                                "View More",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 4),
+                            child: Text(
+                              "View More",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Circular progress
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: CircularProgressIndicator(
+                          value: 0.7,
+                          backgroundColor: Colors.white30,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Color(0xFFC58BF2),
+                          ),
+                        ),
+                      ),
+                      const Text(
+                        "20.1",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Today Target Button
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                gradient: const LinearGradient(
+                  begin: Alignment(1.00, 1.00),
+                  end: Alignment(-0.24, -0.31),
+                  colors: [
+                    Color.fromARGB(255, 201, 208, 241),
+                    Color.fromARGB(255, 223, 237, 251)
+                  ],
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Today Target",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold)),
+                  Container(
+                    width: 80,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment(1.00, 1.00),
+                        end: Alignment(-0.24, -0.31),
+                        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    child: const Text(
+                      "Check",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Feature Cards
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _featureCard("PosePerfect", "Align. Improve. Repeat.",
+                    'assets/pose.png'),
+                _featureCard("FlowEase", "Breathe. Stretch. Heal.",
+                    'assets/stretch.png'),
+              ],
+            ),
+            const SizedBox(height: 20),
+            _featureCar("AlignMart", "Essentials for your yoga journey.",
+                'assets/shop.png'),
+
+            // ---------------- Activity Status ----------------
+            // ---------------- Activity Status ----------------
+            const SizedBox(height: 30),
+            const Text("Activity Status",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 16),
+
+// Heart Rate card
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment(1.00, 1.00),
+                  end: Alignment(-0.24, -0.31),
+                  colors: [
+                    const Color.fromARGB(255, 229, 232, 250),
+                    const Color.fromARGB(255, 226, 236, 247)
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Heart Rate",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontWeight: FontWeight.w900, // makes it bold
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    height: 120,
+                    child: LineChart(
+                      LineChartData(
+                        gridData: FlGridData(show: false),
+                        titlesData: FlTitlesData(show: false),
+                        borderData: FlBorderData(show: false),
+                        lineBarsData: [
+                          LineChartBarData(
+                            spots: const [
+                              FlSpot(0, 70),
+                              FlSpot(1, 75),
+                              FlSpot(2, 78),
+                              FlSpot(3, 76),
+                              FlSpot(4, 80),
+                              FlSpot(5, 78),
+                            ],
+                            isCurved: true,
+                            color: const Color(0xFF92A3FD),
+                            barWidth: 3,
+                            belowBarData: BarAreaData(
+                              show: true,
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.blueAccent.withOpacity(0.2),
+                                  Colors.blueAccent
+                                      .withOpacity(0.0), // fades out
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    // Circular progress
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 60,
-                          width: 60,
-                          child: CircularProgressIndicator(
-                            value: 0.7,
-                            backgroundColor: Colors.white30,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Color(0xFFC58BF2),
-                            ),
-                          ),
-                        ),
-                        const Text(
-                          "20.1",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Today Target Button
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: const LinearGradient(
-                    begin: Alignment(1.00, 1.00),
-                    end: Alignment(-0.24, -0.31),
-                    colors: [
-                      Color.fromARGB(255, 201, 208, 241),
-                      Color.fromARGB(255, 223, 237, 251)
-                    ],
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Today Target",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold)),
-                    Container(
-                      width: 80,
+                  const SizedBox(height: 8),
+                  const Text("78 BPM",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF92A3FD))),
+                  const SizedBox(height: 4),
+                  Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: Container(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
+                        gradient: LinearGradient(
                           begin: Alignment(1.00, 1.00),
                           end: Alignment(-0.24, -0.31),
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                          colors: [
+                            const Color(0xFFC58BF2),
+                            const Color(0xFFEEA4CE)
+                          ],
                         ),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      child: const Text(
-                        "Check",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Feature Cards
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _featureCard("PosePerfect", "Align. Improve. Repeat.",
-                      'assets/pose.png'),
-                  _featureCard("FlowEase", "Breathe. Stretch. Heal.",
-                      'assets/stretch.png'),
-                ],
-              ),
-              const SizedBox(height: 20),
-              _featureCar("AlignMart", "Essentials for your yoga journey.",
-                  'assets/shop.png'),
-
-              // ---------------- Activity Status ----------------
-              // ---------------- Activity Status ---------------- 
-const SizedBox(height: 30),
-const Text("Activity Status",
-    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-const SizedBox(height: 16),
-
-// Heart Rate card
-Container(
-  padding: const EdgeInsets.all(16),
-  decoration: BoxDecoration(
-       gradient: LinearGradient(
-                begin: Alignment(1.00, 1.00),
-                end: Alignment(-0.24, -0.31),
-                colors: [const Color.fromARGB(255, 229, 232, 250), const Color.fromARGB(255, 226, 236, 247)],
-              ),
-    borderRadius: BorderRadius.circular(20),
-  ),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-     const Text(
-  "Heart Rate",
-  style: TextStyle(
-    color: Color.fromARGB(255, 0, 0, 0),
-    fontWeight: FontWeight.w900, // makes it bold
-  ),
-),
-      const SizedBox(height: 8),
-      SizedBox(
-        height: 120,
-        child: LineChart(
-          LineChartData(
-            gridData: FlGridData(show: false),
-            titlesData: FlTitlesData(show: false),
-            borderData: FlBorderData(show: false),
-            lineBarsData: [
-              LineChartBarData(
-                spots: const [
-                  FlSpot(0, 70),
-                  FlSpot(1, 75),
-                  FlSpot(2, 78),
-                  FlSpot(3, 76),
-                  FlSpot(4, 80),
-                  FlSpot(5, 78),
-                ],
-                isCurved: true,
-               color: const Color(0xFF92A3FD),
-                barWidth: 3,
-                belowBarData: BarAreaData(
-                  show: true,
-                  gradient: LinearGradient(
-  colors: [
-    Colors.blueAccent.withOpacity(0.2),
-    Colors.blueAccent.withOpacity(0.0), // fades out
-  ],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      const SizedBox(height: 8),
-      const Text("78 BPM",
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color:  Color(0xFF92A3FD))),
-      const SizedBox(height: 4),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        decoration: BoxDecoration(
-               gradient: LinearGradient(
-                      begin: Alignment(1.00, 1.00),
-                      end: Alignment(-0.24, -0.31),
-                      colors: [const Color(0xFFC58BF2), const Color(0xFFEEA4CE)],
+                      child: const Text("3 mins ago",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 12)),
                     ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: const Text("3 mins ago",
-            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 12)),
-      ),
-    ],
-  ),
-),
-const SizedBox(height: 20),
-
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
 // Grid with Water, Sleep, Calories
 Row(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
-    // Water Intake
+    // ---------------- Water Intake ----------------
     Expanded(
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6)],
+          boxShadow: const [
+            BoxShadow(color: Colors.black12, blurRadius: 6)
+          ],
         ),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Water Intake",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            const Text("4 Liters",
-                style: TextStyle(color: Colors.blue, fontSize: 16)),
-            const SizedBox(height: 12),
+            // Left: Water Level Bar
             Container(
-              height: 278,
-              width: 20,
+              height: 355,
+              width: 30,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(20),
@@ -338,32 +343,67 @@ Row(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  height: 90, // filled portion
+                  height: 140, // adjust based on water consumed
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  colors: [
-    Color(0xFFC58BF2), // #C58BF2
-    Color(0xFFB4C0FE), // #B4C0FE
-  ],
-  stops: [-0.8311, 0.606], // matching the CSS percentages
-),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xFFC58BF2),
+                        Color(0xFFB4C0FE),
+                      ],
+                    ),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            const Text("Real time updates",
-                style: TextStyle(fontSize: 12, color: Colors.black54)),
+            const SizedBox(width: 16),
+
+            // Right: Details
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Water Intake",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 4),
+                  const Text("4 Liters",
+                      style: TextStyle(
+                          color: Color(0xFF92A3FD),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  const Text("Real time updates",
+                      style:
+                          TextStyle(fontSize: 12, color: Colors.black54)),
+                  const SizedBox(height: 12),
+
+                  // Timeline entries
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      _TimelineRow(time: "6am - 8am", amount: "600ml"),
+                      _TimelineRow(time: "9am - 11am", amount: "500ml"),
+                      _TimelineRow(time: "11am - 2pm", amount: "1000ml"),
+                      _TimelineRow(time: "2pm - 4pm", amount: "700ml"),
+                      _TimelineRow(
+                          time: "4pm - now",
+                          amount: "900ml",
+                          isActive: true),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     ),
     const SizedBox(width: 12),
 
-    // Right column with Sleep & Calories
+    // ---------------- Right column with Sleep & Calories ----------------
     Expanded(
       child: Column(
         children: [
@@ -373,16 +413,22 @@ Row(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6)],
+              boxShadow: const [
+                BoxShadow(color: Colors.black12, blurRadius: 6)
+              ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Sleep",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 12)),
                 const SizedBox(height: 8),
                 const Text("8h 20m",
-                    style: TextStyle(color:  Color(0xFF92A3FD), fontSize: 14,fontWeight: FontWeight.w700)),
+                    style: TextStyle(
+                        color: Color(0xFF92A3FD),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700)),
                 const SizedBox(height: 12),
                 SizedBox(
                   height: 80,
@@ -402,8 +448,8 @@ Row(
                           ],
                           isCurved: true,
                           gradient: LinearGradient(
-  colors: [Colors.purple, Colors.purple], // solid purple
-),
+                            colors: [Colors.purple, Colors.purple],
+                          ),
                           barWidth: 2,
                         ),
                         LineChartBarData(
@@ -415,9 +461,12 @@ Row(
                             FlSpot(4, 1.2),
                           ],
                           isCurved: true,
-                        gradient: LinearGradient(
-  colors: [Colors.purple.shade200, Colors.purple.shade200], // same color twice
-),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.purple.shade200,
+                              Colors.purple.shade200
+                            ],
+                          ),
                           barWidth: 2,
                         ),
                       ],
@@ -435,7 +484,9 @@ Row(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6)],
+              boxShadow: const [
+                BoxShadow(color: Colors.black12, blurRadius: 6)
+              ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -444,7 +495,8 @@ Row(
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 const Text("760 kcal",
-                    style: TextStyle(color:  Color(0xFF92A3FD), fontSize: 16)),
+                    style: TextStyle(
+                        color: Color(0xFF92A3FD), fontSize: 16)),
                 const SizedBox(height: 12),
                 SizedBox(
                   height: 100,
@@ -454,15 +506,15 @@ Row(
                       sections: [
                         PieChartSectionData(
                           value: 760,
-                         gradient: LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  colors: [
-    Color(0xFFC58BF2), // #C58BF2
-    Color(0xFFB4C0FE), // #B4C0FE
-  ],
-  stops: [-0.8311, 0.606], // matching the CSS percentages
-),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFFC58BF2),
+                              Color(0xFFB4C0FE),
+                            ],
+                            stops: [-0.8311, 0.606],
+                          ),
                           radius: 12,
                         ),
                         PieChartSectionData(
@@ -476,7 +528,8 @@ Row(
                 ),
                 const Center(
                   child: Text("230 kcal left",
-                      style: TextStyle(fontSize: 12, color: Colors.black54)),
+                      style:
+                          TextStyle(fontSize: 12, color: Colors.black54)),
                 ),
               ],
             ),
@@ -486,8 +539,9 @@ Row(
     ),
   ],
 ),
-            ]
-          ),
+
+
+          ]),
         ),
       ),
 
@@ -516,8 +570,8 @@ Row(
           Image.asset(asset, height: 60),
           const SizedBox(height: 10),
           Text(title,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 14)),
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
           Text(subtitle,
               style: const TextStyle(fontSize: 12, color: Colors.blue)),
         ],
@@ -545,8 +599,8 @@ Row(
           Image.asset(asset, height: 60),
           const SizedBox(height: 10),
           Text(title,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 14)),
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
           Text(subtitle,
               style: const TextStyle(fontSize: 12, color: Colors.blue)),
         ],
@@ -554,7 +608,61 @@ Row(
     );
   }
 }
+// ---------------- Timeline Row Widget ----------------
+class _TimelineRow extends StatelessWidget {
+  final String time;
+  final String amount;
+  final bool isActive;
 
+  const _TimelineRow({
+    Key? key,
+    required this.time,
+    required this.amount,
+    this.isActive = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              color: isActive ? Colors.purpleAccent : Colors.purple.shade200,
+              shape: BoxShape.circle,
+              boxShadow: isActive
+                  ? [
+                      BoxShadow(
+                        color: Colors.purpleAccent.withOpacity(0.5),
+                        blurRadius: 8,
+                        spreadRadius: 2,
+                      )
+                    ]
+                  : [],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(time,
+                  style: const TextStyle(
+                      fontSize: 12, color: Colors.black54)),
+              Text(amount,
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.purple.shade300,
+                      fontWeight: FontWeight.w500)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
 
@@ -566,8 +674,8 @@ class CustomBottomNavBar extends StatelessWidget {
       children: [
         Container(
           height: 70,
-          margin: const EdgeInsets.only(
-              left: 16, right: 16, bottom: 24, top: 8),
+          margin:
+              const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(40),
@@ -582,8 +690,8 @@ class CustomBottomNavBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _navItem(Icons.home, true,
-                  const Color.fromARGB(255, 227, 137, 245)),
+              _navItem(
+                  Icons.home, true, const Color.fromARGB(255, 227, 137, 245)),
               _navItem(Icons.bar_chart, false, Colors.grey),
               const SizedBox(width: 70),
               _navItem(Icons.camera_alt_outlined, false, Colors.grey),
@@ -611,8 +719,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Icon(Icons.search,
-                color: Colors.white, size: 32),
+            child: const Icon(Icons.search, color: Colors.white, size: 32),
           ),
         ),
       ],
