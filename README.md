@@ -1,16 +1,47 @@
-# alignmep1
+# AlignMe
 
-A new Flutter project.
+AlignMe is the mobile app evolution of our earlier web-based platform ZenAlign, built using Flutter to deliver a deeply personalized yoga and wellness experience. It combines AI, smart tracking, and voice-first technologies to provide a tailored approach to physical and mental well-being.
 
-## Getting Started
+## 🌟 Key Features
 
-This project is a starting point for a Flutter application.
+🎯 Goal-Based Yoga Plans – Adaptive routines for weight loss, flexibility, or mindfulness.
 
-A few resources to get you started if this is your first Flutter project:
+🗣 Multilingual Voice Support – Voice-guided instructions in multiple regional languages.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+📊 Health Metrics Tracker – Monitors activity levels, wellness scores, and recovery trends.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🌸 Menstrual Wellness Module – Adaptive routines based on menstrual cycle data.
+
+🏆 Gamified Yoga Goals – Progress challenges to boost user engagement by 40%.
+
+📝 Smart Journaling – Auto-generated wellness insights and summaries.
+
+🛍 Integrated E-commerce – Product recommendations and in-app purchases for wellness products.
+
+🤖 AI ChatBot – Health tips, reminders, and personalized suggestions.
+
+## 🚀 Current Development
+
+AlignMe is actively under development with ongoing work focused on:
+
+Enhancing personalization with AI-driven insights.
+
+Refining UI for an intuitive and engaging experience.
+
+Optimizing performance on mobile devices.
+
+Expanding accessibility with regional language support.
+
+## 🛠️ Tech Stack
+
+Frontend: Flutter
+
+Backend: Python (Flask)
+
+AI/ML: TensorFlow Lite, MediaPipe
+
+Database & Authentication: Firebase
+
+Design: Figma
+
+APIs: REST APIs for data integration
