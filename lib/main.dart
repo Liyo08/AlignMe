@@ -235,7 +235,13 @@ Container(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text("Heart Rate", style: TextStyle(color: Colors.black54)),
+     const Text(
+  "Heart Rate",
+  style: TextStyle(
+    color: Color.fromARGB(255, 0, 0, 0),
+    fontWeight: FontWeight.w900, // makes it bold
+  ),
+),
       const SizedBox(height: 8),
       SizedBox(
         height: 120,
@@ -255,7 +261,7 @@ Container(
                   FlSpot(5, 78),
                 ],
                 isCurved: true,
-                color: Colors.blueAccent,
+               color: const Color(0xFF92A3FD),
                 barWidth: 3,
                 belowBarData: BarAreaData(
                   show: true,
@@ -276,7 +282,7 @@ Container(
       const SizedBox(height: 8),
       const Text("78 BPM",
           style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue)),
+              fontSize: 20, fontWeight: FontWeight.bold, color:  Color(0xFF92A3FD))),
       const SizedBox(height: 4),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -372,7 +378,7 @@ Row(
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 const Text("8h 20m",
-                    style: TextStyle(color: Colors.purple, fontSize: 16)),
+                    style: TextStyle(color:  Color(0xFF92A3FD), fontSize: 16)),
                 const SizedBox(height: 12),
                 SizedBox(
                   height: 80,
