@@ -33,10 +33,10 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Padding(
-          padding: EdgeInsets.only(
-              left: 16.0, top: 8.0, bottom: 8.0), // more space from left
+          padding:
+              const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
@@ -44,11 +44,11 @@ class HomeScreen extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
                   blurRadius: 6,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
-            child: Icon(
+            child: const Icon(
               Icons.notifications_none,
               color: Colors.black,
               size: 24,
@@ -63,12 +63,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Top Illustration
-              Center(
-                  // child: Image.asset(
-                  //   'assets/meditation.png', // Replace with your image asset
-                  //   height: 150,
-                  //),
-                  ),
+              const Center(),
               const SizedBox(height: 10),
               const Text(
                 "Welcome Back,",
@@ -98,27 +93,26 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("BMI (Body Mass Index)",
+                          const Text("BMI (Body Mass Index)",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white)),
-                          SizedBox(height: 4),
-                          Text("You have a normal weight",
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.white)),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 4),
+                          const Text("You have a normal weight",
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.white)),
+                          const SizedBox(height: 10),
                           Container(
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 begin: Alignment(1.00, 1.00),
                                 end: Alignment(-0.24, -0.31),
                                 colors: [Color(0xFFC58BF2), Color(0xFFEEA4CE)],
                               ),
-                              borderRadius: BorderRadius.circular(
-                                  20), // rounded corners like a Chip
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Padding(
+                            child: const Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 18, vertical: 4),
                               child: Text(
@@ -132,18 +126,18 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // Circular progress (placeholder)
+                    // Circular progress
                     Stack(
                       alignment: Alignment.center,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                           width: 60,
                           child: CircularProgressIndicator(
                             value: 0.7,
                             backgroundColor: Colors.white30,
                             valueColor: AlwaysStoppedAnimation<Color>(
-                              Color(0xFFC58BF2), // Start of gradient
+                              Color(0xFFC58BF2),
                             ),
                           ),
                         ),
@@ -179,9 +173,9 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Today Target",
+                    const Text("Today Target",
                         style: TextStyle(
-                            color: const Color.fromARGB(255, 0, 0, 0),
+                            color: Colors.black,
                             fontWeight: FontWeight.bold)),
                     Container(
                       width: 80,
@@ -220,13 +214,137 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 20),
               _featureCar("AlignMart", "Essentials for your yoga journey.",
                   'assets/shop.png'),
+
+              // ---------------- Activity Status ----------------
+              const SizedBox(height: 30),
+              const Text("Activity Status",
+                  style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 16),
+
+              // Heart Rate card
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text("Heart Rate", style: TextStyle(color: Colors.black54)),
+                    SizedBox(height: 8),
+                    Text("78 BPM",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue)),
+                    SizedBox(height: 8),
+                    Text("3 mins ago",
+                        style: TextStyle(color: Colors.purple, fontSize: 12)),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Grid with Water, Sleep, Calories
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Water Intake
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.black12, blurRadius: 6)
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text("Water Intake",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          SizedBox(height: 8),
+                          Text("4 Liters",
+                              style: TextStyle(color: Colors.blue)),
+                          SizedBox(height: 12),
+                          Text("Real time updates",
+                              style: TextStyle(
+                                  fontSize: 12, color: Colors.black54)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+
+                  // Right column with Sleep & Calories
+                  Expanded(
+                    child: Column(
+                      children: [
+                        // Sleep
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.black12, blurRadius: 6)
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text("Sleep",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              SizedBox(height: 8),
+                              Text("8h 20m",
+                                  style: TextStyle(color: Colors.purple)),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Calories
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.black12, blurRadius: 6)
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text("Calories",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              SizedBox(height: 8),
+                              Text("760 kcal",
+                                  style: TextStyle(color: Colors.orange)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
 
       // Bottom Navigation
-      bottomNavigationBar: CustomBottomNavBar(),
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 
@@ -247,11 +365,11 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(asset, height: 60), // Replace with real image assets
+          Image.asset(asset, height: 60),
           const SizedBox(height: 10),
           Text(title,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 14)),
           Text(subtitle,
               style: const TextStyle(fontSize: 12, color: Colors.blue)),
         ],
@@ -276,11 +394,11 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(asset, height: 60), // Replace with real image assets
+          Image.asset(asset, height: 60),
           const SizedBox(height: 10),
           Text(title,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 14)),
           Text(subtitle,
               style: const TextStyle(fontSize: 12, color: Colors.blue)),
         ],
@@ -295,49 +413,46 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      clipBehavior: Clip.none, // allow overflow
+      clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
       children: [
-        // Background container
         Container(
           height: 70,
-          margin:
-              const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
+          margin: const EdgeInsets.only(
+              left: 16, right: 16, bottom: 24, top: 8),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(40),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 10,
-                offset: const Offset(0, 5),
+                offset: Offset(0, 5),
               ),
             ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _navItem(
-                  Icons.home, true, const Color.fromARGB(255, 227, 137, 245)),
+              _navItem(Icons.home, true,
+                  const Color.fromARGB(255, 227, 137, 245)),
               _navItem(Icons.bar_chart, false, Colors.grey),
-              const SizedBox(width: 70), // space for bigger center button
+              const SizedBox(width: 70),
               _navItem(Icons.camera_alt_outlined, false, Colors.grey),
               _navItem(Icons.person_outline, false, Colors.grey),
             ],
           ),
         ),
-
-        // Floating bigger center button
         Positioned(
-          bottom: 40, // raise it above the bar
+          bottom: 40,
           child: Container(
-            height: 75, // bigger size
+            height: 75,
             width: 75,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment(1.00, 1.00),
                 end: Alignment(-0.24, -0.31),
-                colors: [const Color(0xFF92A3FD), const Color(0xFF9DCEFF)],
+                colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
               ),
               shape: BoxShape.circle,
               boxShadow: [
@@ -348,7 +463,8 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Icon(Icons.search, color: Colors.white, size: 32),
+            child: const Icon(Icons.search,
+                color: Colors.white, size: 32),
           ),
         ),
       ],
