@@ -29,6 +29,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -59,6 +60,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             // Top Illustration
@@ -499,7 +501,7 @@ Row(
                         color: Color(0xFF92A3FD), fontSize: 16)),
                 const SizedBox(height: 12),
                 SizedBox(
-                  height: 110,
+                  height: 102.5,
                   child: PieChart(
                     PieChartData(
                       centerSpaceRadius: 35,
