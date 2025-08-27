@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'camera_page.dart';
+import 'stats_page.dart';
+import 'Profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -915,37 +918,6 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   }
 }
 
-// --- Dummy pages for Stats, Camera, Profile ---
-// Create these in separate files ideally
-class StatsPage extends StatelessWidget {
-  const StatsPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("This is Status Page")),
-    );
-  }
-}
 
-class CameraPage extends StatelessWidget {
-  const CameraPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("This is Camera Page")),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("This is Profile Page")),
-    );
-  }
-}
