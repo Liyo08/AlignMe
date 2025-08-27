@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: const HomeScreen(),
+       home: const CustomBottomNavBar(),
     );
   }
 }
@@ -550,8 +550,7 @@ LatestWorkoutSection(),
         ),
       ),
 
-      // Bottom Navigation
-      bottomNavigationBar: const CustomBottomNavBar(),
+     
     );
   }
 
@@ -819,70 +818,134 @@ class _TimelineRow extends StatelessWidget {
     );
   }
 }
-class CustomBottomNavBar extends StatelessWidget {
+class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({super.key});
 
   @override
+  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
+}
+
+class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const StatsPage(),
+    const CameraPage(),
+    const ProfilePage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.bottomCenter,
-      children: [
-        Container(
-          height: 70,
-          margin:
-              const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(40),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-                offset: Offset(0, 5),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _navItem(
-                  Icons.home, true, const Color.fromARGB(255, 227, 137, 245)),
-              _navItem(Icons.bar_chart, false, Colors.grey),
-              const SizedBox(width: 70),
-              _navItem(Icons.camera_alt_outlined, false, Colors.grey),
-              _navItem(Icons.person_outline, false, Colors.grey),
-            ],
-          ),
-        ),
-        Positioned(
-          bottom: 40,
-          child: Container(
-            height: 75,
-            width: 75,
+    return Scaffold(
+      body: _pages[_selectedIndex], // show selected page
+      bottomNavigationBar: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.bottomCenter,
+        children: [
+          Container(
+            height: 70,
+            margin: const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment(1.00, 1.00),
-                end: Alignment(-0.24, -0.31),
-                colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-              ),
-              shape: BoxShape.circle,
-              boxShadow: [
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: const [
                 BoxShadow(
-                  color: Colors.blueAccent.withOpacity(0.3),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
+                  color: Colors.black12,
+                  blurRadius: 10,
+                  offset: Offset(0, 5),
                 ),
               ],
             ),
-            child: const Icon(Icons.search, color: Colors.white, size: 32),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _navItem(Icons.home, 0),
+                _navItem(Icons.bar_chart, 1),
+                const SizedBox(width: 70),
+                _navItem(Icons.camera_alt_outlined, 2),
+                _navItem(Icons.person_outline, 3),
+              ],
+            ),
           ),
-        ),
-      ],
+          Positioned(
+            bottom: 40,
+            child: Container(
+              height: 75,
+              width: 75,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  begin: Alignment(1.00, 1.00),
+                  end: Alignment(-0.24, -0.31),
+                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                ),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blueAccent.withOpacity(0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.search, color: Colors.white, size: 32),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _navItem(IconData icon, bool active, Color color) {
-    return Icon(icon, color: color, size: 28);
+  Widget _navItem(IconData icon, int index) {
+    final bool isActive = _selectedIndex == index;
+    return GestureDetector(
+      onTap: () => _onItemTapped(index),
+      child: Icon(
+        icon,
+        color: isActive ? const Color.fromARGB(255, 227, 137, 245) : Colors.grey,
+        size: 28,
+      ),
+    );
+  }
+}
+
+// --- Dummy pages for Stats, Camera, Profile ---
+// Create these in separate files ideally
+class StatsPage extends StatelessWidget {
+  const StatsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: Text("This is Stats Page")),
+    );
+  }
+}
+
+class CameraPage extends StatelessWidget {
+  const CameraPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: Text("This is Camera Page")),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: Text("This is Profile Page")),
+    );
   }
 }
