@@ -923,7 +923,7 @@ class StatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text("This is Stats Page")),
+      body: Center(child: Text("This is Status Page")),
     );
   }
 }
