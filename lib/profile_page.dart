@@ -134,7 +134,7 @@ _buildSection(
       children: [
         const Row(
           children: [
-            Icon(Icons.notifications_outlined, color: Colors.purple),
+            Icon(Icons.notifications_outlined, color: Color.fromARGB(255, 207, 138, 219)),
             SizedBox(width: 8),
            Text(
   "Pop-up Notification",
@@ -199,22 +199,46 @@ _buildSection(
   }
 
   // 🔹 Reusable Stat Card
-  Widget _buildStatCard(String value, String label) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        children: [
-          Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue)),
-          const SizedBox(height: 4),
-          Text(label, style: const TextStyle(color: Colors.grey)),
-        ],
-      ),
-    );
-  }
+Widget _buildStatCard(String value, String label) {
+  return Container(
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: Column(
+      children: [
+        // Gradient for value
+        ShaderMask(
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white, // keep white to show gradient
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+        // Normal black label
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
 
   // 🔹 Reusable Section
   Widget _buildSection({required String title, required List<Widget> items}) {
@@ -238,12 +262,23 @@ _buildSection(
   }
 
   // 🔹 Reusable ListTile
-  Widget _buildListTile(IconData icon, String text) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.blue),
-      title: Text(text),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () {},
-    );
-  }
+Widget _buildListTile(IconData icon, String text) {
+  return ListTile(
+    leading: ShaderMask(
+      shaderCallback: (bounds) => const LinearGradient(
+        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+      ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+      child: Icon(
+        icon,
+        color: Colors.white, // this will be masked by gradient
+      ),
+    ),
+    title: Text(text),
+    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+    onTap: () {},
+  );
+}
+
 }
