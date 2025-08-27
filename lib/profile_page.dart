@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   const Text(
                     "Profile",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz, size: 28),
