@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40), // space for status bar
+          const SizedBox(height: 10), // space for status bar
 
           // 🔔 Notification Icon (now part of scrollable content)
           Align(
