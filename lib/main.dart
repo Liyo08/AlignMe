@@ -39,43 +39,49 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
   backgroundColor: const Color(0xFFF5F5F5),
-  body: SafeArea(
-  child: SingleChildScrollView(
+  body: SingleChildScrollView(
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      
+      padding: const EdgeInsets.only(
+  left: 25.0,
+  right: 25.0,
+  bottom: 95.0, // adjust as per your navbar height
+),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10), // space for status bar
+          const SizedBox(height: 30), // space for status bar
 
          // 🔔 Notification Icon (clickable + navigates to another page)
 Align(
   alignment: Alignment.topLeft,
-  child: GestureDetector(
-    onTap: () {
-      // Navigate to NotificationsPage (create this page separately)
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => NotificationsPage()),
-      );
-    },
-    child: Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: const Icon(
-        Icons.notifications_none,
-        color: Colors.black,
-        size: 24,
+  child: Padding(
+    padding: const EdgeInsets.only(top: 25), // 👈 move down + right
+    child: GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NotificationsPage()),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: const Icon(
+          Icons.notifications_none,
+          color: Colors.black,
+          size: 24,
+        ),
       ),
     ),
   ),
@@ -256,7 +262,7 @@ GestureDetector(
     'assets/pose.png',
     context,
     const PosePerfectPage(),
-  ),
+  ), const SizedBox(width: 12),
   _featureCard(
     "FlowEase",
     "Breathe. Stretch. Heal.",
@@ -612,47 +618,54 @@ LatestWorkoutSection(),
       ),
 
      
-    ));
+    );
   }
 
   Widget _featureCard(String title, String subtitle, String asset, BuildContext context, Widget page) {
-  return InkWell(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => page),
-      );
-    },
-    borderRadius: BorderRadius.circular(20),
-    child: Container(
-      width: 175,
-      padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
+  return Expanded( // <-- makes it responsive
+    child: InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => page),
+        );
+      },
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               spreadRadius: 2,
-              blurRadius: 5)
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(asset, height: 60),
-          const SizedBox(height: 10),
-          Text(title,
+              blurRadius: 5,
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(asset, height: 60),
+            const SizedBox(height: 10),
+            Text(
+              title,
               style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 14)),
-          Text(subtitle,
-              style: const TextStyle(fontSize: 12, color: Colors.blue)),
-        ],
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+            Text(
+              subtitle,
+              style: const TextStyle(fontSize: 12, color: Colors.blue),
+            ),
+          ],
+        ),
       ),
     ),
   );
 }
-
 
   Widget _featureCar(String title, String subtitle, String asset, BuildContext context, Widget page) {
   return InkWell(
@@ -927,7 +940,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
+    backgroundColor: Colors.transparent, // ✅ Make scaffold transparent
+    extendBody: true, // ✅ allow body to extend behind the navbar
       body: _pages[_selectedIndex], // show selected page
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
@@ -935,7 +949,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         children: [
           Container(
             height: 70,
-            margin: const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
+            margin: const EdgeInsets.only(left: 8, right: 8, bottom: 5, top: 8),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),
