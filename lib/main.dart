@@ -5,6 +5,9 @@ import 'camera_page.dart';
 import 'stats_page.dart';
 import 'Profile_page.dart';
 import 'notification_page.dart';
+import 'poseperfect_page.dart';
+import 'flowease_page.dart';
+import 'alignmart_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -218,15 +221,30 @@ Align(
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _featureCard("PosePerfect", "Align. Improve. Repeat.",
-                    'assets/pose.png'),
-                _featureCard("FlowEase", "Breathe. Stretch. Heal.",
-                    'assets/stretch.png'),
-              ],
+  _featureCard(
+    "PosePerfect",
+    "Align. Improve. Repeat.",
+    'assets/pose.png',
+    context,
+    const PosePerfectPage(),
+  ),
+  _featureCard(
+    "FlowEase",
+    "Breathe. Stretch. Heal.",
+    'assets/stretch.png',
+    context,
+    const FlowEasePage(),
+  ),
+],
             ),
             const SizedBox(height: 20),
-            _featureCar("AlignMart", "Essentials for your yoga journey.",
-                'assets/shop.png'),
+          _featureCar(
+  "AlignMart",
+  "Essentials for your yoga journey.",
+  'assets/shop.png',
+  context,
+  const AlignMartPage(),
+),
 
            
             // ---------------- Activity Status ----------------
@@ -568,8 +586,16 @@ LatestWorkoutSection(),
     ));
   }
 
-  Widget _featureCard(String title, String subtitle, String asset) {
-    return Container(
+  Widget _featureCard(String title, String subtitle, String asset, BuildContext context, Widget page) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => page),
+      );
+    },
+    borderRadius: BorderRadius.circular(20),
+    child: Container(
       width: 175,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
@@ -588,17 +614,27 @@ LatestWorkoutSection(),
           Image.asset(asset, height: 60),
           const SizedBox(height: 10),
           Text(title,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 14)),
           Text(subtitle,
               style: const TextStyle(fontSize: 12, color: Colors.blue)),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
-  Widget _featureCar(String title, String subtitle, String asset) {
-    return Container(
+
+  Widget _featureCar(String title, String subtitle, String asset, BuildContext context, Widget page) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => page),
+      );
+    },
+    borderRadius: BorderRadius.circular(20),
+    child: Container(
       width: 440,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
@@ -617,14 +653,16 @@ LatestWorkoutSection(),
           Image.asset(asset, height: 60),
           const SizedBox(height: 10),
           Text(title,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 14)),
           Text(subtitle,
               style: const TextStyle(fontSize: 12, color: Colors.blue)),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
 // ---------------- Latest Workout Section ----------------
 class LatestWorkoutSection extends StatelessWidget {
