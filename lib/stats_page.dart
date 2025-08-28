@@ -21,7 +21,7 @@ class StatsPage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
                     onPressed: () {
-                      Navigator.pop(context); // go back to home
+                     // go back to home
                     },
                   ),
                   Row(
