@@ -31,7 +31,7 @@ class StatsPage extends StatelessWidget {
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 6),
-                      Icon(Icons.keyboard_arrow_down, color: Colors.black),
+                     
                     ],
                   ),
                   IconButton(
@@ -112,10 +112,17 @@ class StatsPage extends StatelessWidget {
                 children: const [
                   Text("Activity Progress",
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Chip(
-                    label: Text("Weekly", style: TextStyle(color: Colors.white)),
-                    backgroundColor: Colors.blue,
-                  )
+                 Chip(
+  label: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: const [
+      Text("Weekly", style: TextStyle(color: Colors.white)),
+      SizedBox(width: 4),
+      Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 18),
+    ],
+  ),
+  backgroundColor: Colors.blue,
+),
                 ],
               ),
 
@@ -206,30 +213,40 @@ class StatsPage extends StatelessWidget {
 
   // latest activity card
   static Widget _buildActivityCard(
-      String title, String subtitle, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 22,
-            backgroundColor: color.withOpacity(0.2),
-            child: Icon(icon, color: color, size: 24),
-          ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(subtitle, style: const TextStyle(color: Colors.grey, fontSize: 12)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+    String title, String subtitle, IconData icon, Color color) {
+  return Container(
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: Row(
+      children: [
+        CircleAvatar(
+          radius: 22,
+          backgroundColor: color.withOpacity(0.2),
+          child: Icon(icon, color: color, size: 24),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(subtitle,
+                style: const TextStyle(color: Colors.grey, fontSize: 12)),
+          ],
+        ),
+        const Spacer(), // pushes the button to the right
+        IconButton(
+          icon: const Icon(Icons.more_horiz, color: Colors.black),
+          onPressed: () {
+            // action here
+          },
+        ),
+      ],
+    ),
+  );
+}
+
 }
