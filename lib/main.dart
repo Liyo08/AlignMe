@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'camera_page.dart';
 import 'stats_page.dart';
 import 'Profile_page.dart';
+import 'notification_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,29 +43,39 @@ class HomeScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 10), // space for status bar
 
-          // 🔔 Notification Icon (now part of scrollable content)
-          Align(
-            alignment: Alignment.topLeft,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: const Icon(
-                Icons.notifications_none,
-                color: Colors.black,
-                size: 24,
-              ),
-            ),
+         // 🔔 Notification Icon (clickable + navigates to another page)
+Align(
+  alignment: Alignment.topLeft,
+  child: GestureDetector(
+    onTap: () {
+      // Navigate to NotificationsPage (create this page separately)
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NotificationsPage()),
+      );
+    },
+    child: Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
           ),
+        ],
+      ),
+      child: const Icon(
+        Icons.notifications_none,
+        color: Colors.black,
+        size: 24,
+      ),
+    ),
+  ),
+),
+
 
           const SizedBox(height: 20),
 
