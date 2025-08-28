@@ -157,13 +157,13 @@ const SizedBox(height: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildProgressBar("Sun", 0.3),
-                    _buildProgressBar("Mon", 0.7),
-                    _buildProgressBar("Tue", 0.4),
-                    _buildProgressBar("Wed", 0.6),
-                    _buildProgressBar("Thu", 0.8),
-                    _buildProgressBar("Fri", 0.2),
-                    _buildProgressBar("Sat", 0.5),
+                    _buildProgressBar(0,"Sun", 0.3),
+                    _buildProgressBar(1,"Mon", 0.7),
+                    _buildProgressBar(2,"Tue", 0.4),
+                    _buildProgressBar(3,"Wed", 0.6),
+                    _buildProgressBar(4,"Thu", 0.8),
+                    _buildProgressBar(5,"Fri", 0.2),
+                    _buildProgressBar(6,"Sat", 0.5),
                   ],
                 ),
               ),
@@ -196,39 +196,49 @@ const SizedBox(height: 12),
   }
 
   // progress bar widget
-  static Widget _buildProgressBar(String day, double heightFactor) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          height: 120,
-          width: 20,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: FractionallySizedBox(
-              heightFactor: heightFactor,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Colors.blue, Colors.purple],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+static Widget _buildProgressBar(int index, String day, double heightFactor) {
+  // Two gradient options
+  final gradients = [
+    const LinearGradient(
+      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)], // Blue shades
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+    ),
+    const LinearGradient(
+      colors: [Color(0xFFC58BF2), Color(0xFFEEA4CE)], // Purple → Pink
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+    ),
+  ];
+
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      Container(
+        height: 120,
+        width: 20,
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: FractionallySizedBox(
+            heightFactor: heightFactor,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: gradients[index % 2], // alternate gradient
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 6),
-        Text(day, style: const TextStyle(color: Colors.grey)),
-      ],
-    );
-  }
+      ),
+      const SizedBox(height: 6),
+      Text(day, style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+    ],
+  );
+}
 
   // latest activity card
   static Widget _buildActivityCard(
