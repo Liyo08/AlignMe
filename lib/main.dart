@@ -973,7 +973,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             ),
           ),
           Positioned(
-            bottom: 40,
+            bottom: 25,
             child: Container(
               height: 75,
               width: 75,
