@@ -8,6 +8,7 @@ import 'notification_page.dart';
 import 'poseperfect_page.dart';
 import 'flowease_page.dart';
 import 'alignmart_page.dart';
+import 'bmi_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -121,26 +122,38 @@ Align(
                             style:
                                 TextStyle(fontSize: 14, color: Colors.white)),
                         const SizedBox(height: 10),
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              begin: Alignment(1.00, 1.00),
-                              end: Alignment(-0.24, -0.31),
-                              colors: [Color(0xFFC58BF2), Color(0xFFEEA4CE)],
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 18, vertical: 4),
-                            child: Text(
-                              "View More",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
+                      // Your button
+GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BMIScreen(), // navigate to BMI page
+      ),
+    );
+  },
+  child: Container(
+    decoration: BoxDecoration(
+      gradient: const LinearGradient(
+        begin: Alignment(1.00, 1.00),
+        end: Alignment(-0.24, -0.31),
+        colors: [Color(0xFFC58BF2), Color(0xFFEEA4CE)],
+      ),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+      child: Text(
+        "View More",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ),
+)
+
                       ],
                     ),
                   ),
