@@ -28,7 +28,7 @@ class StatsPage extends StatelessWidget {
                     children: const [
                       Text(
                         "Activity Tracker",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                       ),
                       SizedBox(width: 6),
                      
@@ -53,10 +53,14 @@ class StatsPage extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                   decoration: BoxDecoration(
+  gradient: const LinearGradient(
+    colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight, // you can change direction
+  ),
+  borderRadius: BorderRadius.circular(12),
+),
                     child: const Icon(Icons.add, color: Colors.white),
                   ),
                 ],
@@ -67,10 +71,14 @@ class StatsPage extends StatelessWidget {
               // Today Target card
               Container(
                 padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  borderRadius: BorderRadius.circular(20),
-                ),
+               decoration: BoxDecoration(
+  gradient: const LinearGradient(
+    colors: [Color.fromARGB(205, 221, 227, 253), Color.fromARGB(183, 199, 225, 251)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  ),
+  borderRadius: BorderRadius.circular(20),
+),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -105,28 +113,39 @@ class StatsPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 20),
-
-              // Activity Progress header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text("Activity Progress",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                 Chip(
-  label: Row(
+// Activity Progress header
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    const Text(
+      "Activity Progress",
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    ),
+  // Gradient Chip Replacement
+Container(
+  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+  decoration: BoxDecoration(
+    gradient: const LinearGradient(
+      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+    ),
+    borderRadius: BorderRadius.circular(20),
+  ),
+  child: Row(
     mainAxisSize: MainAxisSize.min,
     children: const [
-      Text("Weekly", style: TextStyle(color: Colors.white)),
+      Text("Weekly",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
       SizedBox(width: 4),
       Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 18),
     ],
   ),
-  backgroundColor: Colors.blue,
 ),
-                ],
-              ),
+  ],
+),
 
-              const SizedBox(height: 12),
+const SizedBox(height: 12),
 
               // Progress bars inside a white card
               Container(
