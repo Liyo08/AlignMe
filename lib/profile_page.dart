@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
- 
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: SafeArea(
@@ -16,7 +14,6 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               // 🔹 Top Bar (Back + Title + Menu)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,7 +21,7 @@ class ProfilePage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_back, size: 28),
                     onPressed: () {
-                       Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                   ),
                   const Text(
@@ -54,7 +51,8 @@ class ProfilePage extends StatelessWidget {
                       children: const [
                         Text(
                           "Jeel",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 4),
                         Text(
@@ -65,53 +63,56 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-  onPressed: () {},
-  style: ElevatedButton.styleFrom(
-    padding: EdgeInsets.zero, // remove default padding
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-    backgroundColor: Colors.transparent, // make button transparent
-    shadowColor: Colors.transparent, // remove default shadow color
-  ),
-  child: Ink(
-    decoration: BoxDecoration(
-      gradient: const LinearGradient(
-        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-      ),
-      borderRadius: BorderRadius.circular(20),
-    ),
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-      alignment: Alignment.center,
-      child: const Text(
-        "Edit",
-        style: TextStyle(color: Colors.white), // make text visible
-      ),
-    ),
-  ),
-)
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero, // remove default padding
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      backgroundColor:
+                          Colors.transparent, // make button transparent
+                      shadowColor:
+                          Colors.transparent, // remove default shadow color
+                    ),
+                    child: Ink(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 35, vertical: 8),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Edit",
+                          style: TextStyle(
+                              color: Colors.white), // make text visible
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
               const SizedBox(height: 20),
 
               // 🔹 Stats Row
-         Padding(
-  padding: const EdgeInsets.only(bottom: 20), // 👈 bottom padding
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      Expanded(child: _buildStatCard("180cm", "Height")),
-      const SizedBox(width: 10), 
-      Expanded(child: _buildStatCard("65kg", "Weight")),
-      const SizedBox(width: 10),
-      Expanded(child: _buildStatCard("22yo", "Age")),
-    ],
-  ),
-),
-
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20), // 👈 bottom padding
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(child: _buildStatCard("180cm", "Height")),
+                    const SizedBox(width: 10),
+                    Expanded(child: _buildStatCard("65kg", "Weight")),
+                    const SizedBox(width: 10),
+                    Expanded(child: _buildStatCard("22yo", "Age")),
+                  ],
+                ),
+              ),
 
               // 🔹 Account Section
               _buildSection(
@@ -125,63 +126,65 @@ class ProfilePage extends StatelessWidget {
               ),
 
               // 🔹 Notification Section
-             
-_buildSection(
-  title: "Notification",
-  items: [
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Row(
-          children: [
-            Icon(Icons.notifications_outlined, color: Color.fromARGB(255, 207, 138, 219)),
-            SizedBox(width: 8),
-           Text(
-  "Pop-up Notification",
-  style: TextStyle(
-    fontSize: 15,       // increase/decrease as needed
-    fontWeight: FontWeight.w500, // optional, for bolder look
-    color: Colors.black, // optional, set custom color
-  ),
-),
-          ],
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFFC58BF2),
-                Color(0xFFB4C0FE),
-              ],
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(2), // space for thumb
-            child: FlutterSwitch(
-              width: 50,
-              height: 20,
-              toggleSize: 26,
-              value: true,
-              borderRadius: 30.0,
-              padding: 2.0,
-              activeColor: Colors.transparent, // show gradient
-              inactiveColor: Colors.grey.shade300,
-              activeToggleColor: Colors.white,
-              inactiveToggleColor: Colors.white,
-              showOnOff: false,
-              onToggle: (val) {
-                // handle toggle state
-              },
-            ),
-          ),
-        ),
-      ],
-    ),
-  ],
-),
+
+              _buildSection(
+                title: "Notification",
+                items: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.notifications_outlined,
+                              color: Color.fromARGB(255, 207, 138, 219)),
+                          SizedBox(width: 8),
+                          Text(
+                            "Pop-up Notification",
+                            style: TextStyle(
+                              fontSize: 15, // increase/decrease as needed
+                              fontWeight:
+                                  FontWeight.w500, // optional, for bolder look
+                              color: Colors.black, // optional, set custom color
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFFC58BF2),
+                              Color(0xFFB4C0FE),
+                            ],
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(2), // space for thumb
+                          child: FlutterSwitch(
+                            width: 50,
+                            height: 20,
+                            toggleSize: 26,
+                            value: true,
+                            borderRadius: 30.0,
+                            padding: 2.0,
+                            activeColor: Colors.transparent, // show gradient
+                            inactiveColor: Colors.grey.shade300,
+                            activeToggleColor: Colors.white,
+                            inactiveToggleColor: Colors.white,
+                            showOnOff: false,
+                            onToggle: (val) {
+                              // handle toggle state
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               // 🔹 Other Section
               _buildSection(
                 title: "Other",
@@ -199,46 +202,44 @@ _buildSection(
   }
 
   // 🔹 Reusable Stat Card
-Widget _buildStatCard(String value, String label) {
-  return Container(
-    padding: const EdgeInsets.all(12),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(16),
-    ),
-    child: Column(
-      children: [
-        // Gradient for value
-        ShaderMask(
-          shaderCallback: (bounds) => const LinearGradient(
-            colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-          child: Text(
-            value,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white, // keep white to show gradient
+  Widget _buildStatCard(String value, String label) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          // Gradient for value
+          ShaderMask(
+            shaderCallback: (bounds) => const LinearGradient(
+              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // keep white to show gradient
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 4),
-        // Normal black label
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            color: Colors.black,
+          const SizedBox(height: 4),
+          // Normal black label
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
-
+        ],
+      ),
+    );
+  }
 
   // 🔹 Reusable Section
   Widget _buildSection({required String title, required List<Widget> items}) {
@@ -253,7 +254,8 @@ Widget _buildStatCard(String value, String label) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              style:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
           ...items,
         ],
@@ -262,23 +264,22 @@ Widget _buildStatCard(String value, String label) {
   }
 
   // 🔹 Reusable ListTile
-Widget _buildListTile(IconData icon, String text) {
-  return ListTile(
-    leading: ShaderMask(
-      shaderCallback: (bounds) => const LinearGradient(
-        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-      ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-      child: Icon(
-        icon,
-        color: Colors.white, // this will be masked by gradient
+  Widget _buildListTile(IconData icon, String text) {
+    return ListTile(
+      leading: ShaderMask(
+        shaderCallback: (bounds) => const LinearGradient(
+          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+        child: Icon(
+          icon,
+          color: Colors.white, // this will be masked by gradient
+        ),
       ),
-    ),
-    title: Text(text),
-    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-    onTap: () {},
-  );
-}
-
+      title: Text(text),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: () {},
+    );
+  }
 }
