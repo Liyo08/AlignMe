@@ -9,6 +9,7 @@ import 'poseperfect_page.dart';
 import 'flowease_page.dart';
 import 'alignmart_page.dart';
 import 'bmi_page.dart';
+import 'todaytarget_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -201,32 +202,47 @@ GestureDetector(
                 ),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Today Target",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
-                  Container(
-                    width: 80,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment(1.00, 1.00),
-                        end: Alignment(-0.24, -0.31),
-                        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    child: const Text(
-                      "Check",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-                ],
-              ),
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    const Text(
+      "Today Target",
+      style: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TodayTargetPage(), // Replace with your page
+          ),
+        );
+      },
+      child: Container(
+        width: 80,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment(1.00, 1.00),
+            end: Alignment(-0.24, -0.31),
+            colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: const Text(
+          "Check",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ),
+  ],
+),
             ),
             const SizedBox(height: 20),
 
