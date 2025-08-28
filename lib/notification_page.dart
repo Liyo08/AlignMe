@@ -19,7 +19,7 @@ class NotificationsPage extends StatelessWidget {
           "Notification",
           style: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w900,
           ),
         ),
         actions: [
