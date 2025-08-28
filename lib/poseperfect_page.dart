@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'fullbody_page.dart';
+import 'lowerbody_page.dart';
+import 'abpage.dart';
 
 class PosePerfectPage extends StatelessWidget {
   const PosePerfectPage({super.key});
@@ -243,13 +246,13 @@ Container(
                       const SizedBox(height: 12),
 
                       trainingCard("Fullbody Workout", "10 Poses | 40mins",
-                          "https://img.icons8.com/color/96/yoga.png"),
+                          "https://img.icons8.com/color/96/yoga.png",context,FullBody()),
                       const SizedBox(height: 12),
                       trainingCard("Lowerbody Workout", "10 Poses | 30mins",
-                          "https://img.icons8.com/color/96/yoga.png"),
+                          "https://img.icons8.com/color/96/yoga.png",context,LowerBody()),
                       const SizedBox(height: 12),
                       trainingCard("AB Workout", "10 Poses | 20mins",
-                          "https://img.icons8.com/color/96/yoga.png"),
+                          "https://img.icons8.com/color/96/yoga.png",context,AbWorkout()),
                     ],
                   ),
                 ),
@@ -329,91 +332,100 @@ Container(
   }
 
   /// Training Card
-  static Widget trainingCard(String title, String subtitle, String img) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment(1.00, 1.00),
-          end: Alignment(-0.24, -0.31),
-          colors: [
-            Color.fromARGB(255, 239, 243, 251),
-            Color.fromARGB(255, 234, 240, 254)
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          // Left side: Text + Button
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color:
-                        Color.fromARGB(255, 0, 0, 0), // White text on gradient
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    color: Color.fromARGB(
-                        179, 93, 93, 93), // Softer white for subtitle
-                  ),
-                ),
-                const SizedBox(height: 10),
-
-                // White button with gradient text
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, // White box
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                  ),
-                  onPressed: () {},
-                  child: ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ).createShader(
-                        Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-                    child: const Text(
-                      "View more",
-                      style: TextStyle(
-                        color: Colors.white, // ignored, gradient applies
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-
-          // Right side: Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              img,
-              width: 90,
-              height: 70,
-              fit: BoxFit.cover,
-            ),
-          ),
+  static Widget trainingCard(
+  String title,
+  String subtitle,
+  String img,
+  BuildContext context,
+  Widget nextPage,
+) {
+  return Container(
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      gradient: const LinearGradient(
+        begin: Alignment(1.00, 1.00),
+        end: Alignment(-0.24, -0.31),
+        colors: [
+          Color.fromARGB(255, 239, 243, 251),
+          Color.fromARGB(255, 234, 240, 254)
         ],
       ),
-    );
-  }
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Row(
+      children: [
+        // Left side: Text + Button
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  color: Color.fromARGB(179, 93, 93, 93),
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // White button with gradient text
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 18, vertical: 8),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => nextPage),
+                  );
+                },
+                child: ShaderMask(
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ).createShader(
+                      Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                  child: const Text(
+                    "View more",
+                    style: TextStyle(
+                      color: Colors.white, // ignored, gradient applies
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 12),
+
+        // Right side: Image
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.network(
+            img,
+            width: 90,
+            height: 70,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
