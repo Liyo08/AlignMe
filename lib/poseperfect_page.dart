@@ -27,7 +27,7 @@ class PosePerfectPage extends StatelessWidget {
                       "Pose Perfect",
                       style: TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w900,
                         fontSize: 18,
                       ),
                     ),
@@ -85,7 +85,7 @@ decoration: BoxDecoration(
       const Text(
         "Daily Workout Schedule",
         style: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ),
