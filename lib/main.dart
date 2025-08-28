@@ -32,53 +32,53 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      backgroundColor: const Color(0xFFF5F5F5),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: const Icon(
-              Icons.notifications_none,
-              color: Colors.black,
-              size: 24,
+  backgroundColor: const Color(0xFFF5F5F5),
+  body: SafeArea(
+  child: SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 40), // space for status bar
+
+          // 🔔 Notification Icon (now part of scrollable content)
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.notifications_none,
+                color: Colors.black,
+                size: 24,
+              ),
             ),
           ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            // Top Illustration
-            const Center(),
-            const SizedBox(height: 10),
-            const Text(
-              "Welcome Back,",
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            const Text(
-              "Jeel!",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
 
+          const SizedBox(height: 20),
+
+          // ✅ Rest of your content
+          const Text(
+            "Welcome Back,",
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+          const Text(
+            "Jeel!",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+
+          const SizedBox(height: 20),
             // BMI Card
             Container(
               padding: const EdgeInsets.all(16),
@@ -224,7 +224,7 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
 
-// Heart Rate card
+    // Heart Rate card
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -554,7 +554,7 @@ LatestWorkoutSection(),
       ),
 
      
-    );
+    ));
   }
 
   Widget _featureCard(String title, String subtitle, String asset) {
@@ -667,6 +667,7 @@ class LatestWorkoutSection extends StatelessWidget {
     );
   }
 }
+
 
 class WorkoutCard extends StatelessWidget {
   final String title;
@@ -821,6 +822,7 @@ class _TimelineRow extends StatelessWidget {
     );
   }
 }
+
 class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({super.key});
 
@@ -847,6 +849,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       body: _pages[_selectedIndex], // show selected page
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
