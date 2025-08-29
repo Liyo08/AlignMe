@@ -14,6 +14,7 @@ import 'workout_page.dart';
 import 'sleep_page.dart';
 import 'calories_page.dart';
 import 'water_page.dart';
+import 'heart_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -293,99 +294,112 @@ GestureDetector(
             const SizedBox(height: 16),
 
     // Heart Rate card
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(1.00, 1.00),
-                  end: Alignment(-0.24, -0.31),
-                  colors: [
-                    const Color.fromARGB(255, 229, 232, 250),
-                    const Color.fromARGB(255, 226, 236, 247)
+GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HeartRatePage()),
+    );
+  },
+  child: Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment(1.00, 1.00),
+        end: Alignment(-0.24, -0.31),
+        colors: [
+          const Color.fromARGB(255, 229, 232, 250),
+          const Color.fromARGB(255, 226, 236, 247)
+        ],
+      ),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Heart Rate",
+          style: TextStyle(
+            color: Color.fromARGB(255, 0, 0, 0),
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          height: 120,
+          child: LineChart(
+            LineChartData(
+              gridData: FlGridData(show: false),
+              titlesData: FlTitlesData(show: false),
+              borderData: FlBorderData(show: false),
+              lineBarsData: [
+                LineChartBarData(
+                  spots: const [
+                    FlSpot(0, 70),
+                    FlSpot(1, 75),
+                    FlSpot(2, 78),
+                    FlSpot(3, 76),
+                    FlSpot(4, 80),
+                    FlSpot(5, 78),
                   ],
+                  isCurved: true,
+                  color: const Color(0xFF92A3FD),
+                  barWidth: 3,
+                  belowBarData: BarAreaData(
+                    show: true,
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blueAccent.withOpacity(0.2),
+                        Colors.blueAccent.withOpacity(0.0),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Heart Rate",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w900, // makes it bold
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    height: 120,
-                    child: LineChart(
-                      LineChartData(
-                        gridData: FlGridData(show: false),
-                        titlesData: FlTitlesData(show: false),
-                        borderData: FlBorderData(show: false),
-                        lineBarsData: [
-                          LineChartBarData(
-                            spots: const [
-                              FlSpot(0, 70),
-                              FlSpot(1, 75),
-                              FlSpot(2, 78),
-                              FlSpot(3, 76),
-                              FlSpot(4, 80),
-                              FlSpot(5, 78),
-                            ],
-                            isCurved: true,
-                            color: const Color(0xFF92A3FD),
-                            barWidth: 3,
-                            belowBarData: BarAreaData(
-                              show: true,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.blueAccent.withOpacity(0.2),
-                                  Colors.blueAccent
-                                      .withOpacity(0.0), // fades out
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text("78 BPM",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF92A3FD))),
-                  const SizedBox(height: 4),
-                  Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment(1.00, 1.00),
-                          end: Alignment(-0.24, -0.31),
-                          colors: [
-                            const Color(0xFFC58BF2),
-                            const Color(0xFFEEA4CE)
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Text("3 mins ago",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 12)),
-                    ),
-                  ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          "78 BPM",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF92A3FD),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment(1.00, 1.00),
+                end: Alignment(-0.24, -0.31),
+                colors: [
+                  const Color(0xFFC58BF2),
+                  const Color(0xFFEEA4CE)
                 ],
               ),
+              borderRadius: BorderRadius.circular(20),
             ),
+            child: const Text(
+              "3 mins ago",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  ),
+)
+,
             const SizedBox(height: 20),
 // Grid with Water, Sleep, Calories
 Row(
