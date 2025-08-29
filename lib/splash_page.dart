@@ -8,7 +8,7 @@ class SplashPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200], // light grey background
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255), // light grey background
       body: SafeArea(
         child: Column(
           children: [
@@ -105,7 +105,7 @@ class SplashPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: Column(
           children: [
@@ -117,7 +117,15 @@ class SplashPage2 extends StatelessWidget {
               height: 200,
             ),
             const SizedBox(height: 40),
-
+ const Text(
+              "Enjoy the Power of Meditation",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 8),
             // Subtitle
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -125,9 +133,10 @@ class SplashPage2 extends StatelessWidget {
                 "“ Guided meditation to relax your mind ”",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
+                  fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Color.fromARGB(221, 77, 77, 77),
                 ),
               ),
             ),
@@ -230,7 +239,7 @@ class SplashPage3 extends StatelessWidget {
             const Text(
               "Track Your Progress",
               style: TextStyle(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
@@ -242,10 +251,11 @@ class SplashPage3 extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                "Monitor workouts and measure improvements with ease using our smart fitness tracker.",
+                "“Monitor workouts and measure improvements with ease using our smart fitness tracker”",
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 14,
+                  color: Color.fromARGB(221, 77, 77, 77),
                 ),
                 textAlign: TextAlign.center,
               ),
