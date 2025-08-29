@@ -15,6 +15,7 @@ import 'sleep_page.dart';
 import 'calories_page.dart';
 import 'water_page.dart';
 import 'heart_page.dart';
+import 'splash_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-       home: const CustomBottomNavBar(),
+       home: const SplashPage1(),
     );
   }
 }
