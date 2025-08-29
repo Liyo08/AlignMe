@@ -13,6 +13,7 @@ import 'todaytarget_page.dart';
 import 'workout_page.dart';
 import 'sleep_page.dart';
 import 'calories_page.dart';
+import 'water_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -392,88 +393,95 @@ Row(
   children: [
     // ---------------- Water Intake ----------------
     Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(color: Colors.black12, blurRadius: 6)
-          ],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Left: Water Level Bar
-            Container(
-              height: 355,
-              width: 30,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 140, // adjust based on water consumed
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFFC58BF2),
-                        Color(0xFFB4C0FE),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(20),
+  child: InkWell(
+    borderRadius: BorderRadius.circular(20), // ripple effect matches card
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const WaterDetailsPage()),
+      );
+    },
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 6),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Left: Water Level Bar
+          Container(
+            height: 355,
+            width: 30,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 140, // adjust based on water consumed
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFC58BF2),
+                      Color(0xFFB4C0FE),
+                    ],
                   ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
-            const SizedBox(width: 16),
+          ),
+          const SizedBox(width: 16),
 
-            // Right: Details
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("Water Intake",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16)),
-                  const SizedBox(height: 4),
-                  const Text("4 Liters",
-                      style: TextStyle(
-                          color: Color(0xFF92A3FD),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 12),
-                  const Text("Real time updates",
-                      style:
-                          TextStyle(fontSize: 12, color: Colors.black54)),
-                  const SizedBox(height: 12),
+          // Right: Details
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Water Intake",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                const SizedBox(height: 4),
+                const Text("4 Liters",
+                    style: TextStyle(
+                        color: Color(0xFF92A3FD),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                const Text("Real time updates",
+                    style: TextStyle(fontSize: 12, color: Colors.black54)),
+                const SizedBox(height: 12),
 
-                  // Timeline entries
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      _TimelineRow(time: "6am - 8am", amount: "600ml"),
-                      _TimelineRow(time: "9am - 11am", amount: "500ml"),
-                      _TimelineRow(time: "11am - 2pm", amount: "1000ml"),
-                      _TimelineRow(time: "2pm - 4pm", amount: "700ml"),
-                      _TimelineRow(
-                          time: "4pm - now",
-                          amount: "900ml",
-                          isActive: true),
-                    ],
-                  ),
-                ],
-              ),
+                // Timeline entries
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    _TimelineRow(time: "6am - 8am", amount: "600ml"),
+                    _TimelineRow(time: "9am - 11am", amount: "500ml"),
+                    _TimelineRow(time: "11am - 2pm", amount: "1000ml"),
+                    _TimelineRow(time: "2pm - 4pm", amount: "700ml"),
+                    _TimelineRow(
+                        time: "4pm - now", amount: "900ml", isActive: true),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
-    const SizedBox(width: 12),
+  ),
+),
+const SizedBox(width: 12),
+
 
     // ---------------- Right column with Sleep & Calories ----------------
     Expanded(
