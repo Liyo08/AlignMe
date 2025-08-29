@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'signup_page.dart';
 
@@ -60,25 +61,35 @@ class SplashPage1 extends StatelessWidget {
             const SizedBox(height: 20), // 👈 Adjust this to move arrows up/down
 
             // Next Button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SplashPage2()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue[300],
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(16),
-                elevation: 4,
-              ),
-              child: const Icon(
-                Icons.arrow_forward,
-                color: Colors.white,
-                size: 28,
-              ),
-            ),
+            Container(
+  decoration: const BoxDecoration(
+    shape: BoxShape.circle,
+    gradient: LinearGradient(
+      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+    ),
+  ),
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SplashPage2()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.transparent, // make it transparent
+      shadowColor: Colors.transparent,     // remove shadow
+      shape: const CircleBorder(),
+      padding: const EdgeInsets.all(16),
+    ),
+    child: const Icon(
+      Icons.arrow_forward,
+      color: Colors.white,
+      size: 28,
+    ),
+  ),
+),
 
             const Spacer(), // 👈 Leaves space below arrows
           ],
@@ -157,26 +168,35 @@ class SplashPage2 extends StatelessWidget {
                 ),
 
                 // Next Button
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SplashPage3()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[300],
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(16),
-                    elevation: 4,
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                ),
+               Container(
+  decoration: const BoxDecoration(
+    shape: BoxShape.circle,
+    gradient: LinearGradient(
+      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+    ),
+  ),
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SplashPage3()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.transparent, // make it transparent
+      shadowColor: Colors.transparent,     // remove shadow
+      shape: const CircleBorder(),
+      padding: const EdgeInsets.all(16),
+    ),
+    child: const Icon(
+      Icons.arrow_forward,
+      color: Colors.white,
+      size: 28,
+    ),
+  ),
+),
               ],
             ),
 
@@ -267,26 +287,35 @@ class SplashPage3 extends StatelessWidget {
                 ),
 
                 // Next → Goes to Login
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignInPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[300],
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(16),
-                    elevation: 4,
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                ),
+                Container(
+  decoration: const BoxDecoration(
+    shape: BoxShape.circle,
+    gradient: LinearGradient(
+      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+    ),
+  ),
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SignInPage()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.transparent, // make it transparent
+      shadowColor: Colors.transparent,     // remove shadow
+      shape: const CircleBorder(),
+      padding: const EdgeInsets.all(16),
+    ),
+    child: const Icon(
+      Icons.arrow_forward,
+      color: Colors.white,
+      size: 28,
+    ),
+  ),
+)
               ],
             ),
 

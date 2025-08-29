@@ -1039,7 +1039,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               Positioned(
                 bottom: 20,
                 child: GestureDetector(
-                  onTap: () => _onItemTapped(2), // ✅ tapping big button goes to camera
+                 // onTap: () => _onItemTapped(2), // ✅ tapping big button goes to camera
                   child: Container(
                     height: 75,
                     width: 75,

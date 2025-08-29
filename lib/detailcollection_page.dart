@@ -3,7 +3,6 @@ import 'main.dart';
 
 // ------------ Page 1 ------------
 
-
 class DetailPage1 extends StatefulWidget {
   @override
   _DetailPage1 createState() => _DetailPage1();
@@ -138,21 +137,30 @@ class _DetailPage1 extends State<DetailPage1> {
                         decoration: InputDecoration(
                           hintText: "Your Weight",
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(16),
+                          contentPadding: EdgeInsets.all(13),
                         ),
                       ),
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                       decoration: BoxDecoration(
-                        color: Colors.purple,
-                        borderRadius: BorderRadius.only(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color(0xFFC58BF2),
+                            Color(0xFFB4C0FE),
+                          ],
+                        ),
+                        borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(12),
                           bottomRight: Radius.circular(12),
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         "KG",
                         style: TextStyle(color: Colors.white, fontSize: 14),
                       ),
@@ -178,7 +186,7 @@ class _DetailPage1 extends State<DetailPage1> {
                         decoration: InputDecoration(
                           hintText: "Your Height",
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(16),
+                          contentPadding: EdgeInsets.all(13),
                         ),
                       ),
                     ),
@@ -186,10 +194,19 @@ class _DetailPage1 extends State<DetailPage1> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       decoration: BoxDecoration(
-                        color: Colors.purple,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color(0xFFC58BF2),
+                            Color(0xFFB4C0FE),
+                          ],
+                        ),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(12),
                           bottomRight: Radius.circular(12),
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
                         ),
                       ),
                       child: Text(
@@ -206,22 +223,36 @@ class _DetailPage1 extends State<DetailPage1> {
               // Next Button
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    backgroundColor: Colors.blueAccent,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DetailPage2()),
-                );
-                  },
-                  child: Text(
-                    "Next",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Colors.transparent, // transparent for gradient
+                      shadowColor: Colors.transparent, // remove default shadow
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DetailPage2()),
+                      );
+                    },
+                    child: const Text(
+                      "Next",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
@@ -232,7 +263,6 @@ class _DetailPage1 extends State<DetailPage1> {
     );
   }
 }
-
 
 // ------------ Page 2 ------------
 class DetailPage2 extends StatelessWidget {
@@ -269,21 +299,21 @@ class DetailPage2 extends StatelessWidget {
 
             // Card
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 50),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 gradient: const LinearGradient(
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
               ),
               child: Column(
                 children: [
                   // Illustration (Replace with your asset)
                   SizedBox(
-                    height: 280,
+                    height: 290,
                     child: Image.asset(
                       "assets/yoga.png", // 👉 replace with your yoga illustration
                       fit: BoxFit.contain,
@@ -322,9 +352,10 @@ class DetailPage2 extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DetailPage3()),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DetailPage3()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -332,8 +363,9 @@ class DetailPage2 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   backgroundColor: const LinearGradient(
-                    colors: [Color(0xFF6DD5FA), Color(0xFF2980B9)],
-                  ).createShader(const Rect.fromLTWH(0, 0, 200, 50)) == null
+                            colors: [Color(0xFF6DD5FA), Color(0xFF2980B9)],
+                          ).createShader(const Rect.fromLTWH(0, 0, 200, 50)) ==
+                          null
                       ? Colors.blue
                       : null,
                   foregroundColor: Colors.white,
@@ -350,11 +382,11 @@ class DetailPage2 extends StatelessWidget {
                 ),
                 child: Ink(
                   decoration: BoxDecoration(
-                     gradient: const LinearGradient(
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Container(
@@ -407,21 +439,21 @@ class DetailPage3 extends StatelessWidget {
 
             // Card
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 50),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                 gradient: const LinearGradient(
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
               ),
               child: Column(
                 children: [
                   // Illustration (Replace with your asset)
                   SizedBox(
-                    height: 280,
+                    height: 290,
                     child: Image.asset(
                       "assets/yoga.png", // 👉 replace with your yoga illustration
                       fit: BoxFit.contain,
@@ -460,9 +492,10 @@ class DetailPage3 extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DetailPage4()),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DetailPage4()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -470,8 +503,9 @@ class DetailPage3 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   backgroundColor: const LinearGradient(
-                    colors: [Color(0xFF6DD5FA), Color(0xFF2980B9)],
-                  ).createShader(const Rect.fromLTWH(0, 0, 200, 50)) == null
+                            colors: [Color(0xFF6DD5FA), Color(0xFF2980B9)],
+                          ).createShader(const Rect.fromLTWH(0, 0, 200, 50)) ==
+                          null
                       ? Colors.blue
                       : null,
                   foregroundColor: Colors.white,
@@ -488,11 +522,11 @@ class DetailPage3 extends StatelessWidget {
                 ),
                 child: Ink(
                   decoration: BoxDecoration(
-                     gradient: const LinearGradient(
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Container(
@@ -509,6 +543,7 @@ class DetailPage3 extends StatelessWidget {
     );
   }
 }
+
 // ------------ Page 4 ------------
 class DetailPage4 extends StatelessWidget {
   const DetailPage4({super.key});
@@ -544,21 +579,21 @@ class DetailPage4 extends StatelessWidget {
 
             // Card
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 50),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                 gradient: const LinearGradient(
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
               ),
               child: Column(
                 children: [
                   // Illustration (Replace with your asset)
                   SizedBox(
-                    height: 280,
+                    height: 290,
                     child: Image.asset(
                       "assets/yoga.png", // 👉 replace with your yoga illustration
                       fit: BoxFit.contain,
@@ -597,9 +632,10 @@ class DetailPage4 extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DetailPage5()),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DetailPage5()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -607,8 +643,9 @@ class DetailPage4 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   backgroundColor: const LinearGradient(
-                    colors: [Color(0xFF6DD5FA), Color(0xFF2980B9)],
-                  ).createShader(const Rect.fromLTWH(0, 0, 200, 50)) == null
+                            colors: [Color(0xFF6DD5FA), Color(0xFF2980B9)],
+                          ).createShader(const Rect.fromLTWH(0, 0, 200, 50)) ==
+                          null
                       ? Colors.blue
                       : null,
                   foregroundColor: Colors.white,
@@ -625,11 +662,11 @@ class DetailPage4 extends StatelessWidget {
                 ),
                 child: Ink(
                   decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Container(
@@ -648,7 +685,6 @@ class DetailPage4 extends StatelessWidget {
 }
 
 // ------------ Page 5 ------------
-
 
 class DetailPage5 extends StatelessWidget {
   final String username;
@@ -677,8 +713,8 @@ class DetailPage5 extends StatelessWidget {
             Text(
               "Welcome, Jeel",
               style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                fontWeight: FontWeight.w900,
                 color: Colors.black87,
               ),
             ),
@@ -698,16 +734,17 @@ class DetailPage5 extends StatelessWidget {
 
             // Button
             Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 40),
+  padding: const EdgeInsets.fromLTRB(40, 170, 40, 20), // increased top padding to move down
   child: SizedBox(
     width: double.infinity,
     height: 55,
     child: ElevatedButton(
       onPressed: () {
         Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CustomBottomNavBar()),
-                );
+          context,
+          MaterialPageRoute(
+              builder: (context) => const CustomBottomNavBar()),
+        );
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -719,11 +756,11 @@ class DetailPage5 extends StatelessWidget {
       ),
       child: Ink(
         decoration: const BoxDecoration(
-            gradient:  LinearGradient(
-                          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
+          gradient: LinearGradient(
+            colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
         child: Container(
@@ -748,5 +785,3 @@ class DetailPage5 extends StatelessWidget {
     );
   }
 }
-
-

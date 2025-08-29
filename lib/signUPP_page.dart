@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'detailcollection_page.dart';
 
-
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
 
@@ -15,7 +14,8 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   bool _isObscure = true;
 
@@ -30,12 +30,20 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // App Logo or Title
-              const Text(
-                "Create Account",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlueAccent
+              ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ).createShader(
+                    Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                child: const Text(
+                  "Create Account",
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // base color overridden by gradient
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -51,102 +59,259 @@ class _SignupPageState extends State<SignupPage> {
                 child: Column(
                   children: [
                     // Name
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.person, color: Colors.lightBlueAccent),
-                        hintText: "Full Name",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 238, 240, 252),
+                            Color.fromARGB(255, 226, 232, 239)
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                         ),
-                        filled: true,
-                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4), // shadow position
+                          ),
+                        ],
                       ),
-                      validator: (value) => value!.isEmpty ? "Enter your name" : null,
+                      child: TextFormField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          prefixIcon: ShaderMask(
+                            shaderCallback: (bounds) => const LinearGradient(
+                              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(Rect.fromLTWH(
+                                0, 0, bounds.width, bounds.height)),
+                            child: const Icon(
+                              Icons.person,
+                              color: Colors
+                                  .white, // base color overridden by gradient
+                            ),
+                          ),
+                          hintText: "Full Name",
+                          border: InputBorder.none, // no border
+                          filled: true,
+                          fillColor: Colors
+                              .transparent, // transparent to show gradient
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 18, horizontal: 20),
+                        ),
+                        validator: (value) =>
+                            value!.isEmpty ? "Enter your name" : null,
+                      ),
                     ),
                     const SizedBox(height: 16),
 
                     // Email
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.email, color: Colors.lightBlueAccent),
-                        hintText: "Email",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 238, 240, 252),
+                            Color.fromARGB(255, 226, 232, 239)
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                         ),
-                        filled: true,
-                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4), // shadow position
+                          ),
+                        ],
                       ),
-                      validator: (value) => value!.isEmpty ? "Enter your email" : null,
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          prefixIcon: ShaderMask(
+                            shaderCallback: (bounds) => const LinearGradient(
+                              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(Rect.fromLTWH(
+                                0, 0, bounds.width, bounds.height)),
+                            child: const Icon(
+                              Icons.email,
+                              color: Colors
+                                  .white, // base color overridden by gradient
+                            ),
+                          ),
+                          hintText: "Email",
+                          border: InputBorder.none, // no border
+                          filled: true,
+                          fillColor: Colors
+                              .transparent, // transparent to show gradient
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 18, horizontal: 20),
+                        ),
+                        validator: (value) =>
+                            value!.isEmpty ? "Enter your email" : null,
+                      ),
                     ),
                     const SizedBox(height: 16),
 
                     // Password
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: _isObscure,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock, color: Colors.lightBlueAccent),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _isObscure ? Icons.visibility_off : Icons.visibility,
-                            color: Colors.grey,
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 238, 240, 252),
+                            Color.fromARGB(255, 226, 232, 239)
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4), // shadow position
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure;
-                            });
-                          },
-                        ),
-                        hintText: "Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
+                        ],
                       ),
-                      validator: (value) => value!.length < 6 ? "Password must be at least 6 characters" : null,
+                      child: TextFormField(
+                        controller: _passwordController,
+                        obscureText: _isObscure,
+                        decoration: InputDecoration(
+                          prefixIcon: ShaderMask(
+                            shaderCallback: (bounds) => const LinearGradient(
+                              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(Rect.fromLTWH(
+                                0, 0, bounds.width, bounds.height)),
+                            child: const Icon(
+                              Icons.lock,
+                              color: Colors
+                                  .white, // base color overridden by gradient
+                            ),
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                          ),
+                          hintText: "Password",
+                          border: InputBorder.none, // no border
+                          filled: true,
+                          fillColor: Colors
+                              .transparent, // transparent to show gradient
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 18, horizontal: 20),
+                        ),
+                        validator: (value) => value!.length < 6
+                            ? "Password must be at least 6 characters"
+                            : null,
+                      ),
                     ),
                     const SizedBox(height: 16),
 
                     // Confirm Password
-                    TextFormField(
-                      controller: _confirmPasswordController,
-                      obscureText: _isObscure,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock_outline, color: Colors.lightBlueAccent),
-                        hintText: "Confirm Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 238, 240, 252),
+                            Color.fromARGB(255, 226, 232, 239)
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                         ),
-                        filled: true,
-                        fillColor: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4), // shadow position
+                          ),
+                        ],
                       ),
-                      validator: (value) => value != _passwordController.text ? "Passwords don’t match" : null,
+                      child: TextFormField(
+                        controller: _confirmPasswordController,
+                        obscureText: _isObscure,
+                        decoration: InputDecoration(
+                          prefixIcon: ShaderMask(
+                            shaderCallback: (bounds) => const LinearGradient(
+                              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(Rect.fromLTWH(
+                                0, 0, bounds.width, bounds.height)),
+                            child: const Icon(
+                              Icons.lock_outline,
+                              color: Colors
+                                  .white, // base color overridden by gradient
+                            ),
+                          ),
+                          hintText: "Confirm Password",
+                          border: InputBorder.none, // no border
+                          filled: true,
+                          fillColor: Colors
+                              .transparent, // transparent to show gradient
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 18, horizontal: 20),
+                        ),
+                        validator: (value) => value != _passwordController.text
+                            ? "Passwords don’t match"
+                            : null,
+                      ),
                     ),
                     const SizedBox(height: 24),
 
                     // Signup Button
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlueAccent,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 130, 150, 250),
+                              Color.fromARGB(255, 131, 193, 255)
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
                           ),
+                          borderRadius: BorderRadius.circular(30),
                         ),
-                        onPressed: () {
-                           Navigator.push(
-   context,
-    MaterialPageRoute(builder: (context) =>  DetailPage1()),
-  );
-                        },
-                        child: const Text(
-                          "Sign Up",
-                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Colors.transparent, // transparent for gradient
+                            shadowColor:
+                                Colors.transparent, // remove default shadow
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailPage1()),
+                            );
+                          },
+                          child: const Text(
+                            "Sign Up",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
@@ -169,19 +334,54 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: 24),
 
               // Google Signup
-              OutlinedButton.icon(
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  side: const BorderSide(color: Colors.black26),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4), // shadow position
+                    ),
+                  ],
                 ),
-                onPressed: () {
-                  // TODO: Google Signup
-                },
-                icon: const FaIcon(FontAwesomeIcons.google, color: Color.fromARGB(255, 0, 0, 0)),
-                label: const Text("Sign up with Google", style: TextStyle(fontSize: 16,color: Colors.lightBlueAccent),),
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 14, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    side: BorderSide.none, // removed the border
+                    backgroundColor: const Color.fromARGB(255, 245, 245,
+                        245), // optional, or transparent if you prefer
+                  ),
+                  onPressed: () {
+                    // TODO: Google Signup
+                  },
+                  icon: const FaIcon(
+                    FontAwesomeIcons.google,
+                    color: Colors.black,
+                  ),
+                  label: ShaderMask(
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 132, 152, 251),
+                        Color.fromARGB(255, 140, 195, 250)
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ).createShader(
+                        Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                    child: const Text(
+                      "Sign up with Google",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white, // overridden by gradient
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 32),
 
@@ -194,14 +394,26 @@ class _SignupPageState extends State<SignupPage> {
                     onTap: () {
                       Navigator.pop(context); // Back to login
                     },
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.lightBlueAccent,
-                        fontWeight: FontWeight.bold,
+                    child: ShaderMask(
+                      shaderCallback: (bounds) => const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 137, 156, 254),
+                          Color.fromARGB(255, 144, 198, 253)
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ).createShader(
+                          Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          color:
+                              Colors.white, // base color overridden by gradient
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],

@@ -19,8 +19,8 @@ class SignInPage extends StatelessWidget {
               const Text(
                 "Get Started !",
                 style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
                 ),
               ),
               const SizedBox(height: 40),
@@ -28,22 +28,37 @@ class SignInPage extends StatelessWidget {
               // Google Sign In Button
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const FaIcon(
-                    FontAwesomeIcons.google,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  label: const Text(
-                    "Sign in with Google",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[200],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 197, 206, 250),
+                        Color.fromARGB(255, 196, 222, 248)
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const FaIcon(
+                      FontAwesomeIcons.google,
+                      color: Colors.white,
+                    ),
+                    label: const Text(
+                      "Sign in with Google",
+                      style: TextStyle(
+                          fontSize: 16, color: Color.fromARGB(255, 0, 0, 0)),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent, // let gradient show
+                      shadowColor: Colors.transparent, // remove default shadow
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
                   ),
                 ),
               ),
@@ -65,14 +80,28 @@ class SignInPage extends StatelessWidget {
               const SizedBox(height: 30),
 
               // Username Field
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Username or Email",
-                  filled: true,
-                  fillColor: Colors.blue[100],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide.none,
+              Container(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 197, 206, 250),
+                      Color.fromARGB(255, 196, 222, 248)
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: "Username or Email",
+                    filled: true,
+                    fillColor: Colors
+                        .transparent, // make transparent so gradient shows
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
               ),
@@ -80,19 +109,33 @@ class SignInPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Password Field
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  filled: true,
-                  fillColor: Colors.blue[100],
-                  suffixIcon: TextButton(
-                    onPressed: () {},
-                    child: const Text("Forgot?"),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 197, 206, 250),
+                      Color.fromARGB(255, 196, 222, 248),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: "Password",
+                    filled: true,
+                    fillColor:
+                        Colors.transparent, // transparent so gradient shows
+                    suffixIcon: TextButton(
+                      onPressed: () {},
+                      child: const Text("Forgot?"),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
               ),
@@ -102,23 +145,39 @@ class SignInPage extends StatelessWidget {
               // Sign In Button
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const CustomBottomNavBar()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[400],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 130, 150, 250),
+                        Color.fromARGB(255, 131, 193, 255)
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                  child: const Text(
-                    "Sign In",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CustomBottomNavBar()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Colors.transparent, // transparent so gradient shows
+                      shadowColor: Colors.transparent, // remove shadow
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    child: const Text(
+                      "Sign In",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
@@ -131,17 +190,18 @@ class SignInPage extends StatelessWidget {
                 children: [
                   const Text("Don’t have an account? "),
                   GestureDetector(
-                   onTap: () {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const SignupPage()),
-  );
-},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupPage()),
+                      );
+                    },
                     child: const Text(
                       "Sign up",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 104, 116, 252),
                       ),
                     ),
                   ),
