@@ -11,6 +11,7 @@ import 'alignmart_page.dart';
 import 'bmi_page.dart';
 import 'todaytarget_page.dart';
 import 'workout_page.dart';
+import 'sleep_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -478,74 +479,84 @@ Row(
       child: Column(
         children: [
           // Sleep
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 6)
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Sleep",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 12)),
-                const SizedBox(height: 8),
-                const Text("8h 20m",
-                    style: TextStyle(
-                        color: Color(0xFF92A3FD),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700)),
-                const SizedBox(height: 12),
-                SizedBox(
-                  height: 80,
-                  child: LineChart(
-                    LineChartData(
-                      gridData: FlGridData(show: false),
-                      titlesData: FlTitlesData(show: false),
-                      borderData: FlBorderData(show: false),
-                      lineBarsData: [
-                        LineChartBarData(
-                          spots: const [
-                            FlSpot(0, 1),
-                            FlSpot(1, 1.5),
-                            FlSpot(2, 1.2),
-                            FlSpot(3, 1.8),
-                            FlSpot(4, 1.4),
-                          ],
-                          isCurved: true,
-                          gradient: LinearGradient(
-                            colors: [Colors.purple, Colors.purple],
-                          ),
-                          barWidth: 2,
-                        ),
-                        LineChartBarData(
-                          spots: const [
-                            FlSpot(0, 1.3),
-                            FlSpot(1, 1.7),
-                            FlSpot(2, 1.1),
-                            FlSpot(3, 1.6),
-                            FlSpot(4, 1.2),
-                          ],
-                          isCurved: true,
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.purple.shade200,
-                              Colors.purple.shade200
-                            ],
-                          ),
-                          barWidth: 2,
-                        ),
-                      ],
-                    ),
+          GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SleepPage()), 
+    );
+  },
+  child: Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [
+        BoxShadow(color: Colors.black12, blurRadius: 6)
+      ],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text("Sleep",
+            style: TextStyle(
+                fontWeight: FontWeight.w600, fontSize: 12)),
+        const SizedBox(height: 8),
+        const Text("8h 20m",
+            style: TextStyle(
+                color: Color(0xFF92A3FD),
+                fontSize: 14,
+                fontWeight: FontWeight.w700)),
+        const SizedBox(height: 12),
+        SizedBox(
+          height: 80,
+          child: LineChart(
+            LineChartData(
+              gridData: FlGridData(show: false),
+              titlesData: FlTitlesData(show: false),
+              borderData: FlBorderData(show: false),
+              lineBarsData: [
+                LineChartBarData(
+                  spots: const [
+                    FlSpot(0, 1),
+                    FlSpot(1, 1.5),
+                    FlSpot(2, 1.2),
+                    FlSpot(3, 1.8),
+                    FlSpot(4, 1.4),
+                  ],
+                  isCurved: true,
+                  gradient: const LinearGradient(
+                    colors: [Colors.purple, Colors.purple],
                   ),
+                  barWidth: 2,
+                ),
+                LineChartBarData(
+                  spots: const [
+                    FlSpot(0, 1.3),
+                    FlSpot(1, 1.7),
+                    FlSpot(2, 1.1),
+                    FlSpot(3, 1.6),
+                    FlSpot(4, 1.2),
+                  ],
+                  isCurved: true,
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.purple.shade200,
+                      Colors.purple.shade200
+                    ],
+                  ),
+                  barWidth: 2,
                 ),
               ],
             ),
           ),
+        ),
+      ],
+    ),
+  ),
+),
+const SizedBox(height: 12),
+
           const SizedBox(height: 12),
 
           // Calories
