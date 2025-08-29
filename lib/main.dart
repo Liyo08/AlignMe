@@ -993,62 +993,77 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor: Colors.transparent, // ✅ Make scaffold transparent
-    extendBody: true, // ✅ allow body to extend behind the navbar
-      body: _pages[_selectedIndex], // show selected page
-      bottomNavigationBar: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            height: 70,
-            margin: const EdgeInsets.only(left: 8, right: 8, bottom: 5, top: 8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 10,
-                  offset: Offset(0, 5),
+      backgroundColor: Colors.transparent, // ✅ keep transparent
+      extendBody: true, // ✅ extend body behind navbar (for shadows/effects)
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: Container(
+         decoration: const BoxDecoration(
+    color: Color.fromARGB(255, 255, 255, 255), // black bg
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(200),  // ✅ curved top edges
+      topRight: Radius.circular(200),
+    ),
+  ), // ✅ makes the area below navbar white
+        child: SafeArea(
+          top: false, // ✅ apply only bottom padding (not top)
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.bottomCenter,
+            children: [
+              Container(
+                height: 70,
+                margin: const EdgeInsets.only(left: 8, right: 8, top: 2),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(40),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _navItem(Icons.home, 0),
-                _navItem(Icons.bar_chart, 1),
-                const SizedBox(width: 70),
-                _navItem(Icons.camera_alt_outlined, 2),
-                _navItem(Icons.person_outline, 3),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 25,
-            child: Container(
-              height: 75,
-              width: 75,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment(1.00, 1.00),
-                  end: Alignment(-0.24, -0.31),
-                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _navItem(Icons.home, 0),
+                    _navItem(Icons.bar_chart, 1),
+                    const SizedBox(width: 70),
+                    _navItem(Icons.camera_alt_outlined, 2),
+                    _navItem(Icons.person_outline, 3),
+                  ],
                 ),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blueAccent.withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
               ),
-              child: const Icon(Icons.search, color: Colors.white, size: 32),
-            ),
+              Positioned(
+                bottom: 20,
+                child: GestureDetector(
+                  onTap: () => _onItemTapped(2), // ✅ tapping big button goes to camera
+                  child: Container(
+                    height: 75,
+                    width: 75,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment(1.00, 1.00),
+                        end: Alignment(-0.24, -0.31),
+                        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                      ),
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueAccent.withOpacity(0.3),
+                          blurRadius: 12,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(Icons.search, color: Colors.white, size: 32),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -1059,13 +1074,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       onTap: () => _onItemTapped(index),
       child: Icon(
         icon,
-        color: isActive ? const Color.fromARGB(255, 227, 137, 245) : Colors.grey,
+        color: isActive
+            ? const Color.fromARGB(255, 227, 137, 245)
+            : Colors.grey,
         size: 28,
       ),
     );
   }
 }
-
-
-
-
