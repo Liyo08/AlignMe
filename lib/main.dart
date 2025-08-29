@@ -10,6 +10,7 @@ import 'flowease_page.dart';
 import 'alignmart_page.dart';
 import 'bmi_page.dart';
 import 'todaytarget_page.dart';
+import 'workout_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -716,19 +717,28 @@ class LatestWorkoutSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Header Row
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              "Latest Workout",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "See more",
-              style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
-            ),
-          ],
-        ),
+       Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    const Text(
+      "Latest Workout",
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    ),
+    GestureDetector(
+      onTap: () {
+        // Navigate to another page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const WorkoutPage()), 
+        );
+      },
+      child: Text(
+        "See more",
+        style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+      ),
+    ),
+  ],
+),
         const SizedBox(height: 15),
 
         // Workout Cards
