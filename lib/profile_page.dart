@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'main.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -10,7 +11,7 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -21,7 +22,17 @@ class ProfilePage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_back, size: 28),
                     onPressed: () {
-                      Navigator.pop(context);
+                      if (Navigator.of(context).canPop()) {
+                        // Case 1: FullBody was opened with Navigator.push()
+                        Navigator.of(context).pop();
+                      } else {
+                        // Case 2: FullBody is inside navbar (no stack to pop)
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const CustomBottomNavBar()),
+                        );
+                      }
                     },
                   ),
                   const Text(

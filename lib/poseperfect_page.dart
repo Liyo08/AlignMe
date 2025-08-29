@@ -173,7 +173,7 @@ Container(
       const Text(
         "Daily Workout Schedule",
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -191,14 +191,15 @@ Container(
             backgroundColor: Colors.transparent, // transparent to show gradient
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(15),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
           ),
           onPressed: () {},
           child: const Text(
             "Check",
             style: TextStyle(
+              fontSize: 14,
               color: Colors.white, // text color on gradient
               fontWeight: FontWeight.bold,
             ),
@@ -217,9 +218,9 @@ Container(
                         children: const [
                           Text("Upcoming Workout",
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
                           Text("See more",
-                              style: TextStyle(color: Colors.grey)),
+                              style: TextStyle(color: Colors.grey,fontSize: 13)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -242,7 +243,7 @@ Container(
                       // ⚡ Training Options
                       const Text("What Do You Want to Train",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                              fontSize: 16, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 12),
 
                       trainingCard("Fullbody Workout", "10 Poses | 40mins",
@@ -286,10 +287,10 @@ Container(
               children: [
                 Text(title,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16)),
+                        fontWeight: FontWeight.bold, fontSize: 14)),
                 const SizedBox(height: 4),
                 Text(time,
-                    style: const TextStyle(color: Colors.grey, fontSize: 14)),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ],
             ),
           ),
@@ -363,7 +364,7 @@ Container(
                 title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
@@ -371,6 +372,7 @@ Container(
               Text(
                 subtitle,
                 style: const TextStyle(
+                  fontSize: 12,
                   color: Color.fromARGB(179, 93, 93, 93),
                 ),
               ),
@@ -403,6 +405,7 @@ Container(
                   child: const Text(
                     "View more",
                     style: TextStyle(
+                      fontSize: 14,
                       color: Colors.white, // ignored, gradient applies
                       fontWeight: FontWeight.bold,
                     ),
