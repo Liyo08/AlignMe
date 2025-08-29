@@ -12,6 +12,7 @@ import 'bmi_page.dart';
 import 'todaytarget_page.dart';
 import 'workout_page.dart';
 import 'sleep_page.dart';
+import 'calories_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -555,66 +556,75 @@ Row(
     ),
   ),
 ),
-const SizedBox(height: 12),
+
 
           const SizedBox(height: 12),
 
           // Calories
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 6)
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Calories",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                const Text("760 kcal",
-                    style: TextStyle(
-                        color: Color(0xFF92A3FD), fontSize: 16)),
-                const SizedBox(height: 12),
-                SizedBox(
-                  height: 102.5,
-                  child: PieChart(
-                    PieChartData(
-                      centerSpaceRadius: 35,
-                      sections: [
-                        PieChartSectionData(
-                          value: 760,
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xFFC58BF2),
-                              Color(0xFFB4C0FE),
-                            ],
-                            stops: [-0.8311, 0.606],
-                          ),
-                          radius: 12,
-                        ),
-                        PieChartSectionData(
-                          value: 230,
-                          color: Colors.grey.shade200,
-                          radius: 12,
-                        ),
-                      ],
-                    ),
+          GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CaloriesPage()),
+    );
+  },
+  child: Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [
+        BoxShadow(color: Colors.black12, blurRadius: 6),
+      ],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text("Calories",
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        const Text("760 kcal",
+            style: TextStyle(
+                color: Color(0xFF92A3FD), fontSize: 16)),
+        const SizedBox(height: 12),
+        SizedBox(
+          height: 102.5,
+          child: PieChart(
+            PieChartData(
+              centerSpaceRadius: 35,
+              sections: [
+                PieChartSectionData(
+                  value: 760,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFC58BF2),
+                      Color(0xFFB4C0FE),
+                    ],
+                    stops: [-0.8311, 0.606],
                   ),
+                  radius: 12,
                 ),
-                const Center(
-                  child: Text("230 kcal left",
-                      style:
-                          TextStyle(fontSize: 12, color: Colors.black54)),
+                PieChartSectionData(
+                  value: 230,
+                  color: const Color.fromARGB(255, 218, 217, 217),
+                  radius: 12,
                 ),
               ],
             ),
           ),
+        ),
+        const Center(
+          child: Text(
+            "230 kcal left",
+            style: TextStyle(fontSize: 12, color: Colors.black54),
+          ),
+        ),
+      ],
+    ),
+  ),
+),
         ],
       ),
     ),
