@@ -1000,8 +1000,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
          decoration: const BoxDecoration(
     color: Color.fromARGB(255, 255, 255, 255), // black bg
     borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(200),  // ✅ curved top edges
-      topRight: Radius.circular(200),
+      topLeft: Radius.circular(50),  // ✅ curved top edges
+      topRight: Radius.circular(50),
     ),
   ), // ✅ makes the area below navbar white
         child: SafeArea(
