@@ -1012,7 +1012,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             alignment: Alignment.bottomCenter,
             children: [
               Container(
-                height: 70,
+                height: 55,
                 margin: const EdgeInsets.only(left: 8, right: 8, top: 2),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -1037,11 +1037,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 ),
               ),
               Positioned(
-                bottom: 20,
+                bottom: 10,
                 child: GestureDetector(
                  // onTap: () => _onItemTapped(2), // ✅ tapping big button goes to camera
                   child: Container(
-                    height: 75,
+                    height: 65,
                     width: 75,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
@@ -1058,7 +1058,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.search, color: Colors.white, size: 32),
+                    child: const Icon(Icons.search, color: Colors.white, size: 30),
                   ),
                 ),
               ),
