@@ -444,110 +444,120 @@ class AchievementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white, // ✅ White background
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 28, color: Colors.black87),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          "Achievements",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w900,
-            color: Colors.black87,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 🔹 Ranking & Points Card
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF9DCEFF), Color(0xFFD6A4FF)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+    
+      body:SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                // Custom header (scrollable instead of AppBar)
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back,
+                          size: 28, color: Colors.black87),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    const Expanded(
+                      child: Center(
+                        child: Text(
+                          "Achievements",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 48), // balance for symmetry
+                  ],
                 ),
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.15),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
+                const SizedBox(height: 20),
+              // 🔹 Ranking & Points Card
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF9DCEFF), Color(0xFFD6A4FF)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                ],
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blue.withOpacity(0.15),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    _InfoColumn(title: "Your Rank", value: "#42", dark: false),
+                    _InfoColumn(title: "Total Points", value: "3,450", dark: false),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  _InfoColumn(title: "Your Rank", value: "#42", dark: false),
-                  _InfoColumn(title: "Total Points", value: "3,450", dark: false),
-                ],
+              const SizedBox(height: 20),
+        
+              // 🔹 Pathway Achievements
+              const Text(
+                "Achievement Pathway",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(height: 20),
-
-            // 🔹 Pathway Achievements
-            const Text(
-              "Achievement Pathway",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            _buildPathwayItem("First Workout", true, 200),
-            _buildPathwayItem("7-Day Streak", true, 500),
-            _buildPathwayItem("30-Day Streak", false, 1000),
-            _buildPathwayItem("100 Workouts", false, 2000),
-            _buildPathwayItem("1 Year Consistency", false, 5000),
-
-            const SizedBox(height: 20),
-
-            // 🔹 Completed Achievements
-            const Text(
-              "Completed",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            _buildAchievementCard(
-              "First Workout",
-              "Completed your very first workout!",
-              200,
-              true,
-            ),
-            _buildAchievementCard(
-              "7-Day Streak",
-              "Worked out for 7 days in a row!",
-              500,
-              true,
-            ),
-
-            const SizedBox(height: 20),
-
-            // 🔹 Locked Achievements
-            const Text(
-              "Locked",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            _buildAchievementCard(
-              "30-Day Streak",
-              "Keep going! 30 days of consistency unlocks this.",
-              1000,
-              false,
-            ),
-            _buildAchievementCard(
-              "100 Workouts",
-              "Complete 100 workouts to unlock this.",
-              2000,
-              false,
-            ),
-          ],
+              const SizedBox(height: 12),
+              _buildPathwayItem("First Workout", true, 200),
+              _buildPathwayItem("7-Day Streak", true, 500),
+              _buildPathwayItem("30-Day Streak", false, 1000),
+              _buildPathwayItem("100 Workouts", false, 2000),
+              _buildPathwayItem("1 Year Consistency", false, 5000),
+        
+              const SizedBox(height: 20),
+        
+              // 🔹 Completed Achievements
+              const Text(
+                "Completed",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              _buildAchievementCard(
+                "First Workout",
+                "Completed your very first workout!",
+                200,
+                true,
+              ),
+              _buildAchievementCard(
+                "7-Day Streak",
+                "Worked out for 7 days in a row!",
+                500,
+                true,
+              ),
+        
+              const SizedBox(height: 20),
+        
+              // 🔹 Locked Achievements
+              const Text(
+                "Locked",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              _buildAchievementCard(
+                "30-Day Streak",
+                "Keep going! 30 days of consistency unlocks this.",
+                1000,
+                false,
+              ),
+              _buildAchievementCard(
+                "100 Workouts",
+                "Complete 100 workouts to unlock this.",
+                2000,
+                false,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -718,50 +728,61 @@ class ActivityHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white, // ✅ clean white background
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          "Activity History",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+    
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
+            children: [
+              // Scrollable Header (instead of AppBar)
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back,
+                          size: 28, color: Colors.black87),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    const Expanded(
+                      child: Center(
+                        child: Text(
+                          "Activity History",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 48), // balance for symmetry
+                  ],
+                ),
+                const SizedBox(height: 20),
+              _buildActivityCard(
+                icon: Icons.directions_run,
+                title: "Morning Run",
+                subtitle: "5.2 km • 32 mins",
+                date: "Today, 6:30 AM",
+                gradient: const [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+              ),
+              const SizedBox(height: 16),
+              _buildActivityCard(
+                icon: Icons.fitness_center,
+                title: "Gym Workout",
+                subtitle: "Chest & Arms • 45 mins",
+                date: "Yesterday, 5:00 PM",
+                gradient: const [Color(0xFF9DCEFF), Color(0xFFD6A4FF)],
+              ),
+              const SizedBox(height: 16),
+              _buildActivityCard(
+                icon: Icons.directions_bike,
+                title: "Cycling",
+                subtitle: "12 km • 50 mins",
+                date: "Mon, 7:15 AM",
+                gradient: const [Color(0xFFD6A4FF), Color(0xFF92A3FD)],
+              ),
+            ],
           ),
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            _buildActivityCard(
-              icon: Icons.directions_run,
-              title: "Morning Run",
-              subtitle: "5.2 km • 32 mins",
-              date: "Today, 6:30 AM",
-              gradient: const [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-            ),
-            const SizedBox(height: 16),
-            _buildActivityCard(
-              icon: Icons.fitness_center,
-              title: "Gym Workout",
-              subtitle: "Chest & Arms • 45 mins",
-              date: "Yesterday, 5:00 PM",
-              gradient: const [Color(0xFF9DCEFF), Color(0xFFD6A4FF)],
-            ),
-            const SizedBox(height: 16),
-            _buildActivityCard(
-              icon: Icons.directions_bike,
-              title: "Cycling",
-              subtitle: "12 km • 50 mins",
-              date: "Mon, 7:15 AM",
-              gradient: const [Color(0xFFD6A4FF), Color(0xFF92A3FD)],
-            ),
-          ],
         ),
       ),
     );
@@ -1088,8 +1109,210 @@ class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Contact Us")),
-      body: const Center(child: Text("Contact Us Page")),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Custom scrollable header
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back,
+                        size: 28, color: Colors.black87),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "Contact Us",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 48), // keep balance
+                ],
+              ),
+              const SizedBox(height: 24),
+
+              // Intro text
+              const Text(
+                "We’d love to hear from you! Reach out via email, phone, or visit us.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black54,
+                ),
+              ),
+              const SizedBox(height: 28),
+
+              // Contact cards
+              _buildContactCard(
+                icon: Icons.email_outlined,
+                title: "Email",
+                subtitle: "support@fitnessapp.com",
+                gradient: const [Color(0xFF8EC5FC), Color(0xFFE0C3FC)], // blue → lavender
+              ),
+              const SizedBox(height: 18),
+
+              _buildContactCard(
+                icon: Icons.phone_outlined,
+                title: "Phone",
+                subtitle: "+91 98765 43210",
+                gradient: const [Color.fromARGB(255, 246, 194, 251), Color(0xFFA6C1EE)], // pink → blue
+              ),
+              const SizedBox(height: 18),
+
+              _buildContactCard(
+                icon: Icons.location_on_outlined,
+                title: "Office",
+                subtitle: "123, Fitness Street\nBangalore, India",
+                gradient: const [Color.fromARGB(255, 168, 230, 255), Color.fromARGB(255, 233, 171, 254)], // sky blue → soft pink
+              ),
+              const SizedBox(height: 18),
+
+              _buildContactCard(
+                icon: Icons.public,
+                title: "Website",
+                subtitle: "www.fitnessapp.com",
+                gradient: const [Color.fromARGB(255, 244, 199, 254), Color.fromARGB(255, 177, 217, 255)], // soft mint
+              ),
+              const SizedBox(height: 30),
+
+              // Optional - message form
+              _buildMessageForm(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContactCard({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required List<Color> gradient,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: gradient,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 10,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 26,
+            backgroundColor: Colors.white.withOpacity(0.2),
+            child: Icon(icon, color: Colors.white, size: 28),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
+                const SizedBox(height: 5),
+                Text(subtitle,
+                    style: const TextStyle(fontSize: 14, color: Colors.white70)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMessageForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Send us a Message",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 16),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Your Name",
+            filled: true,
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Your Email",
+            filled: true,
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          maxLines: 4,
+          decoration: InputDecoration(
+            hintText: "Your Message",
+            filled: true,
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF8EC5FC),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: const Text(
+              "Send Message",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -1100,8 +1323,166 @@ class PrivacyPolicyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Privacy Policy")),
-      body: const Center(child: Text("Privacy Policy Page")),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Back button + Title
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.black87),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  const Expanded(
+                    child: Text(
+                      "Privacy Policy",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 48), // to balance arrow space
+                ],
+              ),
+              const SizedBox(height: 24),
+
+              // Gradient Header
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color.fromARGB(255, 163, 177, 248), Color.fromARGB(255, 220, 181, 251)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  "We value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we handle your data.",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Sections
+              _buildPolicySection(
+                "1. Information We Collect",
+                "We collect information you provide directly to us when creating an account, such as your name, email, and fitness activity data.",
+              ),
+              _buildPolicySection(
+                "2. How We Use Your Data",
+                "Your data is used to personalize your fitness journey, track progress, improve our services, and provide insights about your health and performance.",
+              ),
+              _buildPolicySection(
+                "3. Data Sharing",
+                "We do not sell or share your personal data with third parties, except as required by law or to provide essential services (like cloud storage).",
+              ),
+              _buildPolicySection(
+                "4. Security",
+                "We implement industry-standard security measures to protect your personal data from unauthorized access, alteration, or disclosure.",
+              ),
+              _buildPolicySection(
+                "5. Your Rights",
+                "You can access, update, or delete your personal data at any time by visiting your profile settings or contacting our support team.",
+              ),
+
+              const SizedBox(height: 24),
+
+              // Contact Section
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(
+                    color: const Color(0xFF92A3FD),
+                    width: 1.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Need Help?",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF6C63FF),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "If you have any questions about this Privacy Policy, please contact us at:",
+                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "support@fitnessapp.com",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF6C63FF),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Helper widget for sections
+  Widget _buildPolicySection(String title, String content) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF6C63FF),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            content,
+            style: const TextStyle(fontSize: 14, color: Colors.black87, height: 1.5),
+          ),
+        ],
+      ),
     );
   }
 }
