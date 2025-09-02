@@ -1682,7 +1682,7 @@ class SettingsPage extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "1.0.6",
+                      "1.0.7",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
