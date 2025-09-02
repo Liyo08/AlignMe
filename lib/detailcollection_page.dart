@@ -734,51 +734,51 @@ class DetailPage5 extends StatelessWidget {
 
             // Button
             Padding(
-  padding: const EdgeInsets.fromLTRB(40, 170, 40, 20), // increased top padding to move down
-  child: SizedBox(
-    width: double.infinity,
-    height: 55,
-    child: ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const CustomBottomNavBar()),
-        );
-      },
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
-        ),
-        padding: EdgeInsets.zero,
-        elevation: 6,
-        backgroundColor: Colors.transparent, // keep it transparent
-      ),
-      child: Ink(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-        ),
-        child: Container(
-          alignment: Alignment.center,
-          child: const Text(
-            "Go To Home",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
+              padding: const EdgeInsets.fromLTRB(
+                  40, 170, 40, 20), // increased top padding to move down
+              child: SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CustomBottomNavBar()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding: EdgeInsets.zero,
+                    elevation: 6,
+                    backgroundColor: Colors.transparent, // keep it transparent
+                  ),
+                  child: Ink(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: const Text(
+                        "Go To Home",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
-    ),
-  ),
-)
-,
           ],
         ),
       ),
