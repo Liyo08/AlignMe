@@ -323,23 +323,25 @@ class PersonalDataPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // 🔹 Top Bar (Back + Title)
-             Row(
-  children: [
-    IconButton(
-      icon: const Icon(Icons.arrow_back, size: 28),
-      onPressed: () => Navigator.pop(context),
-    ),
-    const Expanded(
-      child: Center(
-        child: Text(
-          "Personal Data",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-        ),
-      ),
-    ),
-    const SizedBox(width: 48), // same width as IconButton for balance
-  ],
-),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back, size: 28),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "Personal Data",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w900),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                      width: 48), // same width as IconButton for balance
+                ],
+              ),
               const SizedBox(height: 20),
 
               // 🔹 Profile Picture + Name
@@ -430,7 +432,8 @@ class PersonalDataPage extends StatelessWidget {
           Text(label,
               style: const TextStyle(fontSize: 15, color: Colors.black54)),
           Text(value,
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+              style:
+                  const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
         ],
       ),
     );
@@ -444,37 +447,37 @@ class AchievementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white, // ✅ White background
-    
-      body:SafeArea(
+
+      body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                // Custom header (scrollable instead of AppBar)
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back,
-                          size: 28, color: Colors.black87),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    const Expanded(
-                      child: Center(
-                        child: Text(
-                          "Achievements",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.black87,
-                          ),
+              // Custom header (scrollable instead of AppBar)
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back,
+                        size: 28, color: Colors.black87),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "Achievements",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black87,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 48), // balance for symmetry
-                  ],
-                ),
-                const SizedBox(height: 20),
+                  ),
+                  const SizedBox(width: 48), // balance for symmetry
+                ],
+              ),
+              const SizedBox(height: 20),
               // 🔹 Ranking & Points Card
               Container(
                 padding: const EdgeInsets.all(16),
@@ -497,12 +500,13 @@ class AchievementPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     _InfoColumn(title: "Your Rank", value: "#42", dark: false),
-                    _InfoColumn(title: "Total Points", value: "3,450", dark: false),
+                    _InfoColumn(
+                        title: "Total Points", value: "3,450", dark: false),
                   ],
                 ),
               ),
               const SizedBox(height: 20),
-        
+
               // 🔹 Pathway Achievements
               const Text(
                 "Achievement Pathway",
@@ -514,9 +518,9 @@ class AchievementPage extends StatelessWidget {
               _buildPathwayItem("30-Day Streak", false, 1000),
               _buildPathwayItem("100 Workouts", false, 2000),
               _buildPathwayItem("1 Year Consistency", false, 5000),
-        
+
               const SizedBox(height: 20),
-        
+
               // 🔹 Completed Achievements
               const Text(
                 "Completed",
@@ -535,9 +539,9 @@ class AchievementPage extends StatelessWidget {
                 500,
                 true,
               ),
-        
+
               const SizedBox(height: 20),
-        
+
               // 🔹 Locked Achievements
               const Text(
                 "Locked",
@@ -571,9 +575,8 @@ class AchievementPage extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundColor: completed
-                ? const Color(0xFF92A3FD)
-                : Colors.grey.shade300,
+            backgroundColor:
+                completed ? const Color(0xFF92A3FD) : Colors.grey.shade300,
             child: Icon(
               completed ? Icons.check : Icons.lock,
               color: Colors.white,
@@ -670,9 +673,7 @@ class AchievementPage extends StatelessWidget {
                   "+$points points",
                   style: TextStyle(
                     fontSize: 13,
-                    color: completed
-                        ? Colors.white
-                        : Colors.grey.shade600,
+                    color: completed ? Colors.white : Colors.grey.shade600,
                   ),
                 ),
               ],
@@ -721,6 +722,7 @@ class _InfoColumn extends StatelessWidget {
     );
   }
 }
+
 class ActivityHistoryPage extends StatelessWidget {
   const ActivityHistoryPage({super.key});
 
@@ -728,36 +730,36 @@ class ActivityHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white, // ✅ clean white background
-    
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: [
               // Scrollable Header (instead of AppBar)
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back,
-                          size: 28, color: Colors.black87),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    const Expanded(
-                      child: Center(
-                        child: Text(
-                          "Activity History",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back,
+                        size: 28, color: Colors.black87),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "Activity History",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 48), // balance for symmetry
-                  ],
-                ),
-                const SizedBox(height: 20),
+                  ),
+                  const SizedBox(width: 48), // balance for symmetry
+                ],
+              ),
+              const SizedBox(height: 20),
               _buildActivityCard(
                 icon: Icons.directions_run,
                 title: "Morning Run",
@@ -827,10 +829,12 @@ class ActivityHistoryPage extends StatelessWidget {
                         color: Colors.white)),
                 const SizedBox(height: 4),
                 Text(subtitle,
-                    style: const TextStyle(color: Colors.white70, fontSize: 14)),
+                    style:
+                        const TextStyle(color: Colors.white70, fontSize: 14)),
                 const SizedBox(height: 6),
                 Text(date,
-                    style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                    style:
+                        const TextStyle(color: Colors.white70, fontSize: 12)),
               ],
             ),
           ),
@@ -865,31 +869,31 @@ class _WorkoutProgressPageState extends State<WorkoutProgressPage> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-             Stack(
-  alignment: Alignment.center,
-  children: [
-    // Back button (aligned to left)
-    Align(
-      alignment: Alignment.centerLeft,
-      child: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.black87),
-        onPressed: () => Navigator.pop(context),
-      ),
-    ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                // Back button (aligned to left)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.black87),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
 
-    // Centered title
-    const Text(
-      "Workout Progress",
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: Colors.black87,
-      ),
-    ),
-  ],
-),
+                // Centered title
+                const Text(
+                  "Workout Progress",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
+            ),
 
-                const SizedBox(height: 20),
+            const SizedBox(height: 20),
             // --- Usage Time Graph ---
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -957,7 +961,7 @@ class _WorkoutProgressPageState extends State<WorkoutProgressPage> {
               ),
             ),
             const SizedBox(height: 24),
-        
+
             // --- Quick Health Summary ---
             _sectionTitle("Health Summary"),
             const SizedBox(height: 12),
@@ -971,47 +975,53 @@ class _WorkoutProgressPageState extends State<WorkoutProgressPage> {
                       [const Color(0xFF92A3FD), const Color(0xFF9DCEFF)]),
                   _buildSummaryCard(Icons.local_drink, "Water", "2.5 L",
                       [const Color(0xFF9DCEFF), const Color(0xFFD6A4FF)]),
-                  _buildSummaryCard(Icons.local_fire_department, "Calories",
-                      "1850 kcal", [const Color(0xFFD6A4FF), const Color(0xFF92A3FD)]),
+                  _buildSummaryCard(
+                      Icons.local_fire_department,
+                      "Calories",
+                      "1850 kcal",
+                      [const Color(0xFFD6A4FF), const Color(0xFF92A3FD)]),
                   _buildSummaryCard(Icons.fastfood, "Food", "Protein-rich",
                       [const Color(0xFF92A3FD), const Color(0xFFD6A4FF)]),
-                  _buildSummaryCard(Icons.fitness_center, "Activities",
-                      "Running + Gym", [const Color(0xFF9DCEFF), const Color(0xFF92A3FD)]),
+                  _buildSummaryCard(
+                      Icons.fitness_center,
+                      "Activities",
+                      "Running + Gym",
+                      [const Color(0xFF9DCEFF), const Color(0xFF92A3FD)]),
                   _buildSummaryCard(Icons.bedtime, "Sleep", "7h 15m",
                       [const Color(0xFFD6A4FF), const Color(0xFF9DCEFF)]),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-        
+
             // --- Before vs After ---
             _sectionTitle("Progress"),
             const SizedBox(height: 12),
             Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // space from edges
-          child: Row(
-            children: [
-        Expanded(
-          child: _buildProgressCard(
-            "Before",
-            "Weight: 75kg\nBMI: 26",
-            Icons.person_off,
-            [const Color(0xFF92A3FD), const Color(0xFF9DCEFF)],
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildProgressCard(
-            "Now",
-            "Weight: 70kg\nBMI: 23",
-            Icons.person,
-            [const Color(0xFFD6A4FF), const Color(0xFF92A3FD)],
-          ),
-        ),
-            ],
-          ),
-        )
-        ,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 20, vertical: 12), // space from edges
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _buildProgressCard(
+                      "Before",
+                      "Weight: 75kg\nBMI: 26",
+                      Icons.person_off,
+                      [const Color(0xFF92A3FD), const Color(0xFF9DCEFF)],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildProgressCard(
+                      "Now",
+                      "Weight: 70kg\nBMI: 23",
+                      Icons.person,
+                      [const Color(0xFFD6A4FF), const Color(0xFF92A3FD)],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -1129,9 +1139,9 @@ class ContactUsPage extends StatelessWidget {
                       child: Text(
                         "Contact Us",
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.w900,
-                          color: Colors.black87,
+                          color: Color.fromARGB(255, 0, 0, 0),
                         ),
                       ),
                     ),
@@ -1157,7 +1167,10 @@ class ContactUsPage extends StatelessWidget {
                 icon: Icons.email_outlined,
                 title: "Email",
                 subtitle: "support@fitnessapp.com",
-                gradient: const [Color(0xFF8EC5FC), Color(0xFFE0C3FC)], // blue → lavender
+                gradient: const [
+                  Color(0xFF8EC5FC),
+                  Color(0xFFE0C3FC)
+                ], // blue → lavender
               ),
               const SizedBox(height: 18),
 
@@ -1165,7 +1178,10 @@ class ContactUsPage extends StatelessWidget {
                 icon: Icons.phone_outlined,
                 title: "Phone",
                 subtitle: "+91 98765 43210",
-                gradient: const [Color.fromARGB(255, 246, 194, 251), Color(0xFFA6C1EE)], // pink → blue
+                gradient: const [
+                  Color.fromARGB(255, 246, 194, 251),
+                  Color(0xFFA6C1EE)
+                ], // pink → blue
               ),
               const SizedBox(height: 18),
 
@@ -1173,7 +1189,10 @@ class ContactUsPage extends StatelessWidget {
                 icon: Icons.location_on_outlined,
                 title: "Office",
                 subtitle: "123, Fitness Street\nBangalore, India",
-                gradient: const [Color.fromARGB(255, 168, 230, 255), Color.fromARGB(255, 233, 171, 254)], // sky blue → soft pink
+                gradient: const [
+                  Color.fromARGB(255, 168, 230, 255),
+                  Color.fromARGB(255, 233, 171, 254)
+                ], // sky blue → soft pink
               ),
               const SizedBox(height: 18),
 
@@ -1181,7 +1200,10 @@ class ContactUsPage extends StatelessWidget {
                 icon: Icons.public,
                 title: "Website",
                 subtitle: "www.fitnessapp.com",
-                gradient: const [Color.fromARGB(255, 244, 199, 254), Color.fromARGB(255, 177, 217, 255)], // soft mint
+                gradient: const [
+                  Color.fromARGB(255, 244, 199, 254),
+                  Color.fromARGB(255, 177, 217, 255)
+                ], // soft mint
               ),
               const SizedBox(height: 30),
 
@@ -1236,7 +1258,8 @@ class ContactUsPage extends StatelessWidget {
                         color: Colors.white)),
                 const SizedBox(height: 5),
                 Text(subtitle,
-                    style: const TextStyle(fontSize: 14, color: Colors.white70)),
+                    style:
+                        const TextStyle(fontSize: 14, color: Colors.white70)),
               ],
             ),
           ),
@@ -1308,7 +1331,10 @@ class ContactUsPage extends StatelessWidget {
             ),
             child: const Text(
               "Send Message",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ),
         ),
@@ -1342,9 +1368,9 @@ class PrivacyPolicyPage extends StatelessWidget {
                       "Privacy Policy",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -1358,7 +1384,10 @@ class PrivacyPolicyPage extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color.fromARGB(255, 163, 177, 248), Color.fromARGB(255, 220, 181, 251)],
+                    colors: [
+                      Color.fromARGB(255, 163, 177, 248),
+                      Color.fromARGB(255, 220, 181, 251)
+                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -1479,7 +1508,8 @@ class PrivacyPolicyPage extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             content,
-            style: const TextStyle(fontSize: 14, color: Colors.black87, height: 1.5),
+            style: const TextStyle(
+                fontSize: 14, color: Colors.black87, height: 1.5),
           ),
         ],
       ),
@@ -1493,8 +1523,247 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Settings")),
-      body: const Center(child: Text("Settings Page")),
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Back arrow + Heading
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 26,
+                      color: Colors.black, // black arrow
+                    ),
+                  ),
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "Settings",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Dummy space to balance the Row (same size as back arrow)
+                  SizedBox(width: 26),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // Profile / Account status section
+            Row(
+  children: [
+    // Avatar
+    CircleAvatar(
+      radius: 35,
+      backgroundColor: const Color(0xFF92A3FD),
+      child: const Icon(Icons.person, size: 40, color: Colors.white),
+    ),
+
+    const SizedBox(width: 16),
+
+    // Name + Membership info
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Text(
+          "Jeel",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.black87,
+          ),
+        ),
+        SizedBox(height: 4),
+        Text(
+          "Premium Member",
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.black54,
+          ),
+        ),
+      ],
+    ),
+
+    const Spacer(),
+
+    // Sign Out button
+    Container(
+  decoration: BoxDecoration(
+    gradient: const LinearGradient(
+      colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(30),
+  ),
+  child: TextButton(
+    style: TextButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10), // smaller height
+      minimumSize: Size.zero, // removes extra min constraints
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap, // prevents extra space
+    ),
+    onPressed: () {
+      // Handle sign out
+    },
+    child: const Text(
+      "Sign Out",
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  ),
+),
+  ],
+),
+
+
+              const SizedBox(height: 30),
+
+              // ===== General Settings =====
+              _sectionTitle("General Settings"),
+              _settingsCard([
+                _buildSettingsTile(Icons.lock, "Privacy Policy"),
+                _divider(),
+                _buildSettingsTile(Icons.info_outline, "About Us"),
+                _divider(),
+                _buildSettingsTile(Icons.contact_mail, "Contact Us"),
+                _divider(),
+                _buildSettingsTile(Icons.notifications, "Notifications"),
+              ]),
+
+              const SizedBox(height: 30),
+
+              // ===== Preferences =====
+              _sectionTitle("Preferences"),
+              _settingsCard([
+                _buildSettingsTile(Icons.language, "Language"),
+                _divider(),
+                _buildSettingsTile(Icons.fitness_center, "Workout Preferences"),
+                _divider(),
+                _buildSettingsTile(Icons.track_changes, "Goals & Progress"),
+                _divider(),
+                _buildSettingsTile(Icons.alarm, "Reminders"),
+              ]),
+
+              const SizedBox(height: 30),
+
+              // ===== Appearance =====
+              _sectionTitle("Appearance"),
+              _settingsCard([
+                _buildSettingsTile(Icons.color_lens, "Theme"),
+                _divider(),
+                _buildSettingsTile(Icons.help_outline, "Help & Support"),
+              ]),
+
+              const SizedBox(height: 40),
+
+              // App Version Section
+              Center(
+                child: Column(
+                  children: const [
+                    Text(
+                      "App Version",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "1.0.6",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF92A3FD),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Reusable Section Title
+  static Widget _sectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.black87,
+      ),
+    );
+  }
+
+  // Reusable Settings Card
+  static Widget _settingsCard(List<Widget> children) {
+    return Container(
+      margin: const EdgeInsets.only(top: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(children: children),
+    );
+  }
+
+  // Settings option tile
+  static Widget _buildSettingsTile(IconData icon, String title) {
+    return ListTile(
+      leading: ShaderMask(
+        shaderCallback: (bounds) => const LinearGradient(
+          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+        child: Icon(
+          icon,
+          color: Colors.white, // masked by gradient
+        ),
+      ),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.black87,
+        ),
+      ),
+      trailing:
+          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black45),
+      onTap: () {},
+    );
+  }
+
+  static Widget _divider() {
+    return const Divider(
+      height: 1,
+      thickness: 0.5,
+      color: Colors.black12,
+      indent: 16,
+      endIndent: 16,
     );
   }
 }
