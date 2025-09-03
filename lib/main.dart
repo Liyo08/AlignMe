@@ -28,13 +28,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(),
-      ),
-       home: const SplashPage1(),
-    );
+   return MaterialApp(
+  debugShowCheckedModeBanner: false,
+  theme: ThemeData(
+    textTheme: GoogleFonts.poppinsTextTheme(),
+    brightness: Brightness.light,
+    primarySwatch: Colors.blue,
+  ),
+  darkTheme: ThemeData(
+    textTheme: GoogleFonts.poppinsTextTheme(),
+    brightness: Brightness.dark,
+    primarySwatch: Colors.blue,
+  ),
+  themeMode: ThemeMode.light, // default
+  home: const SplashPage1(),
+);
   }
 }
 
@@ -267,7 +275,7 @@ GestureDetector(
   _featureCard(
     "PosePerfect",
     "Align. Improve. Repeat.",
-    'assets/pose.png',
+    'assets/poseperfect.jpg',
     context,
     const PosePerfectPage(),
   ), const SizedBox(width: 12),

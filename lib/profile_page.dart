@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'main.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'notification_page.dart';
+import 'themeselection_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -1634,13 +1636,13 @@ class SettingsPage extends StatelessWidget {
               // ===== General Settings =====
               _sectionTitle("General Settings"),
               _settingsCard([
-                _buildSettingsTile(Icons.lock, "Privacy Policy"),
+                _buildSettingsTile(context,Icons.lock, "Privacy Policy",const PrivacyPolicyPage()), // Updated
                 _divider(),
-                _buildSettingsTile(Icons.info_outline, "About Us"),
+                _buildSettingsTile(context,Icons.info_outline, "About Us",const AboutUsPage()), // Updated
                 _divider(),
-                _buildSettingsTile(Icons.contact_mail, "Contact Us"),
+                _buildSettingsTile(context,Icons.contact_mail, "Contact Us",const ContactUsPage()), // Updated
                 _divider(),
-                _buildSettingsTile(Icons.notifications, "Notifications"),
+                _buildSettingsTile(context,Icons.notifications, "Notifications",const NotificationsPage()), // Updated
               ]),
 
               const SizedBox(height: 30),
@@ -1648,13 +1650,13 @@ class SettingsPage extends StatelessWidget {
               // ===== Preferences =====
               _sectionTitle("Preferences"),
               _settingsCard([
-                _buildSettingsTile(Icons.language, "Language"),
+                _buildSettingsTile(context,Icons.language, "Language",const LanguageSelectionPage()), // Updated
                 _divider(),
-                _buildSettingsTile(Icons.fitness_center, "Workout Preferences"),
+                _buildSettingsTile(context,Icons.fitness_center, "Workout Preferences",const WorkoutPreferencesPage()), // Updated
                 _divider(),
-                _buildSettingsTile(Icons.track_changes, "Goals & Progress"),
+                _buildSettingsTile(context,Icons.track_changes, "Goals & Progress",const GoalsProgressPage()), // Updated
                 _divider(),
-                _buildSettingsTile(Icons.alarm, "Reminders"),
+                _buildSettingsTile(context,Icons.alarm, "Reminders",const ReminderSettingsPage()), // Updated
               ]),
 
               const SizedBox(height: 30),
@@ -1662,9 +1664,9 @@ class SettingsPage extends StatelessWidget {
               // ===== Appearance =====
               _sectionTitle("Appearance"),
               _settingsCard([
-                _buildSettingsTile(Icons.color_lens, "Theme"),
+                _buildSettingsTile(context,Icons.color_lens, "Theme",const ThemeSelectionPage()), // Updated
                 _divider(),
-                _buildSettingsTile(Icons.help_outline, "Help & Support"),
+                _buildSettingsTile(context,Icons.help_outline, "Help & Support",const HelpSupportPage()), // Updated
               ]),
 
               const SizedBox(height: 40),
@@ -1731,31 +1733,42 @@ class SettingsPage extends StatelessWidget {
   }
 
   // Settings option tile
-  static Widget _buildSettingsTile(IconData icon, String title) {
-    return ListTile(
-      leading: ShaderMask(
-        shaderCallback: (bounds) => const LinearGradient(
-          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-        child: Icon(
-          icon,
-          color: Colors.white, // masked by gradient
-        ),
+  static Widget _buildSettingsTile(
+  BuildContext context,
+  IconData icon,
+  String title,
+  Widget destinationPage, // New parameter
+) {
+  return ListTile(
+    leading: ShaderMask(
+      shaderCallback: (bounds) => const LinearGradient(
+        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+      ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+      child: Icon(
+        icon,
+        color: Colors.white, // masked by gradient
       ),
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 16,
-          color: Colors.black87,
-        ),
+    ),
+    title: Text(
+      title,
+      style: const TextStyle(
+        fontSize: 16,
+        color: Colors.black87,
       ),
-      trailing:
-          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black45),
-      onTap: () {},
-    );
-  }
+    ),
+    trailing:
+        const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black45),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => destinationPage),
+      );
+    },
+  );
+}
+
 
   static Widget _divider() {
     return const Divider(
@@ -1764,6 +1777,639 @@ class SettingsPage extends StatelessWidget {
       color: Colors.black12,
       indent: 16,
       endIndent: 16,
+    );
+  }
+}
+
+
+class AboutUsPage extends StatelessWidget {
+  const AboutUsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // AppBar with white text to contrast the gradient
+      appBar: AppBar(
+        title: const Text("About Us"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      extendBodyBehindAppBar: true, // To make AppBar transparent
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF92A3FD), // blue
+              Color(0xFF9DCEFF), // light lavender
+              Color(0xFF8E54E9), // violet
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "About Us",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "Welcome to our app! \n\n"
+                  "We are passionate about creating beautiful and interactive user interfaces. "
+                  "Our goal is to provide a seamless experience while exploring new technologies like Flutter, React, and Firebase. "
+                  "We constantly strive to innovate and bring the best experience to our users.",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class LanguageSelectionPage extends StatefulWidget {
+  const LanguageSelectionPage({super.key});
+
+  @override
+  State<LanguageSelectionPage> createState() => _LanguageSelectionPageState();
+}
+
+class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
+  String selectedLanguage = 'English';
+
+  final List<String> languages = [
+    'English',
+    'Spanish',
+    'French',
+    'German',
+    'Hindi',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text("Select Language"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF92A3FD), // blue
+              Color(0xFF9DCEFF), // light lavender
+              Color(0xFF8E54E9), // violet
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Choose Your Language",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: languages.length,
+                    itemBuilder: (context, index) {
+                      final language = languages[index];
+                      final isSelected = language == selectedLanguage;
+
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedLanguage = language;
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 24),
+                          decoration: BoxDecoration(
+                            gradient: isSelected
+                                ? const LinearGradient(
+                                    colors: [
+                                      Color(0xFF8E54E9),
+                                      Color(0xFF92A3FD),
+                                    ],
+                                  )
+                                : const LinearGradient(
+                                    colors: [
+                                      Colors.white30,
+                                      Colors.white24,
+                                    ],
+                                  ),
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: isSelected
+                                ? [
+                                    const BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 8,
+                                      offset: Offset(0, 4),
+                                    )
+                                  ]
+                                : [],
+                          ),
+                          child: Text(
+                            language,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
+                              color: isSelected ? Colors.white : Colors.white70,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+}
+class WorkoutPreferencesPage extends StatefulWidget {
+  const WorkoutPreferencesPage({super.key});
+
+  @override
+  State<WorkoutPreferencesPage> createState() => _WorkoutPreferencesPageState();
+}
+
+class _WorkoutPreferencesPageState extends State<WorkoutPreferencesPage> {
+  final List<String> workoutOptions = [
+    'Cardio',
+    'Strength',
+    'Yoga',
+    'Pilates',
+    'HIIT',
+    'CrossFit',
+  ];
+
+  List<String> selectedWorkouts = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text("Workout Preferences"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF92A3FD), // blue
+              Color(0xFF9DCEFF), // light lavender
+              Color(0xFF8E54E9), // violet
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Select Your Workouts",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: workoutOptions.length,
+                    itemBuilder: (context, index) {
+                      final workout = workoutOptions[index];
+                      final isSelected = selectedWorkouts.contains(workout);
+
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (isSelected) {
+                              selectedWorkouts.remove(workout);
+                            } else {
+                              selectedWorkouts.add(workout);
+                            }
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 24),
+                          decoration: BoxDecoration(
+                            gradient: isSelected
+                                ? const LinearGradient(
+                                    colors: [
+                                      Color(0xFF8E54E9),
+                                      Color(0xFF92A3FD),
+                                    ],
+                                  )
+                                : const LinearGradient(
+                                    colors: [
+                                      Colors.white30,
+                                      Colors.white24,
+                                    ],
+                                  ),
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: isSelected
+                                ? const [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 8,
+                                      offset: Offset(0, 4),
+                                    )
+                                  ]
+                                : [],
+                          ),
+                          child: Text(
+                            workout,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
+                              color: isSelected ? Colors.white : Colors.white70,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class GoalsProgressPage extends StatelessWidget {
+  const GoalsProgressPage({super.key});
+
+  final List<Map<String, dynamic>> goals = const [
+    {"title": "Daily Steps", "progress": 0.6},
+    {"title": "Workout Sessions", "progress": 0.4},
+    {"title": "Calories Burned", "progress": 0.7},
+    {"title": "Water Intake", "progress": 0.5},
+    {"title": "Meditation", "progress": 0.8},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text("Goals & Progress"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF92A3FD), // blue
+              Color(0xFF9DCEFF), // light lavender
+              Color(0xFF8E54E9), // violet
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Your Goals",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: goals.length,
+                    itemBuilder: (context, index) {
+                      final goal = goals[index];
+                      final progress = goal["progress"] as double;
+
+                      return Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Colors.white24,
+                              Colors.white30,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              goal["title"],
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: LinearProgressIndicator(
+                                value: progress,
+                                minHeight: 10,
+                                backgroundColor: Colors.white24,
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "${(progress * 100).toInt()}% Completed",
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class ReminderSettingsPage extends StatefulWidget {
+  final Function(Map<String, bool>) onRemindersChanged;
+
+  const ReminderSettingsPage({super.key, required this.onRemindersChanged});
+
+  @override
+  State<ReminderSettingsPage> createState() => _ReminderSettingsPageState();
+}
+
+class _ReminderSettingsPageState extends State<ReminderSettingsPage> {
+  // Example reminders
+  Map<String, bool> reminders = {
+    "Workout": true,
+    "Drink Water": false,
+    "Meditation": true,
+    "Sleep Schedule": false,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text("Reminders"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF92A3FD), // blue
+              Color(0xFF9DCEFF), // light lavender
+              Color(0xFF8E54E9), // violet
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Your Reminders",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView(
+                    children: reminders.keys.map((key) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 24),
+                        decoration: BoxDecoration(
+                          gradient: reminders[key]!
+                              ? const LinearGradient(
+                                  colors: [
+                                    Color(0xFF8E54E9),
+                                    Color(0xFF92A3FD),
+                                  ],
+                                )
+                              : const LinearGradient(
+                                  colors: [
+                                    Colors.white24,
+                                    Colors.white30,
+                                  ],
+                                ),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              key,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: reminders[key]!
+                                    ? Colors.white
+                                    : Colors.white70,
+                              ),
+                            ),
+                            Switch(
+                              value: reminders[key]!,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  reminders[key] = value;
+                                });
+                                widget.onRemindersChanged(reminders);
+                              },
+                            )
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HelpSupportPage extends StatelessWidget {
+  const HelpSupportPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> helpOptions = [
+      {"title": "FAQs", "icon": Icons.question_answer},
+      {"title": "Contact Support", "icon": Icons.contact_support},
+      {"title": "Feedback", "icon": Icons.feedback},
+    ];
+
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text("Help & Support"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF92A3FD), // blue
+              Color(0xFF9DCEFF), // light lavender
+              Color(0xFF8E54E9), // violet
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "How can we help you?",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: helpOptions.length,
+                    itemBuilder: (context, index) {
+                      final option = helpOptions[index];
+                      return GestureDetector(
+                        onTap: () {
+                          // TODO: Add navigation or action for each option
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 24),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                Colors.white24,
+                                Colors.white30,
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                option["icon"],
+                                color: Colors.white,
+                              ),
+                              const SizedBox(width: 16),
+                              Text(
+                                option["title"],
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Spacer(),
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 16,
+                                color: Colors.white70,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
