@@ -1686,13 +1686,13 @@ class SettingsPage extends StatelessWidget {
                     Text(
                       "App Version",
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black54,
+                        fontSize: 14
+                      
                       ),
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "1.0.7",
+                      "1.0.8",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
