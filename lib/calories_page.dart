@@ -9,8 +9,8 @@ class CaloriesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Calories"),
-        backgroundColor: const Color(0xFF92A3FD),
-        foregroundColor: Colors.white,
+        centerTitle: true,
+         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
       body: Padding(
@@ -55,7 +55,7 @@ class CaloriesPage extends StatelessWidget {
                       value: 230,
                       title: "230",
                       titleStyle: const TextStyle(
-                        color: Colors.black54,
+                      
                         fontWeight: FontWeight.bold,
                       ),
                       color: Colors.grey.shade200,
@@ -83,8 +83,7 @@ class CaloriesPage extends StatelessWidget {
               "Great job! You're on track with your calorie goal today 🎉",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 14,
-                color: Colors.black54,
+                fontSize: 14
               ),
             ),
           ],
@@ -106,7 +105,7 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
           BoxShadow(color: Colors.black12, blurRadius: 6),
@@ -116,7 +115,7 @@ class _StatCard extends StatelessWidget {
         children: [
           Text(label,
               style: const TextStyle(
-                  fontSize: 12, color: Colors.black54)),
+                  fontSize: 12)),
           const SizedBox(height: 4),
           Text(value,
               style: const TextStyle(

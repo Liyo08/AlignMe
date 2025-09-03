@@ -9,6 +9,7 @@ class WorkoutPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Latest Workouts"),
         centerTitle: true,
+         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

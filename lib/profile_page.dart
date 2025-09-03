@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back, size: 28),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () {
                       if (Navigator.of(context).canPop()) {
                         // Case 1: FullBody was opened with Navigator.push()
@@ -331,7 +331,7 @@ class PersonalDataPage extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back, size: 28),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Expanded(
@@ -465,7 +465,7 @@ class AchievementPage extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back, size: 28),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Expanded(
@@ -744,7 +744,7 @@ class ActivityHistoryPage extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back, size: 28),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Expanded(
@@ -877,7 +877,7 @@ class _WorkoutProgressPageState extends State<WorkoutProgressPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: IconButton(
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
@@ -1123,7 +1123,7 @@ class ContactUsPage extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back, size: 28),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Expanded(
@@ -1361,7 +1361,7 @@ class PrivacyPolicyPage extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Expanded(
@@ -1536,8 +1536,7 @@ class SettingsPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: const Icon(
-                      Icons.arrow_back,
-                      size: 26 // black arrow
+                      Icons.arrow_back_ios_new// black arrow
                     ),
                   ),
                   const Expanded(
@@ -1805,7 +1804,7 @@ class AboutUsPage extends StatelessWidget {
             children: [
               // Back arrow button
               IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back_ios_new),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -1993,7 +1992,7 @@ class _WorkoutPreferencesPageState extends State<WorkoutPreferencesPage> {
             Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back_ios_new),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -2126,7 +2125,7 @@ class GoalsProgressPage extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back_ios_new),
                   
                   onPressed: () {
                     Navigator.pop(context);
@@ -2260,7 +2259,7 @@ class _ReminderSettingsPageState extends State<ReminderSettingsPage> {
             Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back_ios_new),
                   
                   onPressed: () {
                     Navigator.pop(context);
@@ -2386,7 +2385,7 @@ class HelpSupportPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.pop(context),
         ),
       ),

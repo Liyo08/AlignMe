@@ -18,8 +18,7 @@ class _WaterDetailsPageState extends State<WaterDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Water Intake"),
-        backgroundColor: const Color(0xFF92A3FD),
-        foregroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
       ),
       body: Padding(
