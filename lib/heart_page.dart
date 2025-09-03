@@ -11,17 +11,17 @@ class _HeartRatePageState extends State<HeartRatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F7FB),
+      backgroundColor:Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text(
           "Heart Rate",
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 22),
+              fontWeight: FontWeight.bold, fontSize: 22),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,8 +97,7 @@ class _HeartRatePageState extends State<HeartRatePage> {
                 "Tips for a Healthy Heart",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.black87),
+                    fontSize: 18),
               ),
             ),
             const SizedBox(height: 12),

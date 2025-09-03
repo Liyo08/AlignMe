@@ -68,12 +68,12 @@ class SignInPage extends StatelessWidget {
               // Divider
               Row(
                 children: const [
-                  Expanded(child: Divider(thickness: 1)),
+                  Expanded(child: Divider(thickness: 1,color:Colors.black)),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text("or sign in with email"),
                   ),
-                  Expanded(child: Divider(thickness: 1)),
+                  Expanded(child: Divider(thickness: 1,color:Colors.black)),
                 ],
               ),
 

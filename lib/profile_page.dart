@@ -54,9 +54,11 @@ class ProfilePage extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
-                    radius: 32,
-                    backgroundImage: AssetImage(""), // replace with your asset
+                 CircleAvatar(
+                    radius: 35,
+                    backgroundColor: const Color(0xFF92A3FD),
+                    child:
+                        const Icon(Icons.person, size: 40, color: Colors.white),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -133,11 +135,11 @@ class ProfilePage extends StatelessWidget {
                   title: "Account",
                   items: [
                     _buildListTile(Icons.person_outline, "Personal Data",
-                        const PersonalDataPage(), context),
+                        const PersonalDataPage(), context),_divider(context),
                     _buildListTile(Icons.emoji_events_outlined, "Achievement",
-                        const AchievementPage(), context),
+                        const AchievementPage(), context),_divider(context),
                     _buildListTile(Icons.history, "Activity History",
-                        const ActivityHistoryPage(), context),
+                        const ActivityHistoryPage(), context),_divider(context),
                     _buildListTile(Icons.fitness_center, "Workout Progress",
                         const WorkoutProgressPage(), context),
                   ],
@@ -208,9 +210,9 @@ class ProfilePage extends StatelessWidget {
                   title: "Other",
                   items: [
                     _buildListTile(Icons.mail_outline, "Contact Us",
-                        const ContactUsPage(), context),
+                        const ContactUsPage(), context),_divider(context),
                     _buildListTile(Icons.privacy_tip_outlined, "Privacy Policy",
-                        const PrivacyPolicyPage(), context),
+                        const PrivacyPolicyPage(), context),_divider(context),
                     _buildListTile(Icons.settings_outlined, "Settings",
                         const SettingsPage(), context),
                   ],
@@ -221,7 +223,20 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
+static Widget _divider(BuildContext context) {
+  // Choose color based on light/dark mode
+  final Color dividerColor = Theme.of(context).brightness == Brightness.dark
+      ? Colors.grey[300]! // light grey for dark mode
+      :const Color.fromARGB(255, 179, 179, 179); // dark grey/black-grey for light mode
 
+  return Divider(
+    height: 1,
+    thickness: 0.5,
+    color: dividerColor,
+    indent: 16,
+    endIndent: 16,
+  );
+}
   // 🔹 Reusable Stat Card
   Widget _buildStatCard(context, String value, String label) {
     return Container(
@@ -1272,11 +1287,11 @@ class ContactUsPage extends StatelessWidget {
             hintText: "Your Name",
             hintStyle: TextStyle(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.black // black in dark mode
-                  : Colors.grey, // normal grey in light mode
+                  ? const Color.fromARGB(255, 179, 178, 178) // black in dark mode
+                  : const Color.fromARGB(255, 43, 43, 43), // normal grey in light mode
             ),
             filled: true,
-            fillColor: Colors.grey[100],
+            fillColor: Theme.of(context).cardColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -1289,11 +1304,11 @@ class ContactUsPage extends StatelessWidget {
             hintText: "Your Email",
             hintStyle: TextStyle(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.black // black in dark mode
-                  : Colors.grey, // normal grey in light mode
+                  ? const Color.fromARGB(255, 179, 178, 178) // black in dark mode
+                  : const Color.fromARGB(255, 43, 43, 43),
             ),
             filled: true,
-            fillColor: Colors.grey[100],
+            fillColor: Theme.of(context).cardColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -1307,11 +1322,11 @@ class ContactUsPage extends StatelessWidget {
             hintText: "Your Message",
             hintStyle: TextStyle(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.black // black in dark mode
-                  : Colors.grey, // normal grey in light mode
+               ? const Color.fromARGB(255, 179, 178, 178) // black in dark mode
+                  : const Color.fromARGB(255, 43, 43, 43),
             ),
             filled: true,
-            fillColor: Colors.grey[100],
+            fillColor: Theme.of(context).cardColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -1633,13 +1648,13 @@ class SettingsPage extends StatelessWidget {
               _settingsCard([
                 _buildSettingsTile(context, Icons.lock, "Privacy Policy",
                     const PrivacyPolicyPage()), // Updated
-                _divider(),
+                _divider(context),
                 _buildSettingsTile(context, Icons.info_outline, "About Us",
                     const AboutUsPage()), // Updated
-                _divider(),
+                _divider(context),
                 _buildSettingsTile(context, Icons.contact_mail, "Contact Us",
                     const ContactUsPage()), // Updated
-                _divider(),
+                _divider(context),
                 _buildSettingsTile(context, Icons.notifications,
                     "Notifications", const NotificationsPage()), // Updated
               ],context),
@@ -1651,16 +1666,16 @@ class SettingsPage extends StatelessWidget {
               _settingsCard([
                 _buildSettingsTile(context, Icons.language, "Language",
                     const LanguageSelectionPage()), // Updated
-                _divider(),
+                _divider(context),
                 _buildSettingsTile(
                     context,
                     Icons.fitness_center,
                     "Workout Preferences",
                     const WorkoutPreferencesPage()), // Updated
-                _divider(),
+                _divider(context),
                 _buildSettingsTile(context, Icons.track_changes,
                     "Goals & Progress", const GoalsProgressPage()), // Updated
-                _divider(),
+                _divider(context),
                 _buildSettingsTile(context, Icons.alarm, "Reminders",
                     const ReminderSettingsPage()), // Updated
               ],context),
@@ -1672,7 +1687,7 @@ class SettingsPage extends StatelessWidget {
               _settingsCard([
                 _buildSettingsTile(context, Icons.color_lens, "Theme",
                     const ThemeSelectionPage()), // Updated
-                _divider(),
+                _divider(context),
                 _buildSettingsTile(context, Icons.help_outline,
                     "Help & Support", const HelpSupportPage()), // Updated
               ],context),
@@ -1692,7 +1707,7 @@ class SettingsPage extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "1.0.8",
+                      "1.0.9",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -1765,7 +1780,7 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
       trailing:
-          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black45),
+          const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: () {
         Navigator.push(
           context,
@@ -1775,15 +1790,20 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  static Widget _divider() {
-    return const Divider(
-      height: 1,
-      thickness: 0.5,
-      color: Colors.black12,
-      indent: 16,
-      endIndent: 16,
-    );
-  }
+ static Widget _divider(BuildContext context) {
+  // Choose color based on light/dark mode
+  final Color dividerColor = Theme.of(context).brightness == Brightness.dark
+      ? Colors.grey[300]! // light grey for dark mode
+      : const Color.fromARGB(255, 179, 179, 179); // dark grey/black-grey for light mode
+
+  return Divider(
+    height: 1,
+    thickness: 0.5,
+    color: dividerColor,
+    indent: 16,
+    endIndent: 16,
+  );}
+
 }
 
 class AboutUsPage extends StatelessWidget {
