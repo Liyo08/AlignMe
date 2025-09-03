@@ -16,9 +16,16 @@ import 'calories_page.dart';
 import 'water_page.dart';
 import 'heart_page.dart';
 import 'splash_page.dart';
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AppTheme(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,25 +33,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    final themeProvider = Provider.of<AppTheme>(context);
 
-   return MaterialApp(
+return MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: ThemeData(
-    textTheme: GoogleFonts.poppinsTextTheme(),
     brightness: Brightness.light,
     primarySwatch: Colors.blue,
+    scaffoldBackgroundColor:  Colors.grey[100],
+    textTheme: GoogleFonts.poppinsTextTheme().apply(
+      bodyColor: Colors.black,
+      displayColor: Colors.black,
+    ),
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+        .copyWith(surface: Colors.white, onSurface: Colors.black),
   ),
   darkTheme: ThemeData(
-    textTheme: GoogleFonts.poppinsTextTheme(),
     brightness: Brightness.dark,
     primarySwatch: Colors.blue,
+    scaffoldBackgroundColor: Colors.black,
+     cardColor: const Color(0xFF1E1E1E), // dark gray cards
+    textTheme: GoogleFonts.poppinsTextTheme().apply(
+      bodyColor: Colors.white,
+      displayColor: Colors.white,
+    ),
+    colorScheme: ColorScheme.fromSwatch(
+      brightness: Brightness.dark,
+      primarySwatch: Colors.blue,
+    ).copyWith(surface: Colors.black, onSurface: Colors.white),
   ),
-  themeMode: ThemeMode.light, // default
+  themeMode: themeProvider.themeMode,
   home: const SplashPage1(),
 );
   }
 }
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -54,7 +77,7 @@ class HomeScreen extends StatelessWidget {
     
 
     return Scaffold(
-  backgroundColor: const Color(0xFFF5F5F5),
+  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
   body: SingleChildScrollView(
     child: Padding(
       
@@ -83,7 +106,7 @@ Align(
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
+           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
@@ -95,7 +118,7 @@ Align(
         ),
         child: const Icon(
           Icons.notifications_none,
-          color: Colors.black,
+          
           size: 24,
         ),
       ),
@@ -122,12 +145,7 @@ Align(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                gradient: const LinearGradient(
-                  begin: Alignment(1.00, 1.00),
-                  end: Alignment(-0.24, -0.31),
-                  colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                ),
-              ),
+               gradient: getBMIGradient(context),),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -214,14 +232,7 @@ GestureDetector(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                gradient: const LinearGradient(
-                  begin: Alignment(1.00, 1.00),
-                  end: Alignment(-0.24, -0.31),
-                  colors: [
-                    Color.fromARGB(255, 201, 208, 241),
-                    Color.fromARGB(255, 223, 237, 251)
-                  ],
-                ),
+              gradient: getTargetGradient(context),
               ),
               child: Row(
   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,7 +240,6 @@ GestureDetector(
     const Text(
       "Today Target",
       style: TextStyle(
-        color: Colors.black,
         fontWeight: FontWeight.bold,
       ),
     ),
@@ -315,23 +325,34 @@ GestureDetector(
   child: Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment(1.00, 1.00),
-        end: Alignment(-0.24, -0.31),
-        colors: [
-          const Color.fromARGB(255, 229, 232, 250),
-          const Color.fromARGB(255, 226, 236, 247)
-        ],
-      ),
+      gradient: Theme.of(context).brightness == Brightness.dark
+          ? const LinearGradient(
+              begin: Alignment(1.00, 1.00),
+              end: Alignment(-0.24, -0.31),
+              colors: [
+                Color(0xFF3E3C8F), // deep indigo
+                Color(0xFF6C63FF), // vibrant violet
+              ],
+            )
+          : const LinearGradient(
+              begin: Alignment(1.00, 1.00),
+              end: Alignment(-0.24, -0.31),
+              colors: [
+                Color.fromARGB(255, 229, 232, 250),
+                Color.fromARGB(255, 226, 236, 247),
+              ],
+            ),
       borderRadius: BorderRadius.circular(20),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           "Heart Rate",
           style: TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
             fontWeight: FontWeight.w900,
           ),
         ),
@@ -354,18 +375,29 @@ GestureDetector(
                     FlSpot(5, 78),
                   ],
                   isCurved: true,
-                  color: const Color(0xFF92A3FD),
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color(0xFF9DCEFF) // bright cyan-blue in dark
+                      : const Color(0xFF92A3FD),
                   barWidth: 3,
                   belowBarData: BarAreaData(
                     show: true,
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blueAccent.withOpacity(0.2),
-                        Colors.blueAccent.withOpacity(0.0),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
+                    gradient: Theme.of(context).brightness == Brightness.dark
+                        ? LinearGradient(
+                            colors: [
+                              const Color(0xFF6C63FF).withOpacity(0.3),
+                              const Color(0xFF6C63FF).withOpacity(0.0),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          )
+                        : LinearGradient(
+                            colors: [
+                              Colors.blueAccent.withOpacity(0.2),
+                              Colors.blueAccent.withOpacity(0.0),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
                   ),
                 ),
               ],
@@ -373,12 +405,14 @@ GestureDetector(
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           "78 BPM",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF92A3FD),
+            color: Theme.of(context).brightness == Brightness.dark
+                ? const Color(0xFF9DCEFF)
+                : const Color(0xFF92A3FD),
           ),
         ),
         const SizedBox(height: 4),
@@ -387,14 +421,14 @@ GestureDetector(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment(1.00, 1.00),
-                end: Alignment(-0.24, -0.31),
-                colors: [
-                  const Color(0xFFC58BF2),
-                  const Color(0xFFEEA4CE)
-                ],
-              ),
+              gradient:const LinearGradient(
+                      begin: Alignment(1.00, 1.00),
+                      end: Alignment(-0.24, -0.31),
+                      colors: [
+                        Color(0xFFC58BF2),
+                        Color(0xFFEEA4CE),
+                      ],
+                    ),
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Text(
@@ -409,8 +443,8 @@ GestureDetector(
       ],
     ),
   ),
-)
-,
+),
+
             const SizedBox(height: 20),
 // Grid with Water, Sleep, Calories
 Row(
@@ -429,7 +463,8 @@ Row(
     child: Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
+         // card color from theme
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(color: Colors.black12, blurRadius: 6),
@@ -482,7 +517,7 @@ Row(
                         fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
                 const Text("Real time updates",
-                    style: TextStyle(fontSize: 12, color: Colors.black54)),
+                    style: TextStyle(fontSize: 12)),
                 const SizedBox(height: 12),
 
                 // Timeline entries
@@ -523,7 +558,8 @@ const SizedBox(width: 12),
   child: Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
+       // card color from theme
       borderRadius: BorderRadius.circular(20),
       boxShadow: const [
         BoxShadow(color: Colors.black12, blurRadius: 6)
@@ -604,7 +640,8 @@ const SizedBox(width: 12),
   child: Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
+       // card color from theme
       borderRadius: BorderRadius.circular(20),
       boxShadow: const [
         BoxShadow(color: Colors.black12, blurRadius: 6),
@@ -651,7 +688,7 @@ const SizedBox(width: 12),
         const Center(
           child: Text(
             "230 kcal left",
-            style: TextStyle(fontSize: 12, color: Colors.black54),
+            style: TextStyle(fontSize: 12),
           ),
         ),
       ],
@@ -689,7 +726,7 @@ LatestWorkoutSection(),
       child: Container(
         padding: const EdgeInsets.all(22),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -735,7 +772,7 @@ LatestWorkoutSection(),
       width: 440,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: Colors.white,
+         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -830,8 +867,7 @@ class WorkoutCard extends StatelessWidget {
   final double progress;
   final IconData icon;
   final Color iconBg;
-  final Color? titleColor;
-  final Color? textColor;
+
 
   const WorkoutCard({
     super.key,
@@ -840,8 +876,7 @@ class WorkoutCard extends StatelessWidget {
     required this.progress,
     required this.icon,
     required this.iconBg,
-    this.titleColor = Colors.black,
-    this.textColor = Colors.black54,
+  
   });
 
   @override
@@ -850,7 +885,7 @@ class WorkoutCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white,
+         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
@@ -884,13 +919,13 @@ class WorkoutCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: titleColor,
+                    
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   subtitle,
-                  style: TextStyle(fontSize: 13, color: textColor),
+                  style: TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 8),
 
@@ -964,7 +999,7 @@ class _TimelineRow extends StatelessWidget {
             children: [
               Text(time,
                   style: const TextStyle(
-                      fontSize: 12, color: Colors.black54)),
+                      fontSize: 12)),
               Text(amount,
                   style: TextStyle(
                       fontSize: 12,
@@ -1092,4 +1127,34 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       ),
     );
   }
+}
+LinearGradient getBMIGradient(BuildContext context) {
+  return Theme.of(context).brightness == Brightness.dark
+      ? const LinearGradient(
+          begin: Alignment(1.00, 1.00),
+          end: Alignment(-0.24, -0.31),
+          colors: [Color(0xFF4A4E91), Color(0xFF6C63FF)], // deep indigo & violet
+        )
+      : const LinearGradient(
+          begin: Alignment(1.00, 1.00),
+          end: Alignment(-0.24, -0.31),
+          colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)], // pastel blue
+        );
+}
+
+
+
+
+LinearGradient getTargetGradient(BuildContext context) {
+  return Theme.of(context).brightness == Brightness.dark
+      ? const LinearGradient(
+          begin: Alignment(1.00, 1.00),
+          end: Alignment(-0.24, -0.31),
+          colors: [Color(0xFF3E3C8F), Color(0xFF2C3E70)], // muted purple/navy
+        )
+      : const LinearGradient(
+          begin: Alignment(1.00, 1.00),
+          end: Alignment(-0.24, -0.31),
+          colors: [Color(0xFFC9D0F1), Color(0xFFDFEDFB)], // soft lavender/sky
+        );
 }

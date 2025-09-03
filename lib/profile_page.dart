@@ -11,7 +11,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -119,11 +119,11 @@ class ProfilePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(child: _buildStatCard("180cm", "Height")),
+                    Expanded(child: _buildStatCard(context,"180cm", "Height")),
                     const SizedBox(width: 10),
-                    Expanded(child: _buildStatCard("65kg", "Weight")),
+                    Expanded(child: _buildStatCard(context,"65kg", "Weight")),
                     const SizedBox(width: 10),
-                    Expanded(child: _buildStatCard("22yo", "Age")),
+                    Expanded(child: _buildStatCard(context,"22yo", "Age")),
                   ],
                 ),
               ),
@@ -205,6 +205,7 @@ class ProfilePage extends StatelessWidget {
               ),
               // 🔹 Other Section
               _buildSection(
+                context: context,
                 title: "Other",
                 items: [
                   _buildListTile(Icons.mail_outline, "Contact Us",
@@ -223,11 +224,11 @@ class ProfilePage extends StatelessWidget {
   }
 
   // 🔹 Reusable Stat Card
-  Widget _buildStatCard(String value, String label) {
+  Widget _buildStatCard(context,String value, String label) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -254,7 +255,7 @@ class ProfilePage extends StatelessWidget {
             label,
             style: const TextStyle(
               fontSize: 14,
-              color: Colors.black,
+             
             ),
           ),
         ],
@@ -263,12 +264,12 @@ class ProfilePage extends StatelessWidget {
   }
 
   // 🔹 Reusable Section
-  Widget _buildSection({required String title, required List<Widget> items}) {
+  Widget _buildSection({context,required String title, required List<Widget> items}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -1799,9 +1800,9 @@ class AboutUsPage extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF92A3FD), // blue
-              Color(0xFF9DCEFF), // light lavender
-              Color(0xFF8E54E9), // violet
+              Color.fromARGB(255, 247, 248, 251), // blue
+              Color.fromARGB(255, 231, 243, 254), // light lavender
+              Color.fromARGB(255, 237, 232, 245), // violet
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -1818,7 +1819,7 @@ class AboutUsPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 102, 132, 255),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -1829,7 +1830,7 @@ class AboutUsPage extends StatelessWidget {
                   "We constantly strive to innovate and bring the best experience to our users.",
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.white70,
+                    color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
               ],
@@ -1864,101 +1865,92 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text("Select Language"),
-        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
         elevation: 0,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF92A3FD), // blue
-              Color(0xFF9DCEFF), // light lavender
-              Color(0xFF8E54E9), // violet
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Choose Your Language",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Choose Your Language",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: languages.length,
-                    itemBuilder: (context, index) {
-                      final language = languages[index];
-                      final isSelected = language == selectedLanguage;
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: languages.length,
+                  itemBuilder: (context, index) {
+                    final language = languages[index];
+                    final isSelected = language == selectedLanguage;
 
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedLanguage = language;
-                          });
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 8),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 24),
-                          decoration: BoxDecoration(
-                            gradient: isSelected
-                                ? const LinearGradient(
-                                    colors: [
-                                      Color(0xFF8E54E9),
-                                      Color(0xFF92A3FD),
-                                    ],
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedLanguage = language;
+                        });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 24),
+                        decoration: BoxDecoration(
+                          gradient: isSelected
+                              ? const LinearGradient(
+                                  colors: [
+                                    Color(0xFF92A3FD),
+                                    Color(0xFF9DCEFF),
+                                    Color(0xFF8E54E9),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                )
+                              : const LinearGradient(
+                                  colors: [
+                                    Color(0xFFF3F3F3),
+                                    Color.fromARGB(255, 238, 237, 237),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: isSelected
+                              ? [
+                                  const BoxShadow(
+                                    color: Colors.black26,
+                                    blurRadius: 8,
+                                    offset: Offset(0, 4),
                                   )
-                                : const LinearGradient(
-                                    colors: [
-                                      Colors.white30,
-                                      Colors.white24,
-                                    ],
-                                  ),
-                            borderRadius: BorderRadius.circular(16),
-                            boxShadow: isSelected
-                                ? [
-                                    const BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 8,
-                                      offset: Offset(0, 4),
-                                    )
-                                  ]
-                                : [],
-                          ),
-                          child: Text(
-                            language,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: isSelected
-                                  ? FontWeight.bold
-                                  : FontWeight.w500,
-                              color: isSelected ? Colors.white : Colors.white70,
-                            ),
+                                ]
+                              : [],
+                        ),
+                        child: Text(
+                          language,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight:
+                                isSelected ? FontWeight.bold : FontWeight.w500,
+                            color: isSelected ? Colors.white : Colors.black87,
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
-
 }
 class WorkoutPreferencesPage extends StatefulWidget {
   const WorkoutPreferencesPage({super.key});
@@ -1982,108 +1974,106 @@ class _WorkoutPreferencesPageState extends State<WorkoutPreferencesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white, // whole page is white
       appBar: AppBar(
-        title: const Text("Workout Preferences"),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF92A3FD), // blue
-              Color(0xFF9DCEFF), // light lavender
-              Color(0xFF8E54E9), // violet
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        title: const Text(
+          "Workout Preferences",
+          style: TextStyle(color: Colors.black87),
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Select Your Workouts",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black87),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Select Your Workouts",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: workoutOptions.length,
-                    itemBuilder: (context, index) {
-                      final workout = workoutOptions[index];
-                      final isSelected = selectedWorkouts.contains(workout);
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: workoutOptions.length,
+                  itemBuilder: (context, index) {
+                    final workout = workoutOptions[index];
+                    final isSelected = selectedWorkouts.contains(workout);
 
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (isSelected) {
-                              selectedWorkouts.remove(workout);
-                            } else {
-                              selectedWorkouts.add(workout);
-                            }
-                          });
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 8),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 24),
-                          decoration: BoxDecoration(
-                            gradient: isSelected
-                                ? const LinearGradient(
-                                    colors: [
-                                      Color(0xFF8E54E9),
-                                      Color(0xFF92A3FD),
-                                    ],
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isSelected) {
+                            selectedWorkouts.remove(workout);
+                          } else {
+                            selectedWorkouts.add(workout);
+                          }
+                        });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 24),
+                        decoration: BoxDecoration(
+                          gradient: isSelected
+                              ? const LinearGradient(
+                                  colors: [
+                                    Color(0xFF92A3FD),
+                                    Color(0xFF9DCEFF),
+                                    Color(0xFF8E54E9),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                )
+                              : const LinearGradient(
+                                  colors: [
+                                    Color(0xFFF3F3F3),
+                                    Color(0xFFEAEAEA),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: isSelected
+                              ? const [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    blurRadius: 8,
+                                    offset: Offset(0, 4),
                                   )
-                                : const LinearGradient(
-                                    colors: [
-                                      Colors.white30,
-                                      Colors.white24,
-                                    ],
-                                  ),
-                            borderRadius: BorderRadius.circular(16),
-                            boxShadow: isSelected
-                                ? const [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 8,
-                                      offset: Offset(0, 4),
-                                    )
-                                  ]
-                                : [],
-                          ),
-                          child: Text(
-                            workout,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: isSelected
-                                  ? FontWeight.bold
-                                  : FontWeight.w500,
-                              color: isSelected ? Colors.white : Colors.white70,
-                            ),
+                                ]
+                              : [],
+                        ),
+                        child: Text(
+                          workout,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight:
+                                isSelected ? FontWeight.bold : FontWeight.w500,
+                            color: isSelected ? Colors.white : Colors.black87,
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
+
 class GoalsProgressPage extends StatelessWidget {
   const GoalsProgressPage({super.key});
 
@@ -2098,97 +2088,93 @@ class GoalsProgressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white, // White background
       appBar: AppBar(
-        title: const Text("Goals & Progress"),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF92A3FD), // blue
-              Color(0xFF9DCEFF), // light lavender
-              Color(0xFF8E54E9), // violet
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        title: const Text(
+          "Goals & Progress",
+          style: TextStyle(color: Colors.black87),
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Your Goals",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black87),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView( // 🔹 Makes whole page scrollable
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "Your Goals",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: goals.length,
-                    itemBuilder: (context, index) {
-                      final goal = goals[index];
-                      final progress = goal["progress"] as double;
+              ),
+              const SizedBox(height: 20),
+              ...goals.map((goal) {
+                final progress = goal["progress"] as double;
 
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [
-                              Colors.white24,
-                              Colors.white30,
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              goal["title"],
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: LinearProgressIndicator(
-                                value: progress,
-                                minHeight: 10,
-                                backgroundColor: Colors.white24,
-                                valueColor: const AlwaysStoppedAnimation<Color>(
-                                  Colors.white,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              "${(progress * 100).toInt()}% Completed",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.white70,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color(0xFF92A3FD), // blue
+                        Color(0xFF9DCEFF), // lavender
+                        Color(0xFF8E54E9), // violet
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: Offset(0, 3),
+                      )
+                    ],
                   ),
-                ),
-              ],
-            ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        goal["title"],
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: LinearProgressIndicator(
+                          value: progress,
+                          minHeight: 10,
+                          backgroundColor: Colors.white24,
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "${(progress * 100).toInt()}% Completed",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ],
           ),
         ),
       ),
@@ -2196,9 +2182,7 @@ class GoalsProgressPage extends StatelessWidget {
   }
 }
 class ReminderSettingsPage extends StatefulWidget {
-  final Function(Map<String, bool>) onRemindersChanged;
-
-  const ReminderSettingsPage({super.key, required this.onRemindersChanged});
+  const ReminderSettingsPage({super.key});
 
   @override
   State<ReminderSettingsPage> createState() => _ReminderSettingsPageState();
@@ -2216,93 +2200,94 @@ class _ReminderSettingsPageState extends State<ReminderSettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white, // ✅ Background white
       appBar: AppBar(
-        title: const Text("Reminders"),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF92A3FD), // blue
-              Color(0xFF9DCEFF), // light lavender
-              Color(0xFF8E54E9), // violet
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        title: const Text(
+          "Reminders",
+          style: TextStyle(color: Colors.black87), // ✅ Dark text
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Your Reminders",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black87),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "Your Reminders",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87, // ✅ Dark text
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView(
-                    children: reminders.keys.map((key) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 24),
-                        decoration: BoxDecoration(
-                          gradient: reminders[key]!
-                              ? const LinearGradient(
-                                  colors: [
-                                    Color(0xFF8E54E9),
-                                    Color(0xFF92A3FD),
-                                  ],
-                                )
-                              : const LinearGradient(
-                                  colors: [
-                                    Colors.white24,
-                                    Colors.white30,
-                                  ],
-                                ),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              key,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: reminders[key]!
-                                    ? Colors.white
-                                    : Colors.white70,
-                              ),
-                            ),
-                            Switch(
-                              value: reminders[key]!,
-                              activeColor: Colors.white,
-                              onChanged: (value) {
-                                setState(() {
-                                  reminders[key] = value;
-                                });
-                                widget.onRemindersChanged(reminders);
-                              },
+              ),
+              const SizedBox(height: 20),
+              ...reminders.keys.map((key) {
+                final isEnabled = reminders[key]!;
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  decoration: BoxDecoration(
+                    gradient: isEnabled
+                        ? const LinearGradient(
+                            colors: [
+                              Color(0xFF92A3FD), // blue
+                              Color(0xFF9DCEFF), // lavender
+                              Color(0xFF8E54E9), // violet
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          )
+                        : const LinearGradient(
+                            colors: [
+                              Color(0xFFF3F3F3),
+                              Color(0xFFEAEAEA),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: isEnabled
+                        ? const [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 8,
+                              offset: Offset(0, 4),
                             )
-                          ],
-                        ),
-                      );
-                    }).toList(),
+                          ]
+                        : [],
                   ),
-                ),
-              ],
-            ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        key,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isEnabled ? Colors.white : Colors.black87,
+                        ),
+                      ),
+                      Switch(
+                        value: isEnabled,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            reminders[key] = value;
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+            ],
           ),
         ),
       ),
@@ -2322,91 +2307,89 @@ class HelpSupportPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white, // ✅ White background
       appBar: AppBar(
-        title: const Text("Help & Support"),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF92A3FD), // blue
-              Color(0xFF9DCEFF), // light lavender
-              Color(0xFF8E54E9), // violet
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        title: const Text(
+          "Help & Support",
+          style: TextStyle(color: Colors.black87),
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "How can we help you?",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "How can we help you?",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87, // ✅ Black text now
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: helpOptions.length,
-                    itemBuilder: (context, index) {
-                      final option = helpOptions[index];
-                      return GestureDetector(
-                        onTap: () {
-                          // TODO: Add navigation or action for each option
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 8),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 24),
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [
-                                Colors.white24,
-                                Colors.white30,
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(16),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: helpOptions.length,
+                  itemBuilder: (context, index) {
+                    final option = helpOptions[index];
+                    return GestureDetector(
+                      onTap: () {
+                        // TODO: Add navigation or action for each option
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 24),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                        Color(0xFF92A3FD), // blue
+                        Color(0xFF9DCEFF), // lavender
+                        Color(0xFF8E54E9), // violet
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                           ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                option["icon"],
-                                color: Colors.white,
-                              ),
-                              const SizedBox(width: 16),
-                              Text(
-                                option["title"],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Spacer(),
-                              const Icon(
-                                Icons.arrow_forward_ios,
-                                size: 16,
-                                color: Colors.white70,
-                              ),
-                            ],
-                          ),
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                      );
-                    },
-                  ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              option["icon"],
+                              color: const Color.fromARGB(255, 255, 248, 248),
+                            ),
+                            const SizedBox(width: 16),
+                            Text(
+                              option["title"],
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 255, 253, 253),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Spacer(),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

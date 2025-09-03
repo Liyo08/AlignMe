@@ -7,7 +7,7 @@ class StatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -19,8 +19,7 @@ class StatsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new,
-                        color: Colors.black),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () {
                       if (Navigator.of(context).canPop()) {
                         // Case 1: FullBody was opened with Navigator.push()
@@ -46,7 +45,7 @@ class StatsPage extends StatelessWidget {
                     ],
                   ),
                   IconButton(
-                    icon: const Icon(Icons.more_horiz, color: Colors.black),
+                    icon: const Icon(Icons.more_horiz),
                     onPressed: () {},
                   ),
                 ],
@@ -175,7 +174,7 @@ class StatsPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -208,10 +207,10 @@ class StatsPage extends StatelessWidget {
               const SizedBox(height: 12),
 
               // Activity cards
-              _buildActivityCard("Drinking 300ml Water", "About 3 minutes ago",
+              _buildActivityCard(context,"Drinking 300ml Water", "About 3 minutes ago",
                   Icons.local_drink, Colors.blue),
               const SizedBox(height: 10),
-              _buildActivityCard("Eat Snack (Fitbar)", "About 10 minutes ago",
+              _buildActivityCard(context,"Eat Snack (Fitbar)", "About 10 minutes ago",
                   Icons.fastfood, Colors.pink),
             ],
           ),
@@ -260,45 +259,70 @@ class StatsPage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
-        Text(day, style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+        Text(day, style: const TextStyle()),
       ],
     );
   }
 
   // latest activity card
   static Widget _buildActivityCard(
-      String title, String subtitle, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 22,
-            backgroundColor: color.withOpacity(0.2),
-            child: Icon(icon, color: color, size: 24),
+    BuildContext context, String title, String subtitle, IconData icon, Color color) {
+  return Container(
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: Theme.of(context).cardColor, // ✅ Card background from theme
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+        if (Theme.of(context).brightness == Brightness.light)
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6,
+            spreadRadius: 1,
           ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(subtitle,
-                  style: const TextStyle(color: Colors.grey, fontSize: 12)),
-            ],
-          ),
-          const Spacer(), // pushes the button to the right
-          IconButton(
-            icon: const Icon(Icons.more_horiz, color: Colors.black),
-            onPressed: () {
-              // action here
-            },
-          ),
-        ],
-      ),
-    );
-  }
+      ],
+    ),
+    child: Row(
+      children: [
+        CircleAvatar(
+          radius: 22,
+          backgroundColor: color.withOpacity(0.2),
+          child: Icon(icon, color: color, size: 24),
+        ),
+        const SizedBox(width: 12),
+
+        // Title + Subtitle
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            Text(
+              subtitle,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey[400] // softer text in dark mode
+                        : Colors.grey,
+                  ),
+            ),
+          ],
+        ),
+
+        const Spacer(),
+
+        IconButton(
+          icon: const Icon(Icons.more_horiz),
+          color: Theme.of(context).iconTheme.color, // ✅ adapts to theme
+          onPressed: () {
+            // action here
+          },
+        ),
+      ],
+    ),
+  );
+}
+
 }

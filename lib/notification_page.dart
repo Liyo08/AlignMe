@@ -6,19 +6,18 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff5f5f5),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     appBar: AppBar(
-  backgroundColor: const Color(0xfff5f5f5),
+  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
   elevation: 0,
   centerTitle: true,
   leading: IconButton(
-    icon: const Icon(Icons.arrow_back, color: Colors.black),
+    icon: const Icon(Icons.arrow_back),
     onPressed: () => Navigator.pop(context),
   ),
   title: const Text(
     "Notifications",
     style: TextStyle(
-      color: Colors.black,
       fontWeight: FontWeight.w900,
     ),
   ),
@@ -136,7 +135,7 @@ class NotificationTile extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 6),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -195,14 +194,14 @@ class NotificationDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff5f5f5),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xfff5f5f5),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(),
         title: Text(
           title,
-          style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: const TextStyle( fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(
