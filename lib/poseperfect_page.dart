@@ -11,7 +11,7 @@ class PosePerfectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor:Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         top: false,
         child: SingleChildScrollView(
@@ -137,8 +137,8 @@ class PosePerfectPage extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                  decoration:  BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(32),
                       topRight: Radius.circular(32),
@@ -156,16 +156,10 @@ class PosePerfectPage extends StatelessWidget {
                      // 📅 Daily Workout
 Container(
   decoration: BoxDecoration(
-    gradient: const LinearGradient(
-      begin: Alignment(1.00, 1.00),
-      end: Alignment(-0.24, -0.31),
-      colors: [
-        Color.fromARGB(255, 239, 243, 251),
-        Color.fromARGB(255, 234, 240, 254),
-      ],
-    ),
-    borderRadius: BorderRadius.circular(16), // rounded corners
-  ),
+    gradient: getCardGradient(context),
+   
+    borderRadius: BorderRadius.circular(16), ), // rounded corners
+  
   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // space inside
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,14 +223,14 @@ Container(
                         "Fullbody Workout",
                         "Today, 03:00pm",
                         "https://img.icons8.com/color/96/yoga.png",
-                        true,
+                        true,context
                       ),
                       const SizedBox(height: 12),
                       workoutTile(
                         "Lowerbody Workout",
                         "June 05, 03:00pm",
                         "https://img.icons8.com/color/96/yoga.png",
-                        false,
+                        false,context
                       ),
                       const SizedBox(height: 20),
 
@@ -267,15 +261,29 @@ Container(
 
   /// Workout Tile
   static Widget workoutTile(
-      String title, String time, String img, bool enabled) {
+      String title, String time, String img, bool enabled,context) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of( context).cardColor,
+        //color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(color: Colors.grey.shade200, blurRadius: 8, spreadRadius: 2)
-        ],
+       boxShadow: [
+  Theme.of(context).brightness == Brightness.dark
+      ? BoxShadow(
+          color: Colors.black.withOpacity(0.5), // subtle dark shadow
+          blurRadius: 8,
+          spreadRadius: 2,
+          offset: const Offset(0, 2), // little depth
+        )
+      : BoxShadow(
+          color: Colors.grey.shade200, // light mode
+          blurRadius: 8,
+          spreadRadius: 2,
+          offset: const Offset(0, 2),
+        ),
+],
+
       ),
       child: Row(
         children: [
@@ -316,7 +324,7 @@ Container(
       borderRadius: 30.0,
       padding: 2.0,
       activeColor: Colors.transparent, // keeps gradient visible
-      inactiveColor: Colors.grey.shade300,
+      inactiveColor: const Color.fromARGB(255, 174, 174, 174),
       activeToggleColor: Colors.white,
       inactiveToggleColor: Colors.white,
       showOnOff: false,
@@ -342,17 +350,10 @@ Container(
 ) {
   return Container(
     padding: const EdgeInsets.all(20),
-    decoration: BoxDecoration(
-      gradient: const LinearGradient(
-        begin: Alignment(1.00, 1.00),
-        end: Alignment(-0.24, -0.31),
-        colors: [
-          Color.fromARGB(255, 239, 243, 251),
-          Color.fromARGB(255, 234, 240, 254)
-        ],
-      ),
-      borderRadius: BorderRadius.circular(20),
-    ),
+   decoration: BoxDecoration(
+  gradient: getCardGradient(context),
+  borderRadius: BorderRadius.circular(20),
+),
     child: Row(
       children: [
         // Left side: Text + Button
@@ -364,8 +365,8 @@ Container(
                 title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 14
+                 
                 ),
               ),
               const SizedBox(height: 6),
@@ -373,7 +374,7 @@ Container(
                 subtitle,
                 style: const TextStyle(
                   fontSize: 12,
-                  color: Color.fromARGB(179, 93, 93, 93),
+                  color: Color.fromARGB(179, 120, 120, 120),
                 ),
               ),
               const SizedBox(height: 10),
@@ -381,7 +382,7 @@ Container(
               // White button with gradient text
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).cardColor,
                   shadowColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
@@ -431,4 +432,23 @@ Container(
     ),
   );
 }
+}
+LinearGradient getCardGradient(BuildContext context) {
+  return Theme.of(context).brightness == Brightness.dark
+      ? const LinearGradient(
+          begin: Alignment(1.00, 1.00),
+          end: Alignment(-0.24, -0.31),
+          colors: [
+            Color(0xFF2C2F48), // dark bluish grey
+            Color(0xFF1F1F2E), // deep night grey
+          ],
+        )
+      : const LinearGradient(
+          begin: Alignment(1.00, 1.00),
+          end: Alignment(-0.24, -0.31),
+          colors: [
+            Color.fromARGB(255, 239, 243, 251),
+            Color.fromARGB(255, 234, 240, 254),
+          ],
+        );
 }

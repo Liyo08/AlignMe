@@ -17,17 +17,17 @@ class _ThemeSelectionPageState extends State<ThemeSelectionPage> {
     final selectedTheme = appTheme.themeMode;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text(
           "Choose Theme",
-          style: TextStyle(color: Colors.black87),
+          style: TextStyle(),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor:Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
       ),

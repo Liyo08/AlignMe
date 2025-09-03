@@ -6,7 +6,7 @@ class FullBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -17,7 +17,7 @@ class FullBody extends StatelessWidget {
                   width: double.infinity,
                   height: 250,
                   decoration: const BoxDecoration(
-                    color: Color(0xFFE0F7FA),
+                    color: Color.fromARGB(255, 14, 16, 16),
                     borderRadius: BorderRadius.vertical(
                       bottom: Radius.circular(30),
                     ),
@@ -76,7 +76,7 @@ class FullBody extends StatelessWidget {
                       ElevatedButton.icon(
                         onPressed: () {},
                         icon: Icon(Icons.schedule),
-                        label: Text('Schedule Workout'),
+                        label: Text('Schedule Workout',style: TextStyle(color: Colors.white),),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueAccent,
                           shape: RoundedRectangleBorder(

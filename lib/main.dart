@@ -39,7 +39,6 @@ return MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: ThemeData(
     brightness: Brightness.light,
-    primarySwatch: Colors.blue,
     scaffoldBackgroundColor:  Colors.grey[100],
     textTheme: GoogleFonts.poppinsTextTheme().apply(
       bodyColor: Colors.black,
@@ -50,7 +49,6 @@ return MaterialApp(
   ),
   darkTheme: ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: Colors.blue,
     scaffoldBackgroundColor: Colors.black,
      cardColor: const Color(0xFF1E1E1E), // dark gray cards
     textTheme: GoogleFonts.poppinsTextTheme().apply(
@@ -1043,8 +1041,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       extendBody: true, // ✅ extend body behind navbar (for shadows/effects)
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
-         decoration: const BoxDecoration(
-    color: Color.fromARGB(255, 255, 255, 255), // black bg
+         decoration:  BoxDecoration(
+    color:Theme.of(context).scaffoldBackgroundColor, // black bg
     borderRadius: BorderRadius.only(
       topLeft: Radius.circular(50),  // ✅ curved top edges
       topRight: Radius.circular(50),
@@ -1060,7 +1058,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 height: 55,
                 margin: const EdgeInsets.only(left: 8, right: 8, top: 2),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color:Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(40),
                   boxShadow: const [
                     BoxShadow(
