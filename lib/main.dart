@@ -290,7 +290,7 @@ GestureDetector(
   _featureCard(
     "FlowEase",
     "Breathe. Stretch. Heal.",
-    'assets/stretch.png',
+    'assets/floweasejpg.jpg',
     context,
     const FlowEasePage(),
   ),
@@ -299,8 +299,8 @@ GestureDetector(
             const SizedBox(height: 20),
           _featureCar(
   "AlignMart",
-  "Essentials for your yoga journey.",
-  'assets/shop.png',
+  "Essentials for your Yoga \njourney.",
+  'assets/alignmart.jpg',
   context,
   const AlignMartPage(),
 ),
@@ -711,7 +711,13 @@ LatestWorkoutSection(),
     );
   }
 
-  Widget _featureCard(String title, String subtitle, String asset, BuildContext context, Widget page) {
+  Widget _featureCard(
+  String title,
+  String subtitle,
+  String asset,
+  BuildContext context,
+  Widget page,
+) {
   return Expanded( // <-- makes it responsive
     child: InkWell(
       onTap: () {
@@ -735,20 +741,27 @@ LatestWorkoutSection(),
           ],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,        // 👈 vertical center
+          crossAxisAlignment: CrossAxisAlignment.center,      // 👈 horizontal center
           children: [
-            Image.asset(asset, height: 60),
+            Image.asset(asset, height: 100),
             const SizedBox(height: 10),
             Text(
               title,
+              textAlign: TextAlign.center,                   // 👈 center text
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: 18,
               ),
             ),
+            const SizedBox(height: 4),
             Text(
               subtitle,
-              style: const TextStyle(fontSize: 12, color: Colors.blue),
+              textAlign: TextAlign.center,                   // 👈 center text
+              style: const TextStyle(
+                fontSize: 13,
+                color: Colors.blue,
+              ),
             ),
           ],
         ),
@@ -757,7 +770,14 @@ LatestWorkoutSection(),
   );
 }
 
-  Widget _featureCar(String title, String subtitle, String asset, BuildContext context, Widget page) {
+
+Widget _featureCar(
+  String title,
+  String subtitle,
+  String asset,
+  BuildContext context,
+  Widget page,
+) {
   return InkWell(
     onTap: () {
       Navigator.push(
@@ -770,25 +790,48 @@ LatestWorkoutSection(),
       width: 440,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-         color: Theme.of(context).cardColor,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 5)
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 5,
+          ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between text & image
+        crossAxisAlignment: CrossAxisAlignment.center,     // align center vertically
         children: [
-          Image.asset(asset, height: 60),
-          const SizedBox(height: 10),
-          Text(title,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 14)),
-          Text(subtitle,
-              style: const TextStyle(fontSize: 12, color: Colors.blue)),
+          // Left side: title + subtitle
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start, // left align text
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+
+          // Right side: image
+          Image.asset(
+            asset,
+            height: 90,
+          ),
         ],
       ),
     ),
