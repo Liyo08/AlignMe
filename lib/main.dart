@@ -744,7 +744,7 @@ LatestWorkoutSection(),
           mainAxisAlignment: MainAxisAlignment.center,        // 👈 vertical center
           crossAxisAlignment: CrossAxisAlignment.center,      // 👈 horizontal center
           children: [
-            Image.asset(asset, height: 100),
+            Image.asset(asset, height: 80),
             const SizedBox(height: 10),
             Text(
               title,

@@ -28,8 +28,8 @@ class _DetailPage1 extends State<DetailPage1> {
 
               // Top Image
               Image.asset(
-                "assets/images/yoga.png", // replace with your asset
-                height: 200,
+                "assets/splashdetail.png", // replace with your asset
+                height: 300,
               ),
 
               const SizedBox(height: 20),
@@ -315,7 +315,7 @@ class DetailPage2 extends StatelessWidget {
                   SizedBox(
                     height: 290,
                     child: Image.asset(
-                      "assets/yoga.png", // 👉 replace with your yoga illustration
+                      "assets/goal1.png", // 👉 replace with your yoga illustration
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -455,7 +455,7 @@ class DetailPage3 extends StatelessWidget {
                   SizedBox(
                     height: 290,
                     child: Image.asset(
-                      "assets/yoga.png", // 👉 replace with your yoga illustration
+                      "assets/goal2.png", // 👉 replace with your yoga illustration
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -595,7 +595,7 @@ class DetailPage4 extends StatelessWidget {
                   SizedBox(
                     height: 290,
                     child: Image.asset(
-                      "assets/yoga.png", // 👉 replace with your yoga illustration
+                      "assets/goal3.png", // 👉 replace with your yoga illustration
                       fit: BoxFit.contain,
                     ),
                   ),

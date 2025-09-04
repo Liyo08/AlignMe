@@ -113,7 +113,7 @@ class SplashPage2 extends StatelessWidget {
 
             // Center Image
             Image.asset(
-              "assets/images/meditation.png",
+              "assets/splashpage2.png",
               height: 200,
             ),
             const SizedBox(height: 40),
@@ -230,7 +230,7 @@ class SplashPage3 extends StatelessWidget {
             const Spacer(flex: 2),
 
             Image.asset(
-              "assets/splash3.png",
+              "assets/splashpage3.png",
               height: 250,
             ),
 
