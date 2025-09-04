@@ -297,7 +297,7 @@ class StatsPage extends StatelessWidget {
             Text(
               title,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold,fontSize: 14
                   ),
             ),
             Text(

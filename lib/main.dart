@@ -153,7 +153,7 @@ Align(
                       children: [
                         const Text("BMI (Body Mass Index)",
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white)),
                         const SizedBox(height: 4),
@@ -239,6 +239,7 @@ GestureDetector(
       "Today Target",
       style: TextStyle(
         fontWeight: FontWeight.bold,
+        fontSize: 17,
       ),
     ),
     GestureDetector(
