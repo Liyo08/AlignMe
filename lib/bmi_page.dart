@@ -4,15 +4,17 @@ class BMIScreen extends StatefulWidget {
   const BMIScreen({super.key});
 
   @override
-  State<BMIScreen> createState() => _BmiPageState();
+  State<BMIScreen> createState() => _BMIScreenState();
 }
 
-class _BmiPageState extends State<BMIScreen> {
+class _BMIScreenState extends State<BMIScreen> {
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
 
   double? bmiResult;
   String bmiCategory = "";
+  Color categoryColor = Colors.black54;
+  bool showResult = false;
 
   void calculateBMI() {
     final double? height = double.tryParse(heightController.text);
@@ -23,14 +25,20 @@ class _BmiPageState extends State<BMIScreen> {
 
       setState(() {
         bmiResult = bmi;
+        showResult = true;
+
         if (bmi < 18.5) {
           bmiCategory = "Underweight";
+          categoryColor = Colors.orange;
         } else if (bmi < 24.9) {
           bmiCategory = "Normal";
+          categoryColor = Colors.green;
         } else if (bmi < 29.9) {
           bmiCategory = "Overweight";
+          categoryColor = Colors.deepOrange;
         } else {
           bmiCategory = "Obese";
+          categoryColor = Colors.red;
         }
       });
     }
@@ -40,69 +48,144 @@ class _BmiPageState extends State<BMIScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("BMI Calculator"),
-        backgroundColor: const Color(0xFF7EB6FF),
+        backgroundColor: const Color(0xFF4A90E2),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);  // Back to previous screen
+          },
+        ),
+        title: const Text(
+          "BMI Calculator",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              "Enter your details",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: heightController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: "Height (cm)",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: weightController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: "Weight (kg)",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: calculateBMI,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF7EB6FF),
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                "Calculate BMI",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 30),
-            if (bmiResult != null)
-              Column(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF7EB6FF), Color(0xFF4A90E2)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    "Your BMI: ${bmiResult!.toStringAsFixed(1)}",
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),
+                  const SizedBox(height: 20),  // Space below AppBar
+
+                  Card(
+                    elevation: 12,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: heightController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: "Height (cm)",
+                              prefixIcon: Icon(Icons.straighten),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: weightController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: "Weight (kg)",
+                              prefixIcon: Icon(Icons.monitor_weight),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "Category: $bmiCategory",
-                    style: const TextStyle(fontSize: 18),
+
+                  const SizedBox(height: 30),
+
+                  ElevatedButton.icon(
+                    onPressed: calculateBMI,
+                    icon: const Icon(Icons.calculate),
+                    label: const Text(
+                      "Calculate BMI",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(0xFF4A90E2),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  AnimatedOpacity(
+                    opacity: showResult ? 1 : 0,
+                    duration: const Duration(milliseconds: 800),
+                    child: bmiResult != null
+                        ? Container(
+                            padding: const EdgeInsets.all(24),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.95),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                const Text(
+                                  "Your BMI",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  bmiResult!.toStringAsFixed(1),
+                                  style: TextStyle(
+                                    fontSize: 48,
+                                    fontWeight: FontWeight.bold,
+                                    color: categoryColor,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  bmiCategory,
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                    color: categoryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                   ),
                 ],
-              )
-          ],
+              ),
+            ),
+          ),
         ),
       ),
     );
