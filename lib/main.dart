@@ -239,7 +239,7 @@ GestureDetector(
       "Today Target",
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 17,
+        fontSize: 16,
       ),
     ),
     GestureDetector(
@@ -752,7 +752,7 @@ LatestWorkoutSection(),
               textAlign: TextAlign.center,                   // 👈 center text
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: 17,
               ),
             ),
             const SizedBox(height: 4),
@@ -814,7 +814,7 @@ Widget _featureCar(
                 title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 17,
                 ),
               ),
               const SizedBox(height: 4),
