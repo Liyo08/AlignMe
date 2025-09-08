@@ -449,7 +449,7 @@ Row(
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const WaterDetailsPage()),
+        MaterialPageRoute(builder: (context) => const WaterTrackerPage()),
       );
     },
     child: Container(
