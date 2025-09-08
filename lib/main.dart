@@ -277,14 +277,14 @@ GestureDetector(
   _featureCard(
     "PosePerfect",
     "Align. Improve. Repeat.",
-    'assets/poseperfect.jpg',
+    'assets/1.png',
     context,
     const PosePerfectPage(),
   ), const SizedBox(width: 12),
   _featureCard(
     "FlowEase",
     "Breathe. Stretch. Heal.",
-    'assets/floweasejpg.jpg',
+    'assets/2.png',
     context,
     const FlowEasePage(),
   ),
@@ -294,7 +294,7 @@ GestureDetector(
           _featureCar(
   "AlignMart",
   "Essentials for your Yoga \njourney.",
-  'assets/alignmart.jpg',
+  'assets/3.png',
   context,
   const AlignMartPage(),
 ),

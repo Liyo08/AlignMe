@@ -75,6 +75,9 @@ flutter:
     - assets/splashpage3.png
     - assets/splashdetail.png
     - assets/Group.png
+    - assets/1.png
+    - assets/2.png
+    - assets/3.png
     
 
   fonts:
