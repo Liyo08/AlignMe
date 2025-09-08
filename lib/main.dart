@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'camera_page.dart';
 import 'stats_page.dart';
@@ -35,34 +34,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<AppTheme>(context);
 
-return MaterialApp(
-  debugShowCheckedModeBanner: false,
-  theme: ThemeData(
-    brightness: Brightness.light,
-    scaffoldBackgroundColor:  Colors.grey[100],
-    textTheme: GoogleFonts.poppinsTextTheme().apply(
-      bodyColor: Colors.black,
-      displayColor: Colors.black,
-    ),
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-        .copyWith(surface: Colors.white, onSurface: Colors.black),
-  ),
-  darkTheme: ThemeData(
-    brightness: Brightness.dark,
-    scaffoldBackgroundColor: Colors.black,
-     cardColor: const Color(0xFF1E1E1E), // dark gray cards
-    textTheme: GoogleFonts.poppinsTextTheme().apply(
-      bodyColor: Colors.white,
-      displayColor: Colors.white,
-    ),
-    colorScheme: ColorScheme.fromSwatch(
-      brightness: Brightness.dark,
-      primarySwatch: Colors.blue,
-    ).copyWith(surface: Colors.black, onSurface: Colors.white),
-  ),
-  themeMode: themeProvider.themeMode,
-  home: const SplashPage1(),
-);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Poppins',
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.grey[100],
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(surface: Colors.white, onSurface: Colors.black),
+      ),
+      darkTheme: ThemeData(
+        fontFamily: 'Poppins',
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        cardColor: const Color(0xFF1E1E1E),
+        colorScheme: ColorScheme.fromSwatch(
+          brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
+        ).copyWith(surface: Colors.black, onSurface: Colors.white),
+      ),
+      themeMode: themeProvider.themeMode,
+      home: const SplashPage1(),
+    );
   }
 }
 

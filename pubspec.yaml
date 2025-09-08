@@ -75,6 +75,21 @@ flutter:
     - assets/splashpage3.png
     - assets/splashdetail.png
     
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/Poppins-Regular.ttf
+        - asset: assets/Poppins-Italic.ttf
+        - asset: assets/Poppins-MediumItalic.ttf
+        - asset: assets/Poppins-LightItalic.ttf
+        - asset: assets/Poppins-ExtraLightItalic.ttf
+        - asset: assets/Poppins-ThinItalic.ttf
+   
+  
+    
+
+    
     
   
 
