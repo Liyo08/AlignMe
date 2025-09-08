@@ -29,7 +29,7 @@ class _SleepPageState extends State<SleepPage> {
     final avg = data.reduce((a, b) => a + b) / data.length;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Sleep Statistics"), centerTitle: true, backgroundColor: Theme.of(context).scaffoldBackgroundColor,),
+      appBar: AppBar(title: const Text("Sleep Statistics"), centerTitle: true, backgroundColor: Theme.of(context).scaffoldBackgroundColor),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -323,12 +323,12 @@ class _SignupPageState extends State<SignupPage> {
               // Divider
               Row(
                 children: const [
-                  Expanded(child: Divider(thickness: 1)),
+                  Expanded(child: Divider(thickness: 1,color: Colors.grey)),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text("or"),
                   ),
-                  Expanded(child: Divider(thickness: 1)),
+                  Expanded(child: Divider(thickness: 1,color: Colors.grey)),
                 ],
               ),
               const SizedBox(height: 24),

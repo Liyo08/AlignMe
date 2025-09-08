@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
         brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.grey[100],
+        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(surface: Colors.white, onSurface: Colors.black),
       ),
@@ -32,32 +33,53 @@ class WaterTrackerPage extends StatefulWidget {
 }
 
 class _WaterTrackerPageState extends State<WaterTrackerPage>
-    with SingleTickerProviderStateMixin {
-  double currentWater = 900; // in ml
-  double goalWater = 2000; // in ml
+    with TickerProviderStateMixin {
+  double currentWater = 0;
+  double goalWater = 2000;
+  double animatedWater = 0;
 
-  String selectedRange = "Weekly";
+  late AnimationController _waterController;
+  late Animation<double> _waterAnimation;
 
   late AnimationController _congratsController;
   bool showCongrats = false;
 
+  String selectedRange = "Weekly";
+
   @override
   void initState() {
     super.initState();
+
     _congratsController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
+
+    _waterController =
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 800));
+
+    animatedWater = currentWater;
   }
 
   void updateWater(int delta) {
-    setState(() {
-      currentWater += delta;
-      if (currentWater < 0) currentWater = 0;
+    double newWater = currentWater + delta;
+    if (newWater < 0) newWater = 0;
 
-      if (currentWater >= goalWater && !showCongrats) {
-        showCongrats = true;
-        _congratsController.forward(from: 0);
-      }
-    });
+    if (newWater >= goalWater && !showCongrats) {
+      showCongrats = true;
+      _congratsController.forward(from: 0);
+    }
+
+    // Animate water smoothly
+    _waterAnimation = Tween<double>(begin: animatedWater, end: newWater).animate(
+      CurvedAnimation(parent: _waterController, curve: Curves.easeOut),
+    )..addListener(() {
+        setState(() {
+          animatedWater = _waterAnimation.value;
+        });
+      });
+
+    _waterController.forward(from: 0);
+
+    currentWater = newWater;
   }
 
   void editGoal() {
@@ -71,8 +93,7 @@ class _WaterTrackerPageState extends State<WaterTrackerPage>
           content: TextField(
             controller: controller,
             keyboardType: TextInputType.number,
-            decoration:
-                const InputDecoration(hintText: 'Enter goal in ml'),
+            decoration: const InputDecoration(hintText: 'Enter goal in ml'),
           ),
           actions: [
             TextButton(
@@ -94,6 +115,7 @@ class _WaterTrackerPageState extends State<WaterTrackerPage>
   @override
   void dispose() {
     _congratsController.dispose();
+    _waterController.dispose();
     super.dispose();
   }
 
@@ -116,85 +138,83 @@ class _WaterTrackerPageState extends State<WaterTrackerPage>
           children: [
             Stack(
               children: [
-                // Gradient background filling effect
+                // Wavy water
                 Positioned(
                   bottom: 0,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
+                  child: WavyWater(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height *
-                        (currentWater / goalWater).clamp(0.0, 1.0),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFC58BF2), Color(0xFFB4C0FE)],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                    ),
+                    height: MediaQuery.of(context).size.height,
+                    fillPercent: (animatedWater / goalWater).clamp(0.0, 1.0),
                   ),
                 ),
 
                 // Main content
                 Column(
-                  children: [
-                    const SizedBox(height: 40),
-                    Text(
-                      '${currentWater.toStringAsFixed(1)} ml',
-                      style: const TextStyle(
-                          fontSize: 48, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Daily goal: ',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          '$goalWater ml',
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: editGoal,
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    if (showCongrats)
-                      ScaleTransition(
-                        scale: _congratsController
-                            .drive(CurveTween(curve: Curves.elasticOut)),
-                        child: const Icon(Icons.celebration,
-                            color: Colors.amber, size: 100),
-                      ),
-                    const SizedBox(height: 40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FloatingActionButton(
-                          onPressed: () => updateWater(-300),
-                          child: const Icon(Icons.remove, size: 36),
-                          heroTag: 'remove',
-                        ),
-                        const SizedBox(width: 40),
-                        FloatingActionButton(
-                          onPressed: () => updateWater(300),
-                          child: const Icon(Icons.add, size: 36),
-                          heroTag: 'add',
-                        ),
-                        const SizedBox(width: 40),
-                        FloatingActionButton(
-                          onPressed: editGoal,
-                          child: const Icon(Icons.local_drink, size: 28),
-                          heroTag: 'edit',
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+  children: [
+    const SizedBox(height: 40),
+    Text(
+      '${currentWater.toStringAsFixed(0)} ml',
+      style: const TextStyle(
+          fontSize: 48, fontWeight: FontWeight.bold),
+    ),
+    const SizedBox(height: 8),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          'Daily goal: ',
+          style: TextStyle(fontSize: 18),
+        ),
+        Text(
+          '$goalWater ml',
+          style: const TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        IconButton(
+          icon: const Icon(Icons.edit),
+          onPressed: editGoal,
+        )
+      ],
+    ),
+    const SizedBox(height: 30),
+    if (showCongrats)
+      ScaleTransition(
+        scale: _congratsController
+            .drive(CurveTween(curve: Curves.elasticOut)),
+        child: const Icon(Icons.celebration,
+            color: Colors.amber, size: 100),
+      ),
+
+    Spacer(), // Push buttons to bottom
+
+    Padding(
+      padding: const EdgeInsets.only(bottom: 30), // distance from bottom
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton.small(
+            onPressed: () => updateWater(-300),
+            child: const Icon(Icons.remove, size: 24),
+            heroTag: 'remove',
+          ),
+          const SizedBox(width: 40),
+          FloatingActionButton(
+            onPressed: () => updateWater(300),
+            child: const Icon(Icons.add, size: 40),
+            heroTag: 'add',
+          ),
+          const SizedBox(width: 40),
+          FloatingActionButton.small(
+            onPressed: editGoal,
+            child: const Icon(Icons.local_drink, size: 24),
+            heroTag: 'edit',
+          ),
+        ],
+      ),
+    ),
+  ],
+)
+
               ],
             ),
             WaterDetailsPage(selectedRange: selectedRange),
@@ -205,6 +225,98 @@ class _WaterTrackerPageState extends State<WaterTrackerPage>
   }
 }
 
+// -------------------- Wavy Water Widget --------------------
+class WavyWater extends StatefulWidget {
+  final double fillPercent;
+  final double width;
+  final double height;
+
+  const WavyWater({
+    super.key,
+    required this.fillPercent,
+    required this.width,
+    required this.height,
+  });
+
+  @override
+  State<WavyWater> createState() => _WavyWaterState();
+}
+
+class _WavyWaterState extends State<WavyWater>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return ClipPath(
+          clipper: WaveClipper(_controller.value),
+          child: Container(
+            width: widget.width,
+            height: widget.height * widget.fillPercent,
+            decoration: BoxDecoration(
+  gradient: LinearGradient(
+    colors: [
+      Color(0xFF6CCFF6).withOpacity(0.7),
+      Color(0xFF0077FF).withOpacity(0.9)
+    ],
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+    stops: [0.0, 1.0],
+  ),
+),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// -------------------- Wave clipper --------------------
+class WaveClipper extends CustomClipper<Path> {
+  final double animationValue;
+  WaveClipper(this.animationValue);
+
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    final waveHeight = 20.0;
+    final waveLength = size.width;
+
+    path.moveTo(0, size.height);
+    for (double x = 0; x <= size.width; x++) {
+      double y = waveHeight *
+              sin((x / waveLength * 2 * pi) + (animationValue * 2 * pi)) +
+          size.height * 0.05; // slight offset
+      path.lineTo(x, y);
+    }
+    path.lineTo(size.width, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant WaveClipper oldClipper) => true;
+}
+
+// -------------------- Water Details Page --------------------
 class WaterDetailsPage extends StatefulWidget {
   final String selectedRange;
 
@@ -215,12 +327,22 @@ class WaterDetailsPage extends StatefulWidget {
 }
 
 class _WaterDetailsPageState extends State<WaterDetailsPage> {
-  String selectedRange = "Weekly";
+  late String selectedRange;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedRange = widget.selectedRange;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final barGroups = _generateBarGroups();
+    final maxY =
+        (barGroups.map((e) => e.barRods[0].toY).reduce((a, b) => a > b ? a : b) * 1.2);
+
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           Material(
@@ -251,13 +373,12 @@ class _WaterDetailsPageState extends State<WaterDetailsPage> {
             child: BarChart(
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
-                barGroups: _generateBarGroups(),
+                maxY: maxY,
+                barGroups: barGroups,
                 borderData: FlBorderData(show: false),
                 titlesData: FlTitlesData(
-                  leftTitles: AxisTitles(
-                    sideTitles:
-                        SideTitles(showTitles: true, reservedSize: 28),
-                  ),
+                  leftTitles:
+                      AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 28)),
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -317,8 +438,8 @@ class _WaterDetailsPageState extends State<WaterDetailsPage> {
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
               ),
-              width: 10,
-              borderRadius: BorderRadius.circular(4),
+              width: 12,
+              borderRadius: BorderRadius.circular(6),
             ),
           ],
         ),

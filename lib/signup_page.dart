@@ -68,12 +68,12 @@ class SignInPage extends StatelessWidget {
               // Divider
               Row(
                 children: const [
-                  Expanded(child: Divider(thickness: 1,color:Colors.black)),
+                  Expanded(child: Divider(thickness: 1,color:Colors.grey)),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text("or sign in with email"),
                   ),
-                  Expanded(child: Divider(thickness: 1,color:Colors.black)),
+                  Expanded(child: Divider(thickness: 1,color:Colors.grey)),
                 ],
               ),
 
@@ -130,7 +130,7 @@ class SignInPage extends StatelessWidget {
                         Colors.transparent, // transparent so gradient shows
                     suffixIcon: TextButton(
                       onPressed: () {},
-                      child: const Text("Forgot?"),
+                      child: const Text("Forgot?", style: TextStyle(color: Color.fromARGB(139, 111, 111, 111))),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25),
