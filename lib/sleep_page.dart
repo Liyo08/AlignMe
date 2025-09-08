@@ -117,11 +117,19 @@ class _SleepPageState extends State<SleepPage> {
                           x: e.key,
                           barRods: [
                             BarChartRodData(
-                              toY: e.value, // sleep hours
-                              color: Colors.purple,
-                              width: 18,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
+  toY: e.value, // sleep hours
+  width: 18,
+  borderRadius: BorderRadius.circular(6),
+  gradient: const LinearGradient(
+    colors: [
+      Color(0xFFC58BF2),
+      Color(0xFFB4C0FE),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  ),
+),
+
                           ],
                         ),
                       )
@@ -142,8 +150,8 @@ class _SleepPageState extends State<SleepPage> {
                         : "Monthly Avg: ${avg.toStringAsFixed(1)} h",
                     style: const TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87),
+                        fontWeight: FontWeight.w600
+                        ),
                   ),
                   const SizedBox(height: 6),
                   Text(

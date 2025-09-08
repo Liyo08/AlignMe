@@ -125,15 +125,27 @@ class _WaterTrackerPageState extends State<WaterTrackerPage>
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Water Tracker'),
-          centerTitle: true,
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Track Water'),
-              Tab(text: 'History'),
-            ],
-          ),
-        ),
+  leading: IconButton(
+    icon: const Icon(Icons.arrow_back_ios_new),
+    onPressed: () {
+      Navigator.pop(context); // go back to previous screen
+    },
+  ),
+  title: const Text(
+    'Water Tracker',
+    style: TextStyle(),
+  ),
+  centerTitle: true,
+  // optional: match scaffold background
+  elevation: 0,
+  bottom: const TabBar(
+    tabs: [
+      Tab(text: 'Track Water'),
+      Tab(text: 'History'),
+    ],
+  ),
+),
+
         body: TabBarView(
           children: [
             Stack(
@@ -187,31 +199,70 @@ class _WaterTrackerPageState extends State<WaterTrackerPage>
 
     Spacer(), // Push buttons to bottom
 
-    Padding(
-      padding: const EdgeInsets.only(bottom: 30), // distance from bottom
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FloatingActionButton.small(
-            onPressed: () => updateWater(-300),
-            child: const Icon(Icons.remove, size: 24),
-            heroTag: 'remove',
+   Padding(
+  padding: const EdgeInsets.only(bottom: 30),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      // Remove button
+      GestureDetector(
+        onTap: () => updateWater(-100),
+        child: Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: const LinearGradient(
+              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
-          const SizedBox(width: 40),
-          FloatingActionButton(
-            onPressed: () => updateWater(300),
-            child: const Icon(Icons.add, size: 40),
-            heroTag: 'add',
-          ),
-          const SizedBox(width: 40),
-          FloatingActionButton.small(
-            onPressed: editGoal,
-            child: const Icon(Icons.local_drink, size: 24),
-            heroTag: 'edit',
-          ),
-        ],
+          child: const Icon(Icons.remove, size: 24, color: Colors.white),
+        ),
       ),
-    ),
+      const SizedBox(width: 40),
+
+      // Add button (larger)
+      GestureDetector(
+        onTap: () => updateWater(100),
+        child: Container(
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: const LinearGradient(
+              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: const Icon(Icons.add, size: 40, color: Colors.white),
+        ),
+      ),
+      const SizedBox(width: 40),
+
+      // Edit goal button
+      GestureDetector(
+        onTap: editGoal,
+        child: Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: const LinearGradient(
+              colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: const Icon(Icons.local_drink, size: 24, color: Colors.white),
+        ),
+      ),
+    ],
+  ),
+),
+
   ],
 )
 
