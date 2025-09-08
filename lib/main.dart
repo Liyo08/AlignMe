@@ -17,6 +17,8 @@ import 'heart_page.dart';
 import 'splash_page.dart';
 import 'package:provider/provider.dart';
 import 'theme_provider.dart';
+import 'dart:math';
+import 'explorepage.dart';
 
 void main() {
   runApp(
@@ -705,7 +707,7 @@ LatestWorkoutSection(),
     );
   }
 
-  Widget _featureCard(
+Widget _featureCard(
   String title,
   String subtitle,
   String asset,
@@ -721,48 +723,54 @@ LatestWorkoutSection(),
         );
       },
       borderRadius: BorderRadius.circular(20),
-      child: Container(
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 5,
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,        // 👈 vertical center
-          crossAxisAlignment: CrossAxisAlignment.center,      // 👈 horizontal center
-          children: [
-            Image.asset(asset, height: 80),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              textAlign: TextAlign.center,                   // 👈 center text
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
+      child: NeonBorderCard( // <-- Wrap Container with NeonBorderCard
+        neonColor: Color(0xFFC58BF2), // lavender shade
+        borderRadius: 20,
+        borderWidth: 3,
+        child: Container(
+          padding: const EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 5,
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              subtitle,
-              textAlign: TextAlign.center,                   // 👈 center text
-              style: const TextStyle(
-                fontSize: 13,
-                color: Colors.blue,
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,        // 👈 vertical center
+            crossAxisAlignment: CrossAxisAlignment.center,      // 👈 horizontal center
+            children: [
+              Image.asset(asset, height: 80),
+              const SizedBox(height: 10),
+              Text(
+                title,
+                textAlign: TextAlign.center,                   // 👈 center text
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,                   // 👈 center text
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ),
   );
 }
+
 
 
 Widget _featureCar(
@@ -780,53 +788,58 @@ Widget _featureCar(
       );
     },
     borderRadius: BorderRadius.circular(20),
-    child: Container(
-      width: 440,
-      padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 5,
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between text & image
-        crossAxisAlignment: CrossAxisAlignment.center,     // align center vertically
-        children: [
-          // Left side: title + subtitle
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // left align text
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
+    child: NeonBorderCard( // <-- Wrap the container here
+      neonColor: Colors.lightBlueAccent,
+      borderRadius: 20,
+      borderWidth: 3,
+      child: Container(
+        width: 440,
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between text & image
+          crossAxisAlignment: CrossAxisAlignment.center,     // align center vertically
+          children: [
+            // Left side: title + subtitle
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start, // left align text
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                subtitle,
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: Colors.blue,
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.blue,
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-          // Right side: image
-          Image.asset(
-            asset,
-            height: 90,
-          ),
-        ],
+            // Right side: image
+            Image.asset(
+              asset,
+              height: 90,
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -1061,7 +1074,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   final List<Widget> _pages = [
     const HomeScreen(),
     const StatsPage(),
-    const CameraPage(),
+    const ExplorePage(),
     const ProfilePage(),
   ];
 
@@ -1109,9 +1122,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _navItem(Icons.home, 0),
-                    _navItem(Icons.bar_chart, 1),
+                    _navItem(Icons.track_changes, 1),
                     const SizedBox(width: 70),
-                    _navItem(Icons.camera_alt_outlined, 2),
+                    _navItem(Icons.explore, 2),
                     _navItem(Icons.person_outline, 3),
                   ],
                 ),
@@ -1119,7 +1132,12 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               Positioned(
                 bottom: 10,
                 child: GestureDetector(
-                 // onTap: () => _onItemTapped(2), // ✅ tapping big button goes to camera
+                 onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const CameraPage()),
+      );
+    },
                   child: Container(
                     height: 65,
                     width: 75,
@@ -1138,7 +1156,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.search, color: Colors.white, size: 30),
+                    child: const Icon(Icons.camera_alt_outlined, color: Colors.white, size: 30),
                   ),
                 ),
               ),
@@ -1192,4 +1210,103 @@ LinearGradient getTargetGradient(BuildContext context) {
           end: Alignment(-0.24, -0.31),
           colors: [Color(0xFFC9D0F1), Color(0xFFDFEDFB)], // soft lavender/sky
         );
+}
+
+
+class NeonBorderCard extends StatefulWidget {
+  final Widget child;
+  final double borderWidth;
+  final double borderRadius;
+  final Color neonColor; // <-- new parameter for custom neon color
+
+  const NeonBorderCard({
+    super.key,
+    required this.child,
+    this.borderWidth = 3,
+    this.borderRadius = 20,
+    this.neonColor = Colors.lightBlueAccent, // default blue
+  });
+
+  @override
+  State<NeonBorderCard> createState() => _NeonBorderCardState();
+}
+
+class _NeonBorderCardState extends State<NeonBorderCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 3))
+          ..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (_, __) {
+        return CustomPaint(
+          painter: _NeonBorderPainter(
+            animationValue: _controller.value,
+            borderRadius: widget.borderRadius,
+            borderWidth: widget.borderWidth,
+            neonColor: widget.neonColor, // pass the color
+          ),
+          child: widget.child,
+        );
+      },
+    );
+  }
+}
+
+class _NeonBorderPainter extends CustomPainter {
+  final double animationValue;
+  final double borderRadius;
+  final double borderWidth;
+  final Color neonColor; // new color parameter
+
+  _NeonBorderPainter({
+    required this.animationValue,
+    required this.borderRadius,
+    required this.borderWidth,
+    required this.neonColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
+
+    // SweepGradient for glowing neon effect
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth
+      ..shader = SweepGradient(
+        startAngle: 0,
+        endAngle: 2 * pi,
+        colors: [
+          neonColor.withOpacity(0.0),
+          neonColor.withOpacity(0.8),
+          neonColor,
+          neonColor.withOpacity(0.8),
+          neonColor.withOpacity(0.0),
+        ],
+        stops: [0.0, 0.2, 0.5, 0.8, 1.0],
+        transform: GradientRotation(2 * pi * animationValue),
+      ).createShader(rect);
+
+    canvas.drawRRect(rrect, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _NeonBorderPainter oldDelegate) => true;
 }
