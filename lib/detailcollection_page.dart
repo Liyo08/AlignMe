@@ -702,7 +702,7 @@ class DetailPage5 extends StatelessWidget {
             // Illustration
             Center(
               child: Image.asset(
-                "assets/images/welcome.png", // Replace with your illustration
+                "assets/Group.png", // Replace with your illustration
                 height: 260,
               ),
             ),
