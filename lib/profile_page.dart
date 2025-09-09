@@ -4,6 +4,8 @@ import 'main.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'notification_page.dart';
 import 'themeselection_page.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // For persisting selected language
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -1665,7 +1667,7 @@ class SettingsPage extends StatelessWidget {
               _sectionTitle("Preferences"),
               _settingsCard([
                 _buildSettingsTile(context, Icons.language, "Language",
-                    const LanguageSelectionPage()), // Updated
+                     LanguageSelectionPage()), // Updated
                 _divider(context),
                 _buildSettingsTile(
                     context,
@@ -1866,30 +1868,85 @@ class AboutUsPage extends StatelessWidget {
   }
 }
 
-class LanguageSelectionPage extends StatefulWidget {
-  const LanguageSelectionPage({super.key});
 
+class LanguageSelectionPage extends StatefulWidget {
   @override
-  State<LanguageSelectionPage> createState() => _LanguageSelectionPageState();
+  _LanguageSelectionPageState createState() => _LanguageSelectionPageState();
 }
 
 class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
-  String selectedLanguage = 'English';
+  String selectedLanguageCode = 'en'; // Default language code
 
-  final List<String> languages = [
-    'English',
-    'Spanish',
-    'French',
-    'German',
-    'Hindi',
+  final List<Map<String, String>> languages = [
+    {'name': 'English', 'code': 'en'},
+    {'name': 'Spanish', 'code': 'es'},
+    {'name': 'French', 'code': 'fr'},
+    {'name': 'German', 'code': 'de'},
+    {'name': 'Hindi', 'code': 'hi'},
+    {'name': 'Tamil', 'code': 'ta'},
+    {'name': 'Malayalam', 'code': 'ml'},
   ];
+
+  final Map<String, Map<String, String>> localizedStrings = {
+    'en': {
+      'app_bar_title': 'Select Language',
+      'choose_language': 'Choose Your Language',
+    },
+    'hi': {
+      'app_bar_title': 'भाषा चुनें',
+      'choose_language': 'अपनी भाषा चुनें',
+    },
+    'ta': {
+      'app_bar_title': 'மொழியை தேர்வு செய்க',
+      'choose_language': 'உங்கள் மொழியை தேர்ந்தெடுக்கவும்',
+    },
+    'ml': {
+      'app_bar_title': 'ഭാഷ തിരഞ്ഞെടുക്കുക',
+      'choose_language': 'നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക',
+    },  'es': {
+    'app_bar_title': 'Seleccionar idioma',
+    'choose_language': 'Elige tu idioma',
+  },
+  'de': {
+    'app_bar_title': 'Sprache auswählen',
+    'choose_language': 'Wählen Sie Ihre Sprache',
+  },
+  'fr': {
+    'app_bar_title': 'Sélectionner la langue',
+    'choose_language': 'Choisissez votre langue',
+  },
+    // Add more translations here as needed
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedLanguage();
+  }
+
+  Future<void> _loadSelectedLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedLanguageCode = prefs.getString('selected_language_code') ?? 'en';
+    });
+  }
+
+  Future<void> _saveSelectedLanguage(String code) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selected_language_code', code);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final lang = selectedLanguageCode;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text("Select Language",style: TextStyle(fontWeight:FontWeight.bold),),
+        title: Text(
+          localizedStrings[lang]?['app_bar_title'] ?? 'Select Language',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(0, 0, 0, 0),
         elevation: 0,
@@ -1900,9 +1957,9 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Choose Your Language",
-                style: TextStyle(
+              Text(
+                localizedStrings[lang]?['choose_language'] ?? 'Choose Your Language',
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
@@ -1914,12 +1971,13 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                   itemCount: languages.length,
                   itemBuilder: (context, index) {
                     final language = languages[index];
-                    final isSelected = language == selectedLanguage;
+                    final isSelected = language['code'] == selectedLanguageCode;
 
                     return GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedLanguage = language;
+                          selectedLanguageCode = language['code']!;
+                          _saveSelectedLanguage(selectedLanguageCode);
                         });
                       },
                       child: Container(
@@ -1957,7 +2015,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                               : [],
                         ),
                         child: Text(
-                          language,
+                          language['name']!,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight:
