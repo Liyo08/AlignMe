@@ -1887,35 +1887,98 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
     {'name': 'Malayalam', 'code': 'ml'},
   ];
 
-  final Map<String, Map<String, String>> localizedStrings = {
+  final Map<String, Map<String, dynamic>> localizedStrings = {
     'en': {
       'app_bar_title': 'Select Language',
       'choose_language': 'Choose Your Language',
+      'language_names': {
+        'en': 'English',
+        'es': 'Spanish',
+        'fr': 'French',
+        'de': 'German',
+        'hi': 'Hindi',
+        'ta': 'Tamil',
+        'ml': 'Malayalam',
+      },
     },
     'hi': {
       'app_bar_title': 'भाषा चुनें',
       'choose_language': 'अपनी भाषा चुनें',
+      'language_names': {
+        'en': 'अंग्रेज़ी',
+        'es': 'स्पेनिश',
+        'fr': 'फ्रेंच',
+        'de': 'जर्मन',
+        'hi': 'हिन्दी',
+        'ta': 'तमिल',
+        'ml': 'मलयालम',
+      },
     },
     'ta': {
       'app_bar_title': 'மொழியை தேர்வு செய்க',
       'choose_language': 'உங்கள் மொழியை தேர்ந்தெடுக்கவும்',
+      'language_names': {
+        'en': 'ஆங்கிலம்',
+        'es': 'ஸ்பானிஷ்',
+        'fr': 'பிரஞ்சு',
+        'de': 'ஜெர்மன்',
+        'hi': 'ஹிந்தி',
+        'ta': 'தமிழ்',
+        'ml': 'மலையாளம்',
+      },
     },
     'ml': {
       'app_bar_title': 'ഭാഷ തിരഞ്ഞെടുക്കുക',
       'choose_language': 'നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക',
-    },  'es': {
-    'app_bar_title': 'Seleccionar idioma',
-    'choose_language': 'Elige tu idioma',
-  },
-  'de': {
-    'app_bar_title': 'Sprache auswählen',
-    'choose_language': 'Wählen Sie Ihre Sprache',
-  },
-  'fr': {
-    'app_bar_title': 'Sélectionner la langue',
-    'choose_language': 'Choisissez votre langue',
-  },
-    // Add more translations here as needed
+      'language_names': {
+        'en': 'ഇംഗ്ലീഷ്',
+        'es': 'സ്പാനിഷ്',
+        'fr': 'ഫ്രഞ്ച്',
+        'de': 'ജർമ്മൻ',
+        'hi': 'ഹിന്ദി',
+        'ta': 'തമിഴ്',
+        'ml': 'മലയാളം',
+      },
+    },
+    'es': {
+      'app_bar_title': 'Seleccionar idioma',
+      'choose_language': 'Elige tu idioma',
+      'language_names': {
+        'en': 'Inglés',
+        'es': 'Español',
+        'fr': 'Francés',
+        'de': 'Alemán',
+        'hi': 'Hindi',
+        'ta': 'Tamil',
+        'ml': 'Malayalam',
+      },
+    },
+    'de': {
+      'app_bar_title': 'Sprache auswählen',
+      'choose_language': 'Wählen Sie Ihre Sprache',
+      'language_names': {
+        'en': 'Englisch',
+        'es': 'Spanisch',
+        'fr': 'Französisch',
+        'de': 'Deutsch',
+        'hi': 'Hindi',
+        'ta': 'Tamil',
+        'ml': 'Malayalam',
+      },
+    },
+    'fr': {
+      'app_bar_title': 'Sélectionner la langue',
+      'choose_language': 'Choisissez votre langue',
+      'language_names': {
+        'en': 'Anglais',
+        'es': 'Espagnol',
+        'fr': 'Français',
+        'de': 'Allemand',
+        'hi': 'Hindi',
+        'ta': 'Tamoul',
+        'ml': 'Malayalam',
+      },
+    },
   };
 
   @override
@@ -2015,7 +2078,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                               : [],
                         ),
                         child: Text(
-                          language['name']!,
+                          localizedStrings[lang]?['language_names'][language['code']] ?? language['name']!,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight:
