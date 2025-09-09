@@ -197,10 +197,10 @@ class _WaterTrackerPageState extends State<WaterTrackerPage>
             color: Colors.amber, size: 100),
       ),
 
-    Spacer(), // Push buttons to bottom
+   
 
    Padding(
-  padding: const EdgeInsets.only(bottom: 30),
+  padding: const EdgeInsets.only(top:380),
   child: Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
