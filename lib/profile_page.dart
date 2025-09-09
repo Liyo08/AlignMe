@@ -1534,13 +1534,166 @@ class PrivacyPolicyPage extends StatelessWidget {
   }
 }
 
-class SettingsPage extends StatelessWidget {
+
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
   @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  String selectedLanguageCode = 'en';
+
+  final Map<String, Map<String, String>> localizedStrings = {
+    'en': {
+      'settings': 'Settings',
+      'general_settings': 'General Settings',
+      'preferences': 'Preferences',
+      'appearance': 'Appearance',
+      'app_version': 'App Version',
+      'sign_out': 'Sign Out',
+      'privacy_policy': 'Privacy Policy',
+      'about_us': 'About Us',
+      'contact_us': 'Contact Us',
+      'notifications': 'Notifications',
+      'language': 'Language',
+      'workout_preferences': 'Workout Preferences',
+      'goals_progress': 'Goals & Progress',
+      'reminders': 'Reminders',
+      'theme': 'Theme',
+      'help_support': 'Help & Support',
+    },
+    'hi': {
+      'settings': 'सेटिंग्स',
+      'general_settings': 'सामान्य सेटिंग्स',
+      'preferences': 'प्राथमिकताएँ',
+      'appearance': 'दिखावट',
+      'app_version': 'एप्लिकेशन संस्करण',
+      'sign_out': 'साइन आउट',
+      'privacy_policy': 'गोपनीयता नीति',
+      'about_us': 'हमारे बारे में',
+      'contact_us': 'संपर्क करें',
+      'notifications': 'सूचनाएं',
+      'language': 'भाषा',
+      'workout_preferences': 'वर्कआउट प्राथमिकताएँ',
+      'goals_progress': 'लक्ष्य और प्रगति',
+      'reminders': 'स्मरणपत्र',
+      'theme': 'थीम',
+      'help_support': 'सहायता और समर्थन',
+    },
+    'ta': {
+      'settings': 'அமைப்புகள்',
+      'general_settings': 'பொது அமைப்புகள்',
+      'preferences': 'விருப்பங்கள்',
+      'appearance': 'வெளிப்பாடு',
+      'app_version': 'ஆப் பதிப்பு',
+      'sign_out': 'வெளியேறு',
+      'privacy_policy': 'தனியுரிமை கொள்கை',
+      'about_us': 'எங்களைப் பற்றி',
+      'contact_us': 'தொடர்பு கொள்ளவும்',
+      'notifications': 'அறிவிப்புகள்',
+      'language': 'மொழி',
+      'workout_preferences': 'பயிற்சி விருப்பங்கள்',
+      'goals_progress': 'நோக்குகள் மற்றும் முன்னேற்றம்',
+      'reminders': 'அறிவிப்புகள்',
+      'theme': 'தீம்',
+      'help_support': 'உதவி & ஆதரவு',
+    },
+    'ml': {
+      'settings': 'സജ്ജീകരണങ്ങൾ',
+      'general_settings': 'സാധാരണ സജ്ജീകരണങ്ങൾ',
+      'preferences': 'ആഗ്രഹങ്ങൾ',
+      'appearance': 'ദൃശ്യം',
+      'app_version': 'ആപ്പ് പതിപ്പ്',
+      'sign_out': 'സൈൻ ഔട്ട്',
+      'privacy_policy': 'സ്വകാര്യത നയം',
+      'about_us': 'ഞങ്ങളെക്കുറിച്ച്',
+      'contact_us': 'ബന്ധപ്പെടുക',
+      'notifications': 'അറിയിപ്പുകൾ',
+      'language': 'ഭാഷ',
+      'workout_preferences': 'വർക്ക്ഔട്ട് മുൻഗണനകൾ',
+      'goals_progress': 'ലക്ഷ്യങ്ങളും പുരോഗതിയും',
+      'reminders': 'സ്മരണകൾ',
+      'theme': 'തീം',
+      'help_support': 'സഹായം & പിന്തുണ',
+    },
+    'es': {
+      'settings': 'Configuración',
+      'general_settings': 'Configuración General',
+      'preferences': 'Preferencias',
+      'appearance': 'Apariencia',
+      'app_version': 'Versión de la App',
+      'sign_out': 'Cerrar sesión',
+      'privacy_policy': 'Política de privacidad',
+      'about_us': 'Sobre nosotros',
+      'contact_us': 'Contáctanos',
+      'notifications': 'Notificaciones',
+      'language': 'Idioma',
+      'workout_preferences': 'Preferencias de entrenamiento',
+      'goals_progress': 'Metas y progreso',
+      'reminders': 'Recordatorios',
+      'theme': 'Tema',
+      'help_support': 'Ayuda y soporte',
+    },
+    'de': {
+      'settings': 'Einstellungen',
+      'general_settings': 'Allgemeine Einstellungen',
+      'preferences': 'Präferenzen',
+      'appearance': 'Darstellung',
+      'app_version': 'App-Version',
+      'sign_out': 'Abmelden',
+      'privacy_policy': 'Datenschutz-Bestimmungen',
+      'about_us': 'Über uns',
+      'contact_us': 'Kontaktieren Sie uns',
+      'notifications': 'Benachrichtigungen',
+      'language': 'Sprache',
+      'workout_preferences': 'Trainingseinstellungen',
+      'goals_progress': 'Ziele & Fortschritt',
+      'reminders': 'Erinnerungen',
+      'theme': 'Thema',
+      'help_support': 'Hilfe & Unterstützung',
+    },
+    'fr': {
+      'settings': 'Paramètres',
+      'general_settings': 'Paramètres généraux',
+      'preferences': 'Préférences',
+      'appearance': 'Apparence',
+      'app_version': 'Version de l\'app',
+      'sign_out': 'Se déconnecter',
+      'privacy_policy': 'Politique de confidentialité',
+      'about_us': 'À propos de nous',
+      'contact_us': 'Nous contacter',
+      'notifications': 'Notifications',
+      'language': 'Langue',
+      'workout_preferences': 'Préférences d\'entraînement',
+      'goals_progress': 'Objectifs et progression',
+      'reminders': 'Rappels',
+      'theme': 'Thème',
+      'help_support': 'Aide & support',
+    },
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedLanguage();
+  }
+
+  Future<void> _loadSelectedLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedLanguageCode = prefs.getString('selected_language_code') ?? 'en';
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final lang = selectedLanguageCode;
+    final strings = localizedStrings[lang]!;
+
     return Scaffold(
-      backgroundColor:Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -1552,30 +1705,28 @@ class SettingsPage extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new// black arrow
-                    ),
+                    child: const Icon(Icons.arrow_back_ios_new),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Center(
                       child: Text(
-                        "Settings",
-                        style: TextStyle(
+                        strings['settings']!,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
                     ),
                   ),
-                  // Dummy space to balance the Row (same size as back arrow)
                   SizedBox(width: 26),
                 ],
               ),
 
               const SizedBox(height: 20),
+              
 
-              // Profile / Account status section
-              Row(
+              // Profile section...
+                   Row(
                 children: [
                   // Avatar
                   CircleAvatar(
@@ -1645,70 +1796,62 @@ class SettingsPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
+
               // ===== General Settings =====
-              _sectionTitle("General Settings"),
+              _sectionTitle(strings['general_settings']!),
               _settingsCard([
-                _buildSettingsTile(context, Icons.lock, "Privacy Policy",
-                    const PrivacyPolicyPage()), // Updated
+                _buildSettingsTile(context, Icons.lock, strings['privacy_policy']!,
+                    const PrivacyPolicyPage()),
                 _divider(context),
-                _buildSettingsTile(context, Icons.info_outline, "About Us",
-                    const AboutUsPage()), // Updated
+                _buildSettingsTile(context, Icons.info_outline, strings['about_us']!,
+                    const AboutUsPage()),
                 _divider(context),
-                _buildSettingsTile(context, Icons.contact_mail, "Contact Us",
-                    const ContactUsPage()), // Updated
+                _buildSettingsTile(context, Icons.contact_mail, strings['contact_us']!,
+                    const ContactUsPage()),
                 _divider(context),
-                _buildSettingsTile(context, Icons.notifications,
-                    "Notifications", const NotificationsPage()), // Updated
-              ],context),
+                _buildSettingsTile(context, Icons.notifications, strings['notifications']!,
+                    const NotificationsPage()),
+              ], context),
 
               const SizedBox(height: 30),
 
               // ===== Preferences =====
-              _sectionTitle("Preferences"),
+              _sectionTitle(strings['preferences']!),
               _settingsCard([
-                _buildSettingsTile(context, Icons.language, "Language",
-                     LanguageSelectionPage()), // Updated
+                _buildSettingsTile(context, Icons.language, strings['language']!,
+                    LanguageSelectionPage()),
                 _divider(context),
-                _buildSettingsTile(
-                    context,
-                    Icons.fitness_center,
-                    "Workout Preferences",
-                    const WorkoutPreferencesPage()), // Updated
+                _buildSettingsTile(context, Icons.fitness_center,
+                    strings['workout_preferences']!, const WorkoutPreferencesPage()),
                 _divider(context),
                 _buildSettingsTile(context, Icons.track_changes,
-                    "Goals & Progress", const GoalsProgressPage()), // Updated
+                    strings['goals_progress']!, const GoalsProgressPage()),
                 _divider(context),
-                _buildSettingsTile(context, Icons.alarm, "Reminders",
-                    const ReminderSettingsPage()), // Updated
-              ],context),
+                _buildSettingsTile(context, Icons.alarm, strings['reminders']!,
+                    const ReminderSettingsPage()),
+              ], context),
 
               const SizedBox(height: 30),
 
               // ===== Appearance =====
-              _sectionTitle("Appearance"),
+              _sectionTitle(strings['appearance']!),
               _settingsCard([
-                _buildSettingsTile(context, Icons.color_lens, "Theme",
-                    const ThemeSelectionPage()), // Updated
+                _buildSettingsTile(context, Icons.color_lens, strings['theme']!,
+                    const ThemeSelectionPage()),
                 _divider(context),
-                _buildSettingsTile(context, Icons.help_outline,
-                    "Help & Support", const HelpSupportPage()), // Updated
-              ],context),
+                _buildSettingsTile(context, Icons.help_outline, strings['help_support']!,
+                    const HelpSupportPage()),
+              ], context),
 
               const SizedBox(height: 40),
 
               // App Version Section
               Center(
                 child: Column(
-                  children: const [
-                    Text(
-                      "App Version",
-                      style: TextStyle(
-                        fontSize: 14
-                      
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
+                  children: [
+                    Text(strings['app_version']!),
+                    const SizedBox(height: 4),
+                    const Text(
                       "1.0.13",
                       style: TextStyle(
                         fontSize: 16,
@@ -1726,29 +1869,27 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // Reusable Section Title
   static Widget _sectionTitle(String title) {
     return Text(
       title,
       style: const TextStyle(
         fontSize: 16,
-        fontWeight: FontWeight.bold
+        fontWeight: FontWeight.bold,
       ),
     );
   }
 
-  // Reusable Settings Card
-  static Widget _settingsCard(List<Widget> children,context) {
+  static Widget _settingsCard(List<Widget> children, context) {
     return Container(
       margin: const EdgeInsets.only(top: 12),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 6,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2),
           ),
         ],
       ),
@@ -1756,13 +1897,8 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // Settings option tile
   static Widget _buildSettingsTile(
-    BuildContext context,
-    IconData icon,
-    String title,
-    Widget destinationPage, // New parameter
-  ) {
+      BuildContext context, IconData icon, String title, Widget destinationPage) {
     return ListTile(
       leading: ShaderMask(
         shaderCallback: (bounds) => const LinearGradient(
@@ -1772,17 +1908,11 @@ class SettingsPage extends StatelessWidget {
         ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
         child: Icon(
           icon,
-          color: Colors.white, // masked by gradient
+          color: Colors.white,
         ),
       ),
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 16
-        ),
-      ),
-      trailing:
-          const Icon(Icons.arrow_forward_ios, size: 16),
+      title: Text(title, style: const TextStyle(fontSize: 16)),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: () {
         Navigator.push(
           context,
@@ -1792,21 +1922,20 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
- static Widget _divider(BuildContext context) {
-  // Choose color based on light/dark mode
-  final Color dividerColor = Theme.of(context).brightness == Brightness.dark
-      ? Colors.grey[300]! // light grey for dark mode
-      : const Color.fromARGB(255, 179, 179, 179); // dark grey/black-grey for light mode
+  static Widget _divider(BuildContext context) {
+    final Color dividerColor = Theme.of(context).brightness == Brightness.dark
+        ? Colors.grey[300]!
+        : const Color.fromARGB(255, 179, 179, 179);
 
-  return Divider(
-    height: 1,
-    thickness: 0.5,
-    color: dividerColor,
-    indent: 16,
-    endIndent: 16,
-  );}
-
-}
+    return Divider(
+      height: 1,
+      thickness: 0.5,
+      color: dividerColor,
+      indent: 16,
+      endIndent: 16,
+    );
+  }
+   }
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
