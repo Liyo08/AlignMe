@@ -141,6 +141,7 @@ class _SettingsPageState extends State<SettingsPage> {
       'theme': 'Thème',
       'help_support': 'Aide & support',
     },
+    // ... [your localizedStrings map stays unchanged] ...
   };
 
   @override
@@ -156,6 +157,11 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
+  Future<void> _refreshPage() async {
+    await Future.delayed(const Duration(seconds: 1)); // Simulate network delay
+    await _loadSelectedLanguage();
+  }
+
   @override
   Widget build(BuildContext context) {
     final lang = selectedLanguageCode;
@@ -164,173 +170,155 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: RefreshIndicator(
+          color: Colors.transparent,
+          backgroundColor: Colors.transparent,
+          onRefresh: _refreshPage,
+          child: Stack(
             children: [
-              // Back arrow + Heading
-              Row(
+              ListView(
+                padding: const EdgeInsets.all(20),
                 children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back_ios_new),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        strings['settings']!,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
+                  // Back arrow + Heading
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: const Icon(Icons.arrow_back_ios_new),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            strings['settings']!,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(width: 26),
-                ],
-              ),
-
-              const SizedBox(height: 20),
-              
-
-              // Profile section...
-                   Row(
-                children: [
-                  // Avatar
-                  CircleAvatar(
-                    radius: 35,
-                    backgroundColor: const Color(0xFF92A3FD),
-                    child:
-                        const Icon(Icons.person, size: 40, color: Colors.white),
+                      const SizedBox(width: 26),
+                    ],
                   ),
 
-                  const SizedBox(width: 16),
+                  const SizedBox(height: 20),
 
-                  // Name + Membership info
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Jeel",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  // Profile section...
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 35,
+                        backgroundColor: const Color(0xFF92A3FD),
+                        child: const Icon(Icons.person, size: 40, color: Colors.white),
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        "Premium Member",
-                        style: TextStyle(
-                          fontSize: 14
+                      const SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "Jeel",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            "Premium Member",
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: () {},
+                          child: const Text(
+                            "Sign Out",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
 
-                  const Spacer(),
+                  const SizedBox(height: 30),
 
-                  // Sign Out button
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF92A3FD), Color(0xFF9DCEFF)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 10), // smaller height
-                        minimumSize: Size.zero, // removes extra min constraints
-                        tapTargetSize: MaterialTapTargetSize
-                            .shrinkWrap, // prevents extra space
-                      ),
-                      onPressed: () {
-                        // Handle sign out
-                      },
-                      child: const Text(
-                        "Sign Out",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                  // General Settings Section
+                  _sectionTitle(strings['general_settings']!),
+                  _settingsCard([
+                    _buildSettingsTile(context, Icons.lock, strings['privacy_policy']!, const PrivacyPolicyPage()),
+                    _divider(context),
+                    _buildSettingsTile(context, Icons.info_outline, strings['about_us']!, const AboutUsPage()),
+                    _divider(context),
+                    _buildSettingsTile(context, Icons.contact_mail, strings['contact_us']!, const ContactUsPage()),
+                    _divider(context),
+                    _buildSettingsTile(context, Icons.notifications, strings['notifications']!, const NotificationsPage()),
+                  ], context),
+
+                  const SizedBox(height: 30),
+
+                  // Preferences Section
+                  _sectionTitle(strings['preferences']!),
+                  _settingsCard([
+                    _buildSettingsTile(context, Icons.language, strings['language']!, LanguageSelectionPage()),
+                    _divider(context),
+                    _buildSettingsTile(context, Icons.fitness_center, strings['workout_preferences']!, const WorkoutPreferencesPage()),
+                    _divider(context),
+                    _buildSettingsTile(context, Icons.track_changes, strings['goals_progress']!, const GoalsProgressPage()),
+                    _divider(context),
+                    _buildSettingsTile(context, Icons.alarm, strings['reminders']!, const ReminderSettingsPage()),
+                  ], context),
+
+                  const SizedBox(height: 30),
+
+                  // Appearance Section
+                  _sectionTitle(strings['appearance']!),
+                  _settingsCard([
+                    _buildSettingsTile(context, Icons.color_lens, strings['theme']!, const ThemeSelectionPage()),
+                    _divider(context),
+                    _buildSettingsTile(context, Icons.help_outline, strings['help_support']!, const HelpSupportPage()),
+                  ], context),
+
+                  const SizedBox(height: 40),
+
+                  // App Version Section
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(strings['app_version']!),
+                        const SizedBox(height: 4),
+                        const Text(
+                          "1.0.14",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF92A3FD),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],
               ),
-
-              const SizedBox(height: 30),
-
-
-              // ===== General Settings =====
-              _sectionTitle(strings['general_settings']!),
-              _settingsCard([
-                _buildSettingsTile(context, Icons.lock, strings['privacy_policy']!,
-                    const PrivacyPolicyPage()),
-                _divider(context),
-                _buildSettingsTile(context, Icons.info_outline, strings['about_us']!,
-                    const AboutUsPage()),
-                _divider(context),
-                _buildSettingsTile(context, Icons.contact_mail, strings['contact_us']!,
-                    const ContactUsPage()),
-                _divider(context),
-                _buildSettingsTile(context, Icons.notifications, strings['notifications']!,
-                    const NotificationsPage()),
-              ], context),
-
-              const SizedBox(height: 30),
-
-              // ===== Preferences =====
-              _sectionTitle(strings['preferences']!),
-              _settingsCard([
-                _buildSettingsTile(context, Icons.language, strings['language']!,
-                    LanguageSelectionPage()),
-                _divider(context),
-                _buildSettingsTile(context, Icons.fitness_center,
-                    strings['workout_preferences']!, const WorkoutPreferencesPage()),
-                _divider(context),
-                _buildSettingsTile(context, Icons.track_changes,
-                    strings['goals_progress']!, const GoalsProgressPage()),
-                _divider(context),
-                _buildSettingsTile(context, Icons.alarm, strings['reminders']!,
-                    const ReminderSettingsPage()),
-              ], context),
-
-              const SizedBox(height: 30),
-
-              // ===== Appearance =====
-              _sectionTitle(strings['appearance']!),
-              _settingsCard([
-                _buildSettingsTile(context, Icons.color_lens, strings['theme']!,
-                    const ThemeSelectionPage()),
-                _divider(context),
-                _buildSettingsTile(context, Icons.help_outline, strings['help_support']!,
-                    const HelpSupportPage()),
-              ], context),
-
-              const SizedBox(height: 40),
-
-              // App Version Section
-              Center(
-                child: Column(
-                  children: [
-                    Text(strings['app_version']!),
-                    const SizedBox(height: 4),
-                    const Text(
-                      "1.0.14",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF92A3FD),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Animated Gradient while pulling
+              
             ],
           ),
         ),
@@ -366,8 +354,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  static Widget _buildSettingsTile(
-      BuildContext context, IconData icon, String title, Widget destinationPage) {
+  static Widget _buildSettingsTile(BuildContext context, IconData icon, String title, Widget destinationPage) {
     return ListTile(
       leading: ShaderMask(
         shaderCallback: (bounds) => const LinearGradient(
@@ -375,10 +362,7 @@ class _SettingsPageState extends State<SettingsPage> {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-        child: Icon(
-          icon,
-          color: Colors.white,
-        ),
+        child: Icon(icon, color: Colors.white),
       ),
       title: Text(title, style: const TextStyle(fontSize: 16)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
@@ -404,7 +388,8 @@ class _SettingsPageState extends State<SettingsPage> {
       endIndent: 16,
     );
   }
-   }
+}
+
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
