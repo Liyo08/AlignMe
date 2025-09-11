@@ -13,6 +13,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   String selectedLanguageCode = 'en';
+  bool _isLoading = false;
 
   final Map<String, Map<String, String>> localizedStrings = {
     'en': {
@@ -141,7 +142,6 @@ class _SettingsPageState extends State<SettingsPage> {
       'theme': 'Thème',
       'help_support': 'Aide & support',
     },
-    // ... [your localizedStrings map stays unchanged] ...
   };
 
   @override
@@ -158,7 +158,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> _refreshPage() async {
-    await Future.delayed(const Duration(seconds: 1)); // Simulate network delay
+    await Future.delayed(const Duration(seconds: 1)); // Simulate delay
     await _loadSelectedLanguage();
   }
 
@@ -170,40 +170,64 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: RefreshIndicator(
-          color: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          onRefresh: _refreshPage,
-          child: Stack(
-            children: [
-              ListView(
-                padding: const EdgeInsets.all(20),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Back arrow + Heading
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: const Icon(Icons.arrow_back_ios_new),
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            strings['settings']!,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 26),
-                    ],
-                  ),
+         SizedBox(
+  height: 50, // fixed row height
+  child: Row(
+    children: [
+      SizedBox(
+        width: 40,
+        child: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: const Icon(Icons.arrow_back_ios_new),
+        ),
+      ),
+      Expanded(
+        child: Center(
+          child: Text(
+            strings['settings']!,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ),
+      ),
+      SizedBox(
+        width: 40,
+        child: Center(  // <-- ensure spinner is centered
+          child: _isLoading
+              ? const SizedBox(
+                  width: 26,
+                  height: 26,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : IconButton(
+                  icon: const Icon(Icons.refresh_outlined),
+                  iconSize: 30,
+                  onPressed: () async {
+                    setState(() => _isLoading = true);
+                    await _refreshPage();
+                    setState(() => _isLoading = false);
+                  },
+                ),
+        ),
+      ),
+    ],
+  ),
+),
+
+
 
                   const SizedBox(height: 20),
 
-                  // Profile section...
+                  // Profile Section
                   Row(
                     children: [
                       CircleAvatar(
@@ -260,7 +284,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   const SizedBox(height: 30),
 
-                  // General Settings Section
                   _sectionTitle(strings['general_settings']!),
                   _settingsCard([
                     _buildSettingsTile(context, Icons.lock, strings['privacy_policy']!, const PrivacyPolicyPage()),
@@ -274,7 +297,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   const SizedBox(height: 30),
 
-                  // Preferences Section
                   _sectionTitle(strings['preferences']!),
                   _settingsCard([
                     _buildSettingsTile(context, Icons.language, strings['language']!, LanguageSelectionPage()),
@@ -288,7 +310,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   const SizedBox(height: 30),
 
-                  // Appearance Section
                   _sectionTitle(strings['appearance']!),
                   _settingsCard([
                     _buildSettingsTile(context, Icons.color_lens, strings['theme']!, const ThemeSelectionPage()),
@@ -298,7 +319,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   const SizedBox(height: 40),
 
-                  // App Version Section
                   Center(
                     child: Column(
                       children: [
@@ -317,10 +337,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ],
               ),
-              // Animated Gradient while pulling
-              
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

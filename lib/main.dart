@@ -20,6 +20,7 @@ import 'theme_provider.dart';
 import 'dart:math';
 import 'explorepage.dart';
 
+
 void main() {
   runApp(
     ChangeNotifierProvider(
