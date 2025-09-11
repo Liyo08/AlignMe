@@ -19,9 +19,18 @@ import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 import 'dart:math';
 import 'explorepage.dart';
+import 'notification_service.dart';
 
 
-void main() {
+
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize notifications (this also initializes timezones)
+  await initNotifications();
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppTheme(),
@@ -29,6 +38,7 @@ void main() {
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -120,7 +130,30 @@ Align(
   ),
 ),
 
+ElevatedButton(
+  onPressed: () async {
+    print("Test Notification button pressed");
 
+    // Immediate notification
+    await showNotification(
+      title: "Test Notification",
+      body: "This notification appears immediately",
+    );
+    print("Immediate notification triggered");
+
+    // Schedule a notification 10 seconds later
+    final scheduledTime = DateTime.now().add(const Duration(seconds: 10));
+    await scheduleNotification(
+      id: 1,
+      title: "Scheduled Test",
+      body: "This notification appears after 10 seconds",
+      scheduledTime: scheduledTime,
+    );
+    print("Scheduled notification set for $scheduledTime");
+  },
+  child: const Text("Test Notification"),
+)
+,
           const SizedBox(height: 20),
 
           // ✅ Rest of your content
