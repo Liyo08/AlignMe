@@ -325,7 +325,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Text(strings['app_version']!),
                         const SizedBox(height: 4),
                         const Text(
-                          "1.0.16",
+                          "1.0.15",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
