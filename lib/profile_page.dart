@@ -2,15 +2,139 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'main.dart';
 import 'package:fl_chart/fl_chart.dart';
- // For persisting selected language
+// For persisting selected language
 import 'settingspage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String selectedLanguageCode = 'en';
+
+  final Map<String, Map<String, String>> localizedStrings = {
+  'en': {
+    'profile': 'Profile',
+    'personal_data': 'Personal Data',
+    'achievement': 'Achievement',
+    'activity_history': 'Activity History',
+    'workout_progress': 'Workout Progress',
+    'contact_us': 'Contact Us',
+    'privacy_policy': 'Privacy Policy',
+    'settings': 'Settings',
+    'edit': 'Edit',
+    'notification': 'Notification',
+    'other': 'Other',
+    'pop_up_notification': 'Pop-up Notification',
+  },
+  'hi': {
+    'profile': 'प्रोफ़ाइल',
+    'personal_data': 'व्यक्तिगत डेटा',
+    'achievement': 'उपलब्धि',
+    'activity_history': 'गतिविधि इतिहास',
+    'workout_progress': 'व्यायाम प्रगति',
+    'contact_us': 'संपर्क करें',
+    'privacy_policy': 'गोपनीयता नीति',
+    'settings': 'सेटिंग्स',
+    'edit': 'संपादित करें',
+    'notification': 'सूचनाएँ',
+    'other': 'अन्य',
+    'pop_up_notification': 'पॉप-अप सूचना',
+  },
+  'es': {
+    'profile': 'Perfil',
+    'personal_data': 'Datos Personales',
+    'achievement': 'Logros',
+    'activity_history': 'Historial de Actividades',
+    'workout_progress': 'Progreso del Entrenamiento',
+    'contact_us': 'Contáctanos',
+    'privacy_policy': 'Política de Privacidad',
+    'settings': 'Configuraciones',
+    'edit': 'Editar',
+    'notification': 'Notificación',
+    'other': 'Otro',
+    'pop_up_notification': 'Notificación emergente',
+  },
+  'fr': {
+    'profile': 'Profil',
+    'personal_data': 'Données Personnelles',
+    'achievement': 'Réalisations',
+    'activity_history': 'Historique des Activités',
+    'workout_progress': 'Progression de l’Entraînement',
+    'contact_us': 'Contactez-nous',
+    'privacy_policy': 'Politique de Confidentialité',
+    'settings': 'Paramètres',
+    'edit': 'Modifier',
+    'notification': 'Notification',
+    'other': 'Autre',
+    'pop_up_notification': 'Notification contextuelle',
+  },
+  'de': {
+    'profile': 'Profil',
+    'personal_data': 'Persönliche Daten',
+    'achievement': 'Erfolge',
+    'activity_history': 'Aktivitätsverlauf',
+    'workout_progress': 'Trainingsfortschritt',
+    'contact_us': 'Kontaktieren Sie uns',
+    'privacy_policy': 'Datenschutzrichtlinie',
+    'settings': 'Einstellungen',
+    'edit': 'Bearbeiten',
+    'notification': 'Benachrichtigung',
+    'other': 'Andere',
+    'pop_up_notification': 'Pop-up-Benachrichtigung',
+  },
+  'ta': {
+    'profile': 'சுயவிவரம்',
+    'personal_data': 'தனிப்பட்ட தகவல்கள்',
+    'achievement': 'சாதனைகள்',
+    'activity_history': 'செயல்பாட்டு வரலாறு',
+    'workout_progress': 'பயிற்சி முன்னேற்றம்',
+    'contact_us': 'தொடர்பு கொள்ள',
+    'privacy_policy': 'தனியுரிமை கொள்கை',
+    'settings': 'அமைப்புகள்',
+    'edit': 'மாற்று',
+    'notification': 'அறிவிப்புகள்',
+    'other': 'மற்றவை',
+    'pop_up_notification': 'பாப்-அப் அறிவிப்பு',
+  },
+  'ml': {
+    'profile': 'പ്രൊഫൈൽ',
+    'personal_data': 'വ്യക്തിഗത വിവരങ്ങൾ',
+    'achievement': 'സാദ്ധ്യതകൾ',
+    'activity_history': 'പ്രവൃത്തി ചരിത്രം',
+    'workout_progress': 'അഭ്യാസ പുരോഗതി',
+    'contact_us': 'ഞങ്ങളെ ബന്ധപ്പെടുക',
+    'privacy_policy': 'ഗോപനീയത നയം',
+    'settings': 'സജ്ജീകരണങ്ങൾ',
+    'edit': 'എഡിറ്റ്',
+    'notification': 'അറിയിപ്പുകൾ',
+    'other': 'മറ്റ്',
+    'pop_up_notification': 'പോപ്പ്-അപ്പ് അറിയിപ്പ്',
+  },
+};
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadSelectedLanguage();
+  }
+
+  Future<void> _loadSelectedLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String code = prefs.getString('selected_language_code') ?? 'en';
+    setState(() {
+      selectedLanguageCode = code;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final lang = selectedLanguageCode;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -19,7 +143,7 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 🔹 Top Bar (Back + Title + Menu)
+              // Top Bar
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -27,10 +151,8 @@ class ProfilePage extends StatelessWidget {
                     icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () {
                       if (Navigator.of(context).canPop()) {
-                        // Case 1: FullBody was opened with Navigator.push()
                         Navigator.of(context).pop();
                       } else {
-                        // Case 2: FullBody is inside navbar (no stack to pop)
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -39,23 +161,33 @@ class ProfilePage extends StatelessWidget {
                       }
                     },
                   ),
-                  const Text(
-                    "Profile",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                  Text(
+                    localizedStrings[lang]?['profile'] ?? 'Profile',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w900),
                   ),
                   IconButton(
                     icon: const Icon(Icons.refresh, size: 28),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await Future.delayed(const Duration(seconds: 1));
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      String code =
+                          prefs.getString('selected_language_code') ?? 'en';
+                      setState(() {
+                        selectedLanguageCode = code;
+                      });
+                    },
                   ),
                 ],
               ),
               const SizedBox(height: 16),
 
-              // 🔹 Profile Header
+              // Profile Header
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 CircleAvatar(
+                  CircleAvatar(
                     radius: 35,
                     backgroundColor: const Color(0xFF92A3FD),
                     child:
@@ -82,14 +214,12 @@ class ProfilePage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero, // remove default padding
+                      padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      backgroundColor:
-                          Colors.transparent, // make button transparent
-                      shadowColor:
-                          Colors.transparent, // remove default shadow color
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
                     ),
                     child: Ink(
                       decoration: BoxDecoration(
@@ -104,11 +234,10 @@ class ProfilePage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 35, vertical: 8),
                         alignment: Alignment.center,
-                        child: const Text(
-                          "Edit",
-                          style: TextStyle(
-                              color: Colors.white), // make text visible
-                        ),
+                        child:  Text(
+    localizedStrings[lang]?['edit'] ?? 'Edit', // 🔹 localized
+    style: const TextStyle(color: Colors.white),
+  ),
                       ),
                     ),
                   )
@@ -116,9 +245,9 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // 🔹 Stats Row
+              // Stats Row
               Padding(
-                padding: const EdgeInsets.only(bottom: 20), // 👈 bottom padding
+                padding: const EdgeInsets.only(bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -131,113 +260,145 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
 
-              // 🔹 Account Section
+              // Account Section
               _buildSection(
-                  title: "Account",
-                  items: [
-                    _buildListTile(Icons.person_outline, "Personal Data",
-                        const PersonalDataPage(), context),_divider(context),
-                    _buildListTile(Icons.emoji_events_outlined, "Achievement",
-                        const AchievementPage(), context),_divider(context),
-                    _buildListTile(Icons.history, "Activity History",
-                        const ActivityHistoryPage(), context),_divider(context),
-                    _buildListTile(Icons.fitness_center, "Workout Progress",
-                        const WorkoutProgressPage(), context),
-                  ],
-                  context: context),
+                title: localizedStrings[lang]?['profile'] ?? 'Account',
+                items: [
+                  _buildListTile(
+                      Icons.person_outline,
+                      localizedStrings[lang]?['personal_data'] ??
+                          'Personal Data',
+                      const PersonalDataPage(),
+                      context),
+                  _divider(context),
+                  _buildListTile(
+                      Icons.emoji_events_outlined,
+                      localizedStrings[lang]?['achievement'] ?? 'Achievement',
+                      const AchievementPage(),
+                      context),
+                  _divider(context),
+                  _buildListTile(
+                      Icons.history,
+                      localizedStrings[lang]?['activity_history'] ??
+                          'Activity History',
+                      const ActivityHistoryPage(),
+                      context),
+                  _divider(context),
+                  _buildListTile(
+                      Icons.fitness_center,
+                      localizedStrings[lang]?['workout_progress'] ??
+                          'Workout Progress',
+                      const WorkoutProgressPage(),
+                      context),
+                ],
+                context: context,
+              ),
 
-              // 🔹 Notification Section
-
+              // Notification Section (unchanged)
               _buildSection(
-                  title: "Notification",
-                  items: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Row(
-                          children: [
-                            Icon(Icons.notifications_outlined,
-                                color: Color.fromARGB(255, 207, 138, 219)),
-                            SizedBox(width: 8),
-                            Text(
-                              "Pop-up Notification",
-                              style: TextStyle(
-                                  fontSize: 15, // increase/decrease as needed
-                                  fontWeight: FontWeight
-                                      .w500 // optional, for bolder look
-                                  // optional, set custom color
-                                  ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Color(0xFFC58BF2),
-                                Color(0xFFB4C0FE),
-                              ],
+                title: localizedStrings[lang]?['notification'] ?? 'Notification', // 🔹 localized
+                items: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       Row(
+                        children: [
+                          Icon(Icons.notifications_outlined,
+                              color: Color.fromARGB(255, 207, 138, 219)),
+                          SizedBox(width: 8),
+                          Text(
+                            localizedStrings[lang]?['pop_up_notification'] ?? 'Pop-up Notification', // 🔹 localized
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(2), // space for thumb
-                            child: FlutterSwitch(
-                              width: 50,
-                              height: 20,
-                              toggleSize: 26,
-                              value: true,
-                              borderRadius: 30.0,
-                              padding: 2.0,
-                              activeColor: Colors.transparent, // show gradient
-                              inactiveColor: Colors.grey.shade300,
-                              activeToggleColor: Colors.white,
-                              inactiveToggleColor: Colors.white,
-                              showOnOff: false,
-                              onToggle: (val) {
-                                // handle toggle state
-                              },
-                            ),
+                        ],
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFFC58BF2),
+                              Color(0xFFB4C0FE),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                  context: context),
-              // 🔹 Other Section
+                        child: Padding(
+                          padding: const EdgeInsets.all(2),
+                          child: FlutterSwitch(
+                            width: 50,
+                            height: 20,
+                            toggleSize: 26,
+                            value: true,
+                            borderRadius: 30.0,
+                            padding: 2.0,
+                            activeColor: Colors.transparent,
+                            inactiveColor: Colors.grey.shade300,
+                            activeToggleColor: Colors.white,
+                            inactiveToggleColor: Colors.white,
+                            showOnOff: false,
+                            onToggle: (val) {},
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+                context: context,
+              ),
+
+              // Other Section
               _buildSection(
-                  title: "Other",
-                  items: [
-                    _buildListTile(Icons.mail_outline, "Contact Us",
-                        const ContactUsPage(), context),_divider(context),
-                    _buildListTile(Icons.privacy_tip_outlined, "Privacy Policy",
-                        const PrivacyPolicyPage(), context),_divider(context),
-                    _buildListTile(Icons.settings_outlined, "Settings",
-                        const SettingsPage(), context),
-                  ],
-                  context: context),
+               title: localizedStrings[lang]?['other'] ?? 'Other', // 🔹 localized
+                items: [
+                  _buildListTile(
+                      Icons.mail_outline,
+                      localizedStrings[lang]?['contact_us'] ?? 'Contact Us',
+                      const ContactUsPage(),
+                      context),
+                  _divider(context),
+                  _buildListTile(
+                      Icons.privacy_tip_outlined,
+                      localizedStrings[lang]?['privacy_policy'] ??
+                          'Privacy Policy',
+                      const PrivacyPolicyPage(),
+                      context),
+                  _divider(context),
+                  _buildListTile(
+                      Icons.settings_outlined,
+                      localizedStrings[lang]?['settings'] ?? 'Settings',
+                      const SettingsPage(),
+                      context),
+                ],
+                context: context,
+              ),
             ],
           ),
         ),
       ),
     );
   }
-static Widget _divider(BuildContext context) {
-  // Choose color based on light/dark mode
-  final Color dividerColor = Theme.of(context).brightness == Brightness.dark
-      ? Colors.grey[300]! // light grey for dark mode
-      :const Color.fromARGB(255, 179, 179, 179); // dark grey/black-grey for light mode
 
-  return Divider(
-    height: 1,
-    thickness: 0.5,
-    color: dividerColor,
-    indent: 16,
-    endIndent: 16,
-  );
-}
+  static Widget _divider(BuildContext context) {
+    // Choose color based on light/dark mode
+    final Color dividerColor = Theme.of(context).brightness == Brightness.dark
+        ? Colors.grey[300]! // light grey for dark mode
+        : const Color.fromARGB(
+            255, 179, 179, 179); // dark grey/black-grey for light mode
+
+    return Divider(
+      height: 1,
+      thickness: 0.5,
+      color: dividerColor,
+      indent: 16,
+      endIndent: 16,
+    );
+  }
+
   // 🔹 Reusable Stat Card
   Widget _buildStatCard(context, String value, String label) {
     return Container(
@@ -1288,8 +1449,10 @@ class ContactUsPage extends StatelessWidget {
             hintText: "Your Name",
             hintStyle: TextStyle(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(255, 179, 178, 178) // black in dark mode
-                  : const Color.fromARGB(255, 43, 43, 43), // normal grey in light mode
+                  ? const Color.fromARGB(
+                      255, 179, 178, 178) // black in dark mode
+                  : const Color.fromARGB(
+                      255, 43, 43, 43), // normal grey in light mode
             ),
             filled: true,
             fillColor: Theme.of(context).cardColor,
@@ -1305,7 +1468,8 @@ class ContactUsPage extends StatelessWidget {
             hintText: "Your Email",
             hintStyle: TextStyle(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(255, 179, 178, 178) // black in dark mode
+                  ? const Color.fromARGB(
+                      255, 179, 178, 178) // black in dark mode
                   : const Color.fromARGB(255, 43, 43, 43),
             ),
             filled: true,
@@ -1323,7 +1487,8 @@ class ContactUsPage extends StatelessWidget {
             hintText: "Your Message",
             hintStyle: TextStyle(
               color: Theme.of(context).brightness == Brightness.dark
-               ? const Color.fromARGB(255, 179, 178, 178) // black in dark mode
+                  ? const Color.fromARGB(
+                      255, 179, 178, 178) // black in dark mode
                   : const Color.fromARGB(255, 43, 43, 43),
             ),
             filled: true,
@@ -1384,10 +1549,8 @@ class PrivacyPolicyPage extends StatelessWidget {
                     child: Text(
                       "Privacy Policy",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900
-                      ),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                     ),
                   ),
                   const SizedBox(width: 48), // to balance arrow space
@@ -1524,13 +1687,10 @@ class PrivacyPolicyPage extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             content,
-            style: const TextStyle(
-                fontSize: 14, height: 1.5),
+            style: const TextStyle(fontSize: 14, height: 1.5),
           ),
         ],
       ),
     );
   }
 }
-
-
