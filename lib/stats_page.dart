@@ -15,41 +15,7 @@ class StatsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Top bar
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new),
-                    onPressed: () {
-                      if (Navigator.of(context).canPop()) {
-                        // Case 1: FullBody was opened with Navigator.push()
-                        Navigator.of(context).pop();
-                      } else {
-                        // Case 2: FullBody is inside navbar (no stack to pop)
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const CustomBottomNavBar()),
-                        );
-                      }
-                    },
-                  ),
-                  Row(
-                    children: const [
-                      Text(
-                        "Activity Tracker",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w900),
-                      ),
-                      SizedBox(width: 6),
-                    ],
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.more_horiz),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+           
 
               const SizedBox(height: 20),
 

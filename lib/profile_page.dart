@@ -44,7 +44,7 @@ class ProfilePage extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.more_horiz, size: 28),
+                    icon: const Icon(Icons.refresh, size: 28),
                     onPressed: () {},
                   ),
                 ],
