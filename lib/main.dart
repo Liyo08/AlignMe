@@ -1137,10 +1137,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _navItem(Icons.home, 0),
-                    _navItem(Icons.explore, 2),
+                    _navItem(Icons.explore, 1),
                     
                     const SizedBox(width: 70),
-                    _navItem(Icons.track_changes, 1),
+                    _navItem(Icons.track_changes, 2),
                     _navItem(Icons.person_outline, 3),
                   ],
                 ),
