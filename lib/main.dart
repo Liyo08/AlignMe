@@ -271,15 +271,26 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Feature Cards
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _featureCard(
-                  "PosePerfect",
+            
+          
+            _featureCar(
+              "PosePerfect",
                   "Align. Improve. Repeat.",
                   'assets/1.png',
                   context,
                   const PosePerfectPage(),
+              
+            ),
+              const SizedBox(height: 20),
+Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _featureCard(
+                  "AlignMart",
+              "Essentials for your Yoga journey.",
+              'assets/3.png',
+              context,
+              const AlignMartPage(),
                 ),
                 const SizedBox(width: 12),
                 _featureCard(
@@ -291,15 +302,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            _featureCar(
-              "AlignMart",
-              "Essentials for your Yoga \njourney.",
-              'assets/3.png',
-              context,
-              const AlignMartPage(),
-            ),
-
             // ---------------- Activity Status ----------------
             const SizedBox(height: 30),
             const Text("Activity Status",
