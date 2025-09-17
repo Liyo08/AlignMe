@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+
 
 class StatsPage extends StatelessWidget {
   const StatsPage({super.key});
@@ -187,7 +187,7 @@ class StatsPage extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: 15),
 
               GridView.count(
                 crossAxisCount: 2,
@@ -220,7 +220,7 @@ _buildHealthReportCard(Icons.local_hospital, "Normal", "Medical Checkup"),  // N
                 ],
               ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: 15),
 
               // Activity Cards
               _buildActivityCard(context, "Drinking 300ml Water",
@@ -260,7 +260,7 @@ _buildHealthReportCard(Icons.local_hospital, "Normal", "Medical Checkup"),  // N
           width: 20,
           decoration: BoxDecoration(
             color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -287,7 +287,7 @@ _buildHealthReportCard(Icons.local_hospital, "Normal", "Medical Checkup"),  // N
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(25),
         boxShadow: [
           if (Theme.of(context).brightness == Brightness.light)
             BoxShadow(
