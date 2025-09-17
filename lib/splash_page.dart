@@ -425,7 +425,7 @@ class Dot extends StatelessWidget {
       width: 8,
       height: 8,
       decoration: BoxDecoration(
-        color: isActive ? const Color.fromARGB(221, 255, 255, 255) : const Color.fromARGB(255, 198, 198, 198),
+        color: isActive ? const Color.fromARGB(221, 255, 255, 255) : const Color.fromARGB(112, 198, 198, 198),
         shape: BoxShape.circle,
       ),
     );

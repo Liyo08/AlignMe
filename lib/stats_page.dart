@@ -15,7 +15,28 @@ class StatsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Top bar
-           
+Stack(
+  alignment: Alignment.center,
+  children: [
+    const Center(
+      child: Text(
+        "Activity Tracker",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+    ),
+    Positioned(
+      right: 0,
+      child: IconButton(
+        icon: const Icon(Icons.more_horiz),
+        onPressed: () {},
+      ),
+    ),
+  ],
+),
+
 
               const SizedBox(height: 20),
 
