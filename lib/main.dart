@@ -1087,8 +1087,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const StatsPage(),
+   
     const ExplorePage(),
+     const StatsPage(),
     const ProfilePage(),
   ];
 
@@ -1136,9 +1137,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _navItem(Icons.home, 0),
-                    _navItem(Icons.track_changes, 1),
-                    const SizedBox(width: 70),
                     _navItem(Icons.explore, 2),
+                    
+                    const SizedBox(width: 70),
+                    _navItem(Icons.track_changes, 1),
                     _navItem(Icons.person_outline, 3),
                   ],
                 ),
