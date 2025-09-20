@@ -41,6 +41,8 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   provider: ^6.0.5
   shared_preferences: ^2.1.1
+  flutter_local_notifications: ^17.2.2
+  timezone: ^0.9.1
 
 
   

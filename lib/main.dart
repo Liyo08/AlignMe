@@ -19,8 +19,28 @@ import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 import 'dart:math';
 import 'explorepage.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 
-void main() {
+
+
+// Create a global notifications plugin
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+    tz.initializeTimeZones();
+
+  // Android settings
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  // iOS / Android init
+  const InitializationSettings initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
+
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppTheme(),
@@ -287,7 +307,7 @@ Row(
               children: [
                 _featureCard(
                   "AlignMart",
-              "Essentials for your Yoga journey.",
+              "Essentials for Yoga journey.",
               'assets/3.png',
               context,
               const AlignMartPage(),
